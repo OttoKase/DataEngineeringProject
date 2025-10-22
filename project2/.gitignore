@@ -1,0 +1,5 @@
+data/
+logs/
+pgdata_airflow
+pgdata_weather
+*.pyc

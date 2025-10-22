@@ -21,8 +21,6 @@ services:
       interval: 10s
       retries: 5
     restart: always
-    depends_on:
-      - py
 
   # --- Separate Postgres for weather tracking ---
   weather-db:
@@ -70,14 +68,12 @@ services:
       AIRFLOW_CONN_WEATHER_DB: postgresql+psycopg2://weather_user:weather_pass@weather-db:5432/weather_db
       AIRFLOW__CORE__LOAD_EXAMPLES: "false"
       AIRFLOW__API__AUTH_BACKENDS: "airflow.api.auth.backend.basic_auth"
-      PIP_ADDITIONAL_REQUIREMENTS: "/requirements.txt"
     ports:
       - "8080:8080"
     volumes:
       - ./dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
-      - ./data/orders:/tmp/data/orders
-      - ./requirements.txt:/requirements.txt
+      - ./data:/opt/airflow/data
     depends_on:
       - airflow-init
       - airflow-db
@@ -97,6 +93,7 @@ services:
     volumes:
       - ./dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
+      - ./data:/opt/airflow/data
     depends_on:
       - airflow-init
       - airflow-db
@@ -129,20 +126,6 @@ services:
       - airflow-db
       - weather-db
     restart: "no"
-  py:
-    build: .
-    container_name: py
-    image: python:3.12.5-bookworm
-    stdin_open: false
-    tty: true   # Keep STDIN open for exec or attach
-    environment:
-      SCRIPTS_PATH: /scripts # you can use 'docker exec py bash -c "pip install -r \${SCRIPTS_PATH}/requirements.txt"' to install the requirements file. Note: generally, it is better to create a custom image with the required packages installed. Otherwise, each time the container is spun up, the requirements need to be pulled and reinstalled.
-      #API_PATH: https://randomuser.me/api/
-      POSTGRES_USER: weather_user
-      POSTGRES_PASSWORD: weather_pass
-      POSTGRES_DB: weather_db
-    volumes:
-      - .:/app  # Mount current dir into container
 
 volumes:
   pgdata_airflow:

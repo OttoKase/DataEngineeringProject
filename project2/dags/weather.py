@@ -1,36 +1,39 @@
 from airflow import DAG
+from airflow.utils.dates import days_ago
 from airflow.operators.python import PythonOperator
+from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
 
 import sys
 import subprocess
 subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'meteostat'])
 
-from meteostat import Point, Daily
+from meteostat import Point, Hourly
 import pandas as pd
 import os
 
 # CONFIG
-LOCATION = Point(52.52, 13.405)  # Berlin
-START_DATE = datetime(2023, 10, 1)
-END_DATE = datetime(2023, 10, 7)
+LOCATION = Point(59.4133, 24.8328)  # Tallinn
+START_DATE = datetime(2025, 6, 2)
+END_DATE = datetime(2025, 9, 26)
 OUTPUT_DIR = '/opt/airflow/data'
 
 def fetch_weather_data():
-    data = Daily(LOCATION, START_DATE, END_DATE)
+    data = Hourly(LOCATION, START_DATE, END_DATE)
     data = data.fetch()
 
     if not data.empty:
         os.makedirs(OUTPUT_DIR, exist_ok=True)
         output_file = os.path.join(OUTPUT_DIR, f'weather_{START_DATE.date()}_{END_DATE.date()}.csv')
-        data.to_csv(output_file)
+        return data.to_csv(output_file)
         print(f"Saved weather data to {output_file}")
     else:
+        print("qqqqq")
         raise ValueError("No data fetched")
 
 default_args = {
     'owner': 'airflow',
-    'start_date': datetime(2025, 10, 20),
+    'start_date': days_ago(0),
     'retries': 1,
     'retry_delay': timedelta(minutes=5)
 }
@@ -38,7 +41,7 @@ default_args = {
 with DAG(
     dag_id='meteostat_weather_dag',
     default_args=default_args,
-    schedule_interval=None,
+    schedule_interval='@once',  #None,
     catchup=False,
     description='Fetch weather data using meteostat without API key'
 ) as dag:
@@ -47,5 +50,9 @@ with DAG(
         task_id='fetch_weather_data',
         python_callable=fetch_weather_data
     )
+    inaccurate = BashOperator(
+        task_id="inaccurate",
+        bash_command=" echo 'inaccurate'"
+    )
 
-    fetch_task
+    fetch_task >> inaccurate
