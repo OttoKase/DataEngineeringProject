@@ -71,7 +71,7 @@ default_args = {
 with DAG(
     dag_id='fetch_data',
     default_args=default_args,
-    schedule_interval= '*/5 * * * *', #'@once', #'@continuous', #'@hourly',
+    schedule_interval='@daily', #'*/5 * * * *', #'@once', #'@continuous', #'@hourly',
     #max_active_runs=1,
     catchup=False,
     description='Fetch weather data using meteostat without API key, fetch mobility and infrared data'
