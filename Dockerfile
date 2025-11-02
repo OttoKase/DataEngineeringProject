@@ -9,5 +9,8 @@ COPY requirements.txt .
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Install dbt and the clickhouse adapter
+RUN pip install --no-cache-dir dbt-core dbt-clickhouse clickhouse-connect
+
 # Default command (opens interactive shell unless overridden)
 #CMD ["tail", "-f", "/dev/null"]
