@@ -4,4 +4,5 @@ pgdata_airflow/
 pgdata_weather/
 dags/__pycache__/
 project2/
+project2_kustutada/
 *.pyc
