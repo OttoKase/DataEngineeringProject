@@ -6,11 +6,11 @@ services:
     container_name: airflow-db
     image: postgres:16.4
     environment:
-      POSTGRES_USER: airflow
-      POSTGRES_PASSWORD: airflow
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASS}
       POSTGRES_DB: airflow
-      PGUSER: airflow
-      PGPASSWORD: airflow
+      PGUSER: ${PG_USER}
+      PGPASSWORD: ${PG_PASS}
       PGDATABASE: airflow
     ports:
       - "5432:5432"
@@ -27,11 +27,11 @@ services:
     container_name: weather-db
     image: postgres:16.4
     environment:
-      POSTGRES_USER: weather_user
-      POSTGRES_PASSWORD: weather_pass
+      POSTGRES_USER: ${POSTGRES_WEATHER_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_WEATHER_PASS}
       POSTGRES_DB: weather_db
-      PGUSER: weather_user
-      PGPASSWORD: weather_pass
+      PGUSER: ${PG_WEATHER_USER}
+      PGPASSWORD: ${PG_WEATHER_PASS}
       PGDATABASE: weather_db
     ports:
       - "5433:5432"
@@ -48,8 +48,8 @@ services:
     container_name: pgadmin
     image: elestio/pgadmin:REL-8_10
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@example.com
-      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_DEFAULT_EMAIL: ${PG_ADMIN}
+      PGADMIN_DEFAULT_PASSWORD: ${PG_ADMIN_PASS}
       CSRF_ENABLED: "False"
     ports:
       - "5050:80"
@@ -126,6 +126,42 @@ services:
       - airflow-db
       - weather-db
     restart: "no"
+
+  clickhouse-server:
+    image: clickhouse/clickhouse-server
+    container_name: clickhouse-server
+    environment:
+      CLICKHOUSE_USER: ${CLICKHOUSE_USER}
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASS}
+      CLICKHOUSE_DB: default
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: 1
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    volumes:
+      - ./sample_data:/var/lib/clickhouse/user_files
+      - ./sql:/sql
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8123/ping"]
+      interval: 5s
+      retries: 20
+  dbt:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dbt
+    depends_on:
+      - clickhouse-server
+    volumes:
+      - ./sample_data:/var/lib/clickhouse/user_files
+      - ./sql:/sql
+      - ./dbt:/dbt
+    working_dir: /dbt
+    tty: true
 
 volumes:
   pgdata_airflow:
