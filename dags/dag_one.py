@@ -17,7 +17,7 @@ LOCATION = Point(59.4133, 24.8328)  # Tallinn
 START_DATE = datetime(2025, 6, 2)
 END_DATE = datetime(2025, 9, 26)
 # Docker data directory
-OUTPUT_DIR = '/opt/airflow/data'
+OUTPUT_DIR = '/opt/airflow/dbt/seeds'
 # Path to data files
 CSV_PATH = 'https://raw.githubusercontent.com/OttoKase/DataEngineeringProject/main/infrared_06-09.2025.%20csv'
 CSV_PATH2 = 'https://raw.githubusercontent.com/OttoKase/DataEngineeringProject/main/mobility_06-09.2025.%20csv'
@@ -29,7 +29,8 @@ def fetch_weather_data(sd = START_DATE, ed = END_DATE):
 
     if not data.empty:
         os.makedirs(OUTPUT_DIR, exist_ok=True)
-        output_file = os.path.join(OUTPUT_DIR, f'weather_{sd.date()}_{ed.date()}.csv')
+        #output_file = os.path.join(OUTPUT_DIR, f'weather_{sd.date()}_{ed.date()}.csv')
+        output_file = os.path.join(OUTPUT_DIR, f'bronze_weather.csv')
         return data.to_csv(output_file)
         print(f"Saved weather data to {output_file}")
     else:
@@ -87,15 +88,22 @@ with DAG(
     ingest_infrared_csv_task = PythonOperator(
         task_id="ingest_infrared_csv",
         python_callable=ingest_csv,
-        op_kwargs={"cp":CSV_PATH,"filename":"infrared_06-09_2025"},
+        #op_kwargs={"cp":CSV_PATH,"filename":"infrared_06-09_2025"},
+        op_kwargs={"cp":CSV_PATH,"filename":"bronze_infrared"},
         provide_context=True
     )
 
     ingest_mobility_csv_task = PythonOperator(
         task_id="ingest_mobility_csv",
         python_callable=ingest_csv,
-        op_kwargs={"cp":CSV_PATH2,"filename":"mobility_06-09_2025"},
+        #op_kwargs={"cp":CSV_PATH2,"filename":"mobility_06-09_2025"},
+        op_kwargs={"cp":CSV_PATH2,"filename":"bronze_mobility"},
         provide_context=True
     )
 
-    fetch_task >> ingest_infrared_csv_task >> ingest_mobility_csv_task
+    run_dbt = BashOperator(
+        task_id="run_dbt",
+        bash_command="docker exec dbt dbt seed",
+    )
+
+    fetch_task >> ingest_infrared_csv_task >> ingest_mobility_csv_task >> run_dbt
