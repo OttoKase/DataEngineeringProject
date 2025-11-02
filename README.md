@@ -2,7 +2,7 @@
 This repository contains group 8's project in Data Engineering course held in 2025 autumn
 
 ## Project Structure
-
+```
 DataEngineeringProject/
 ├── compose.yml
 ├── Dockerfile
@@ -23,6 +23,7 @@ DataEngineeringProject/
 └── sql/
     ├── 01_create_tables.sql
     └── 02_load_queries.sql
+```
 
 ## How to Run
 
