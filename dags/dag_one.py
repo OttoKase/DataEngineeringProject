@@ -71,7 +71,7 @@ default_args = {
 with DAG(
     dag_id='fetch_data',
     default_args=default_args,
-    schedule_interval= '*/5 * * * *', #'@once', #'@continuous', #'@hourly',
+    schedule_interval='@daily', #'*/5 * * * *', #'@once', #'@continuous', #'@hourly',
     #max_active_runs=1,
     catchup=False,
     description='Fetch weather data using meteostat without API key, fetch mobility and infrared data'
@@ -88,7 +88,6 @@ with DAG(
     ingest_infrared_csv_task = PythonOperator(
         task_id="ingest_infrared_csv",
         python_callable=ingest_csv,
-        #op_kwargs={"cp":CSV_PATH,"filename":"infrared_06-09_2025"},
         op_kwargs={"cp":CSV_PATH,"filename":"bronze_infrared"},
         provide_context=True
     )
@@ -96,14 +95,23 @@ with DAG(
     ingest_mobility_csv_task = PythonOperator(
         task_id="ingest_mobility_csv",
         python_callable=ingest_csv,
-        #op_kwargs={"cp":CSV_PATH2,"filename":"mobility_06-09_2025"},
         op_kwargs={"cp":CSV_PATH2,"filename":"bronze_mobility"},
         provide_context=True
     )
 
     run_dbt = BashOperator(
         task_id="run_dbt",
-        bash_command="docker exec dbt dbt seed",
+        bash_command="docker exec dbt dbt seed", #docker exec -it dbt dbt seed
     )
 
-    fetch_task >> ingest_infrared_csv_task >> ingest_mobility_csv_task >> run_dbt
+    run_create_tables = BashOperator(
+        task_id="run_create_tables",
+        bash_command="docker exec clickhouse-server clickhouse-client --multiquery --queries-file=/sql/01_create_tables.sql",
+    )
+
+    run_load_queries = BashOperator(
+        task_id="run_load_queries",
+        bash_command="docker exec clickhouse-server clickhouse-client --multiquery --queries-file=/sql/02_load_queries.sql",
+    )
+
+    fetch_task >> ingest_infrared_csv_task >> ingest_mobility_csv_task >> run_dbt >> run_create_tables >> run_load_queries
