@@ -49,3 +49,5 @@ If the Dag isn't automatically on, please turn it active.
 
 Access Clickhouse at:
 [http://localhost:8123/](http://localhost:8123/)
+
+![Clickhouse Screenshot](Clickhouse_Screenshot.png)
