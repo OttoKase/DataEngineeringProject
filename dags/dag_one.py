@@ -19,8 +19,8 @@ END_DATE = datetime(2025, 9, 26)
 # Docker data directory
 OUTPUT_DIR = '/opt/airflow/dbt/seeds'
 # Path to data files
-CSV_PATH = 'https://raw.githubusercontent.com/OttoKase/DataEngineeringProject/main/infrared_06-09.2025.%20csv'
-CSV_PATH2 = 'https://raw.githubusercontent.com/OttoKase/DataEngineeringProject/main/mobility_06-09.2025.%20csv'
+CSV_PATH = 'https://raw.githubusercontent.com/OttoKase/DataEngineeringProject/main/resources/infrared_06-09.2025.%20csv'
+CSV_PATH2 = 'https://raw.githubusercontent.com/OttoKase/DataEngineeringProject/main/resources/mobility_06-09.2025.%20csv'
 
 def fetch_weather_data(sd = START_DATE, ed = END_DATE):
     # Fetches weather data and saves it into data/weather*.csv
