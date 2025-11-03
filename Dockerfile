@@ -4,10 +4,10 @@
 FROM python:3.12.5-bookworm
 
 # Copy files into container
-COPY requirements.txt .
+COPY etc/requirements.txt .
 
 # Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r etc/requirements.txt
 
 # Install dbt and the clickhouse adapter
 RUN pip install --no-cache-dir dbt-core dbt-clickhouse clickhouse-connect

@@ -45,9 +45,13 @@ Password: airflow
 
 If the Dag isn't automatically on, please turn it active.
 
-![Airflow Screenshot](Airflow_Screenshot.png)
-
 Access Clickhouse at:
 [http://localhost:8123/](http://localhost:8123/)
 
-![Clickhouse Screenshot](Clickhouse_Screenshot.png)
+## Screenshots
+
+Screenshot of Airflow's view:
+![Airflow Screenshot](images/Airflow_Screenshot.png)
+
+Screenshot of Clickhouse's view (query to partially answer BQ-1):
+![Clickhouse Screenshot](images/Clickhouse_Screenshot_2.png)
