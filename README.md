@@ -54,4 +54,4 @@ Screenshot of Airflow's view:
 ![Airflow Screenshot](images/Airflow_Screenshot.png)
 
 Screenshot of Clickhouse's view (query to partially answer BQ-1):
-![Clickhouse Screenshot](images/Clickhouse_Screenshot_2.png)
+![Clickhouse Screenshot](images/Clickhouse_screenshot_2.png)
