@@ -1,0 +1,21 @@
+clickhouse_dbt:     # must match "profile" in dbt_project.yml
+  target: dev
+  outputs:
+    dev:
+      type: clickhouse
+      schema: default
+      host: clickhouse-server
+      port: 8123
+      user: default
+      password: ""
+      secure: false
+
+# your_project_name:
+#   target: duckdb
+#   outputs:
+#     duckdb:
+#       type: duckdb
+#       path: "/opt/airflow/db"
+#       schema: main
+
+
