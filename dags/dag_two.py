@@ -19,9 +19,11 @@ MINIO_ENDPOINT = "minio:9000"
 MINIO_ACCESS_KEY = "minioadmin"
 MINIO_SECRET_KEY = "minioadmin"
 MINIO_BUCKET = "project-bucket"
+DUCKDB_FILE = "/opt/airflow/db/lab.duckdb"
 
 SEEDS_DIR = "./dbt/seeds"
-DUCKDB_FILE = "lab.duckdb"
+
+
 
 # ───────────────────────────────────────────────────────────
 # FUNCTIONS
@@ -42,7 +44,10 @@ def upload_csv_to_minio(**context):
     for file in os.listdir(SEEDS_DIR):
         if file.endswith(".csv"):
             local_path = os.path.join(SEEDS_DIR, file)
-            remote_path = f"seeds/{file}"
+            # remote_path = f"seeds/{file}"
+            remote_path = file
+            print(f"THIS IS LOCAL PATH:{local_path}")
+            print(f"THIS IS REMOTE PATH:{remote_path}")
 
             client.fput_object(
                 MINIO_BUCKET,
@@ -52,16 +57,19 @@ def upload_csv_to_minio(**context):
             print(f"Uploaded {local_path} → s3://{MINIO_BUCKET}/{remote_path}")
 
 
+
 def setup_duckdb(**context):
+    # Ensure directory exists
+    os.makedirs(os.path.dirname(DUCKDB_FILE), exist_ok=True)
+
+    # Connect to DuckDB (creates file if missing)
     con = duckdb.connect(DUCKDB_FILE)
-    # Enable S3 extension
-    conn.install_extension("httpfs")
-    conn.load_extension("httpfs")
 
-    # # Enable S3 extension
-    # con.execute("INSTALL httpfs;")
-    # con.execute("LOAD httpfs;")
+    # Enable S3 / HTTPFS extension
+    con.execute("INSTALL httpfs;")
+    con.execute("LOAD httpfs;")
 
+    # Configure S3 / MinIO
     con.execute(f"""
         SET s3_region='us-east-1';
         SET s3_url_style='path';
@@ -69,16 +77,38 @@ def setup_duckdb(**context):
         SET s3_access_key_id='{MINIO_ACCESS_KEY}';
         SET s3_secret_access_key='{MINIO_SECRET_KEY}';
         SET s3_use_ssl=false;
-
     """)
 
     con.close()
-    print("DuckDB configured with MinIO S3 settings.")
+    print(f"DuckDB initialized at {DUCKDB_FILE} with MinIO settings.")
 
 
 def load_minio_csvs_to_duckdb(**context):
+    import duckdb
+    from minio import Minio
+    import os
+
+    # Ensure DuckDB directory exists
+    os.makedirs(os.path.dirname(DUCKDB_FILE), exist_ok=True)
+
+    # Connect to DuckDB
     con = duckdb.connect(DUCKDB_FILE)
 
+    # Install and load HTTPFS extension for S3/MinIO
+    con.execute("INSTALL httpfs;")
+    con.execute("LOAD httpfs;")
+
+    # Configure MinIO S3 settings for DuckDB
+    con.execute(f"""
+        SET s3_region='us-east-1';
+        SET s3_url_style='path';
+        SET s3_endpoint='{MINIO_ENDPOINT}';
+        SET s3_access_key_id='{MINIO_ACCESS_KEY}';
+        SET s3_secret_access_key='{MINIO_SECRET_KEY}';
+        SET s3_use_ssl=false;
+    """)
+
+    # Connect to MinIO using the Python client
     client = Minio(
         MINIO_ENDPOINT,
         access_key=MINIO_ACCESS_KEY,
@@ -86,23 +116,27 @@ def load_minio_csvs_to_duckdb(**context):
         secure=False
     )
 
-    objects = client.list_objects(MINIO_BUCKET, prefix="seeds/")
-
-    for obj in objects:
+    # List CSV files in the bucket
+    for obj in client.list_objects(MINIO_BUCKET, recursive=True):
         if obj.object_name.endswith(".csv"):
-            filename = obj.object_name.split("/")[-1]
-            table = filename.replace(".csv", "")
-
+            filename = os.path.basename(obj.object_name)
+            table_name = filename.replace(".csv", "")
             csv_path = f"s3://{MINIO_BUCKET}/{obj.object_name}"
 
+            # Load CSV into DuckDB table
             con.execute(f"""
-                CREATE OR REPLACE TABLE {table} AS
-                SELECT * FROM read_csv('{csv_path}', AUTO_DETECT=TRUE);
+                CREATE OR REPLACE TABLE {table_name} AS
+                SELECT * FROM read_csv_auto('{csv_path}');
             """)
+            print(f"Loaded {csv_path} into DuckDB table `{table_name}`")
 
-            print(f"Loaded {csv_path} into DuckDB table `{table}`")
+    # Show created tables
+    tables = con.execute("SHOW TABLES;").fetchall()
+    print("DuckDB tables:", tables)
 
     con.close()
+
+
 
 
 # ───────────────────────────────────────────────────────────
@@ -117,19 +151,20 @@ with DAG(
     description="Uploads csv → MinIO → DuckDB pipeline"
 ) as dag:
 
-    upload_csv = PythonOperator(
+    upload_seed_to_minio = PythonOperator(
         task_id="upload_csv_to_minio",
         python_callable=upload_csv_to_minio
     )
 
-    duckdb_setup = PythonOperator(
+    duckdb_setup_task = PythonOperator(
         task_id="setup_duckdb",
         python_callable=setup_duckdb
     )
 
-    load_duckdb = PythonOperator(
+    load_csvs_task = PythonOperator(
         task_id="load_minio_csvs_to_duckdb",
         python_callable=load_minio_csvs_to_duckdb
     )
 
-    upload_csv >> duckdb_setup >> load_duckdb
+
+    upload_seed_to_minio >> duckdb_setup_task >> load_csvs_task #load_miniocsv_duckdb #duckdb_setup >> load_miniocsv_duckdb
