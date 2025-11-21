@@ -104,6 +104,9 @@ with DAG(
         bash_command="docker exec dbt dbt seed", #docker exec -it dbt dbt seed
     )
 
+    # FOR mart data layer
+    # docker exec -it dbt dbt run
+
     # run_create_tables = BashOperator(
     #     task_id="run_create_tables",
     #     bash_command="docker exec clickhouse-server clickhouse-client --multiquery --queries-file=/sql/01_create_tables.sql",
