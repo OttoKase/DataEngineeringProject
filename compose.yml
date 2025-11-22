@@ -174,7 +174,7 @@ services:
     depends_on:
       - minio #clickhouse-server
     volumes:
-      # - ./sample_data:/var/lib/clickhouse/user_files
+      - ./sample_data:/var/lib/clickhouse/user_files
       - ./sql:/sql
       - ./dbt:/dbt
       - ./minio_data:/data #added by Meik

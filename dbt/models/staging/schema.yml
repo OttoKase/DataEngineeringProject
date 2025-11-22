@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: peopletraffic
+    description: Raw data
+    database: peopletraffic_db
+    schema: peopletraffic
+    tables:
+      - name: bronze_infrared
+        description: Raw people data
+      - name: bronze_weather
+        description: Raw weather data

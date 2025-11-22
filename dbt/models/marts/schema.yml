@@ -1,0 +1,139 @@
+version: 2
+
+models:
+  - name: DimDate
+    description: Date dimension table
+    columns:
+      - name: DateKey
+        description: Primary key (YYYYMMDD format)
+        tests:
+          - unique
+          - not_null
+      - name: FullDate
+        description: Full date value
+        tests:
+          - not_null
+      - name: Year
+        description: year value
+        tests:
+          - not_null
+      - name: Month
+        description: month value
+        tests:
+          - not_null
+      - name: Date
+        description: date value
+        tests:
+          - not_null
+      - name: DayOfWeek
+        description: dayofweek value
+        tests:
+          - not_null
+      
+  - name: DimTime
+    description: Time dimension table
+    columns:
+      - name: TimeKey
+        description: Primary key (HHMMSS format)
+        tests:
+          - unique
+          - not_null
+      - name: FullTime
+        description: fulltime value
+        tests:
+          - not_null
+      - name: hour
+        description: hour value
+        tests:
+          - not_null
+      - name: minute
+        description: minute value
+        tests:
+          - not_null
+      - name: second
+        description: second value
+        tests:
+          - not_null
+
+  - name: DimBuilding
+    description: Building dimension table
+    columns:
+      - name: BuildingKey
+        description: Natural key for Building
+        tests:
+          - unique
+          - not_null
+      - name: timestamp
+        description: datetime of measurment
+        tests:
+          - not_null
+      - name: name
+        description: building aadress name
+        tests:
+          - not_null
+      - name: out
+        description: people outgoing
+        tests:
+          - not_null
+      - name: in
+        description: people incoming
+        tests:
+          - not_null
+
+  - name: DimWeather
+    description: Weather dimension table
+    columns:
+      - name: WeatherKey
+        description: Natural key for weather
+        tests:
+          - unique
+          - not_null
+      - name: timestamp
+        description: datetime of measurment
+        tests:
+          - not_null
+      - name: temp
+        description: temperature measure
+        tests:
+          - not_null
+      - name: prcp
+        description: precepitation measure
+        tests:
+          - not_null
+
+  - name: FactPeopleTraffic
+    description: Fact table for people
+    columns:
+      - name: PeopleTraffic
+        description: Unique identifier
+        tests:
+          - unique
+          - not_null
+      - name: DateKey
+        description: Foreign key to DimDate
+        tests:
+          - relationships:
+              to: ref('DimDate')
+      - name: TimeKey
+        description: Foreign key to DimTime
+        tests:
+          - relationships:
+              to: ref('DimTime')
+      - name: BuildingKey
+        description: Foreign key to DimBuilding
+        tests:
+          - relationships:
+              to: ref('DimBuilding')
+      - name: WeatherKey
+        description: Foreign key to DimWeather
+        tests:
+          - relationships:
+              to: ref('DimWeather')
+      - name: people_in
+      - name: people_out
+      - name: PeopleTrafficAmount
+      - name: FullTime
+
+
+
+
