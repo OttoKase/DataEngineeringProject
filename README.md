@@ -16,7 +16,7 @@ docker compose up -d --build
 
 2. Create MinIO bucket:
 
-* Login: [http://localhost:9001](http://localhost:9001)
+* Login: [http://localhost:9501]
 * Bucket: `project-bucket`
 
 3. Access DuckDB container via airflow-webserver:

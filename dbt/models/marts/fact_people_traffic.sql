@@ -1,3 +1,17 @@
+{{
+  config(
+    materialized='view'
+  )
+}}
+
 SELECT
-    *
-FROM {{ ref('stg_fact_people_traffic') }}
+ WeatherKey,
+ BuildingKey,
+ DateKey,
+ TimeKey,
+ out,
+ in
+FROM {{ ref('stg_dim_weather', 'stg_dim_building') }}
+
+
+
