@@ -23,5 +23,6 @@ RUN pip install --no-cache-dir \
         pyiceberg[pyarrow] \
         pyarrow \
         duckdb==1.1.0 \
-        minio
+        minio \
+        clickhouse-connect=0.6.5
 

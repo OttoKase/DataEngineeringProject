@@ -257,7 +257,7 @@ services:
         CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: 1
         CLICKHOUSE_USER: ${CLICKHOUSE_USER}
         CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASS}
-        CLICKHOUSE_DB: peopletraffic_db
+        CLICKHOUSE_DB: peopletraffic
     ports:
         - "8123:8123"
         - "9000:9000"
@@ -266,6 +266,7 @@ services:
         - ./sql:/sql
         - ./sample_data:/var/lib/clickhouse/user_files
         - ./config/clickhouse/config.d/iceberg.xml:/etc/clickhouse-server/config.d/iceberg.xml
+        - ./config/clickhouse/users.d/iceberg_settings.xml:/etc/clickhouse-server/users.d/iceberg_settings.xml:ro
     depends_on:
         - iceberg_rest
         - minio

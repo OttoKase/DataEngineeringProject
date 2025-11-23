@@ -112,6 +112,15 @@ def create_and_append_iceberg(**context):
 
     # Cast and append
     arrow_table = cast_arrow_to_iceberg_schema(arrow_table, table.schema())
+
+    for col in arrow_table.schema.names:
+        field = arrow_table.schema.field(col)
+        if pa.types.is_timestamp(field.type) and field.type.unit == "ns":
+            arrow_table = arrow_table.set_column(
+                arrow_table.schema.get_field_index(col),
+                col,
+                arrow_table[col].cast(pa.timestamp('us'))
+            )
     table.append(arrow_table)
     print(f"Appended {len(arrow_table)} rows to Iceberg table {identifier}")
 
