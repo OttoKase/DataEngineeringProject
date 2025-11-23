@@ -107,15 +107,15 @@ with DAG(
     # FOR mart data layer
     # docker exec -it dbt dbt run
 
-    run_create_tables = BashOperator(
-        task_id="run_create_tables",
-        bash_command="docker exec clickhouse-server clickhouse-client --multiquery --queries-file=/sql/01_create_tables.sql",
-    )
+    # run_create_tables = BashOperator(
+    #     task_id="run_create_tables",
+    #     bash_command="docker exec clickhouse-server clickhouse-client --multiquery --queries-file=/sql/01_create_tables.sql",
+    # )
+    #
+    # run_load_queries = BashOperator(
+    #     task_id="run_load_queries",
+    #     bash_command="docker exec clickhouse-server clickhouse-client --multiquery --queries-file=/sql/02_load_queries.sql",
+    # )
 
-    run_load_queries = BashOperator(
-        task_id="run_load_queries",
-        bash_command="docker exec clickhouse-server clickhouse-client --multiquery --queries-file=/sql/02_load_queries.sql",
-    )
-
-    fetch_task >> ingest_infrared_csv_task >>  run_dbt_seed >> run_create_tables >> run_load_queries
+    fetch_task >> ingest_infrared_csv_task >>  run_dbt_seed #>> run_create_tables >> run_load_queries
     # fetch_task >> ingest_infrared_csv_task >> ingest_mobility_csv_task >> run_dbt_seed# >> run_create_tables >> run_load_queries

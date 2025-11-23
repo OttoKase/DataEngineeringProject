@@ -12,7 +12,6 @@ SELECT
     Day,
     DayOfWeek
 FROM {{ ref('stg_dim_date') }}
--- FROM {{ source('peopletraffic', 'bronze_infrared') }}
 
 
 
