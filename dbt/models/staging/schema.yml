@@ -7,6 +7,8 @@ sources:
     schema: peopletraffic
     # schema: default
     tables:
+      - name: stg_fact_people_traffic
+        description: Raw people fact data
       - name: stg_dim_building
         description: Raw people data
       - name: stg_dim_weather

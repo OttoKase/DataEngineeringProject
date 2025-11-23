@@ -3,10 +3,10 @@ clickhouse_dbt:     # must match "profile" in dbt_project.yml
   outputs:
     dev:
       type: clickhouse
-      schema: peopletraffic
+      schema: default
       host: clickhouse-server
       port: 8123
-      user: group_eight
+      user: default
       # user: default
       password: ""
       secure: false
