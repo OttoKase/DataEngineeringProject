@@ -9,7 +9,8 @@ SELECT
 	timestamp,
 	temp,
 	prcp
-FROM {{ source('peopletraffic', 'bronze_weather') }}
+FROM {{ ref('bronze_weather') }}
+-- FROM {{ source('peopletraffic', 'bronze_weather') }}
 
 
 

@@ -67,8 +67,8 @@ FROM file('bronze_*.csv', 'CSVWithNames');
 
 
 -- Quick verification
-SELECT 'DimDate' AS table_name, count() AS rows FROM peopletraffic_db.DimDate
-UNION ALL SELECT 'FactPeopleTraffic', count() FROM peopletraffic_db.FactPeopleTraffic;
+-- SELECT 'DimDate' AS table_name, count() AS rows FROM peopletraffic_db.DimDate
+-- UNION ALL SELECT 'FactPeopleTraffic', count() FROM peopletraffic_db.FactPeopleTraffic;
 
 
 

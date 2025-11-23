@@ -11,7 +11,8 @@ SELECT
     Month,
     Day,
     DayOfWeek
-FROM {{ source('peopletraffic', 'bronze_infrared') }}
+FROM {{ ref('bronze_infrared') }}
+-- FROM {{ source('peopletraffic', 'bronze_infrared') }}
 
 
 

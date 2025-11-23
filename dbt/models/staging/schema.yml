@@ -5,8 +5,13 @@ sources:
     description: Raw data
     database: peopletraffic_db
     schema: peopletraffic
+    # schema: default
     tables:
-      - name: bronze_infrared
+      - name: stg_dim_building
         description: Raw people data
-      - name: bronze_weather
+      - name: stg_dim_weather
         description: Raw weather data
+      - name: stg_dim_date
+        description: Daytime data
+      - name: stg_dim_time
+        description: Time data

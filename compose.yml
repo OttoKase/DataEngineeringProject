@@ -249,33 +249,33 @@ services:
       iceberg_network:
 
 
+
   clickhouse-server:
-    # image: clickhouse/clickhouse-server:latest-iceberg
-    image: clickhouse/clickhouse-server
+    image: clickhouse/clickhouse-server #:latest
     container_name: clickhouse-server
     environment:
-      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: 1 # https://clickhouse.com/docs/operations/settings/settings-users#access_management-user-setting
-      CLICKHOUSE_USER: ${CLICKHOUSE_USER}
-      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASS}
-      # CLICKHOUSE_USER: admin
-      # CLICKHOUSE_PASSWORD: admin_password
-      CLICKHOUSE_DB: peopletraffic #???????? (was not in omd file)
-
+        CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: 1
+        CLICKHOUSE_USER: ${CLICKHOUSE_USER}
+        CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASS}
+        CLICKHOUSE_DB: peopletraffic_db
     ports:
-      - "8123:8123" # HTTP interface
-      - "9000:9000" # Native client interface
+        - "8123:8123"
+        - "9000:9000"
     volumes:
-      # NOTE: modify these paths as needed. E.g., you want to persist data somewhere else, you want to use your project data, etc.
-      # This persists our database data on our local machine.
-      - clickhouse-data:/var/lib/clickhouse/
-      # mount SQL to run them via client
-      - ./sql:/sql
-      - ./sample_data:/var/lib/clickhouse/user_files
-    # Best practice from official docs to prevent "too many open files" errors.
+        - clickhouse-data:/var/lib/clickhouse/
+        - ./sql:/sql
+        - ./sample_data:/var/lib/clickhouse/user_files
+        - ./config/clickhouse/config.d/iceberg.xml:/etc/clickhouse-server/config.d/iceberg.xml
+    depends_on:
+        - iceberg_rest
+        - minio
+    networks:
+        iceberg_network:
     ulimits:
       nofile:
         soft: 262144
         hard: 262144
+
 
   #
   # elasticsearch:

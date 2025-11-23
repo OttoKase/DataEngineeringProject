@@ -92,12 +92,12 @@ with DAG(
         provide_context=True
     )
 
-    ingest_mobility_csv_task = PythonOperator(
-        task_id="ingest_mobility_csv",
-        python_callable=ingest_csv,
-        op_kwargs={"cp":CSV_PATH2,"filename":"bronze_mobility"},
-        provide_context=True
-    )
+    # ingest_mobility_csv_task = PythonOperator(
+    #     task_id="ingest_mobility_csv",
+    #     python_callable=ingest_csv,
+    #     op_kwargs={"cp":CSV_PATH2,"filename":"bronze_mobility"},
+    #     provide_context=True
+    # )
 
     run_dbt_seed = BashOperator(
         task_id="run_dbt",
@@ -107,14 +107,15 @@ with DAG(
     # FOR mart data layer
     # docker exec -it dbt dbt run
 
-    # run_create_tables = BashOperator(
-    #     task_id="run_create_tables",
-    #     bash_command="docker exec clickhouse-server clickhouse-client --multiquery --queries-file=/sql/01_create_tables.sql",
-    # )
-    #
-    # run_load_queries = BashOperator(
-    #     task_id="run_load_queries",
-    #     bash_command="docker exec clickhouse-server clickhouse-client --multiquery --queries-file=/sql/02_load_queries.sql",
-    # )
+    run_create_tables = BashOperator(
+        task_id="run_create_tables",
+        bash_command="docker exec clickhouse-server clickhouse-client --multiquery --queries-file=/sql/01_create_tables.sql",
+    )
 
-    fetch_task >> ingest_infrared_csv_task >> ingest_mobility_csv_task >> run_dbt_seed# >> run_create_tables >> run_load_queries
+    run_load_queries = BashOperator(
+        task_id="run_load_queries",
+        bash_command="docker exec clickhouse-server clickhouse-client --multiquery --queries-file=/sql/02_load_queries.sql",
+    )
+
+    fetch_task >> ingest_infrared_csv_task >>  run_dbt_seed >> run_create_tables >> run_load_queries
+    # fetch_task >> ingest_infrared_csv_task >> ingest_mobility_csv_task >> run_dbt_seed# >> run_create_tables >> run_load_queries
