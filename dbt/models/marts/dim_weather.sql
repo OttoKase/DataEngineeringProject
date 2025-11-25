@@ -1,12 +1,8 @@
-{{
-  config(
-    materialized='view'
-  )
-}}
+{{ config(materialized='incremental') }}
+
 
 SELECT
-	WeatherKey,
-	timestamp,
+	time,
 	temp,
 	prcp
 FROM {{ ref('stg_dim_weather') }}

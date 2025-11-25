@@ -1,4 +1,4 @@
-clickhouse_dbt:     # must match "profile" in dbt_project.yml
+peopletraffic_uc:     # must match "profile" in dbt_project.yml
   target: dev
   outputs:
     dev:

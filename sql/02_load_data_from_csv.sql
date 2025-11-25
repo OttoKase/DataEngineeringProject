@@ -1,24 +1,34 @@
 -- ========== Dimensions ==========
 
-INSERT INTO peopletraffic_db.DimBuilding
+INSERT INTO peopletraffic.raw_Building
+(
+timestamp,
+	name,
+    out,
+    in
+)
+
 SELECT
-    toUInt32(BuildingKey),
-    toDate(timestamp),
+    toDateTime(timestamp),
     toString(name),
     toUInt8(out),
     toUInt8(in)
 FROM file('bronze_infrared.csv', 'CSVWithNames');
 
 
-INSERT INTO peopletraffic_db.DimWeather
+INSERT INTO peopletraffic.raw_Weather
+(
+time,
+temp,
+prcp
+)
 SELECT
-	toUInt32(WeatherKey),
-	toDate(timestamp) AS FullDate,
+	toDateTime(time),
 	toFloat32(temp),
 	toFloat32(prcp)
 FROM file('bronze_weather.csv', 'CSVWithNames');
 
-
+/*
 INSERT INTO peopletraffic_db.DimDate
 SELECT DISTINCT
     toUInt32(DateKey),
@@ -62,7 +72,7 @@ SELECT
     toDecimal32(PeopleTrafficAmount),
     toDate(FullDate)
 FROM file('bronze_*.csv', 'CSVWithNames');
--- default.bronze_infrared????
+-- default.bronze_infrared????*/
 
 
 

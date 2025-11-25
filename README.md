@@ -53,9 +53,68 @@ Tables: [('bronze_infrared',), ('bronze_mobility',), ('bronze_weather',)]
 
 4. Fetch data from ClickHOUSE
 
+Check Iceberg tables via duckdb bash:
+
+```
+docker-compose exec duckdb_lab bash
+
+python
+
+from pyiceberg.catalog import load_catalog
+
+# Load the REST catalog
+catalog = load_catalog(
+    "rest",
+    uri="http://iceberg_rest:8181",
+    warehouse="s3://project-bucket/",
+    io_impl="org.apache.iceberg.aws.s3.S3FileIO",
+    s3_endpoint="http://minio:9000",
+    s3_access_key_id="minioadmin",
+    s3_secret_access_key="minioadmin"
+)
+
+# List tables in the 'default' namespace
+tables = catalog.list_tables(("default",))  # pass namespace as a tuple
+print(tables)
+
+[('default', 'bronze_infrared')]
+
+```
+
+-- DuckDB container can reach Iceberg REST (iceberg_rest:8181).
+
+-- Iceberg REST can access the S3 warehouse in MinIO (s3://project-bucket/).
+
+-- Your Iceberg table exists: bronze_infrared in the default namespace.
+
+###############################
+
+docker exec -it clickhouse-server clickhouse-client
+
+:) SHOW DATABASES;
+
+SHOW DATABASES
+
+Query id: 042aa5c1-9330-4518-aa0b-aae9d7282dd4
+
+   ┌─name───────────────┐
+1. │ INFORMATION_SCHEMA │
+2. │ default            │
+3. │ information_schema │
+4. │ peopletraffic      │
+5. │ system             │
+   └────────────────────┘
+
+5 rows in set. Elapsed: 0.003 sec.
+
+Not seen:
+iceberg_catalog_default
+
 
 
 5. CREATE USERS, ROLES IN CH
+
+
 CREATE ROLE IF NOT EXISTS jun_analyst_role;
 
 CREATE USER IF NOT EXISTS jun_analyst_user IDENTIFIED WITH plaintext_password BY 'password123';

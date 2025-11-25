@@ -1,10 +1,16 @@
+{{
+  config(
+    materialized='view'
+  )
+}}
+
 SELECT
-	BuildingKey,
 	timestamp,
 	name,
     out,
     in
-FROM file('/var/lib/clickhouse/user_files/bronze_infrared.csv')
+FROM {{ source('peopletraffic', 'raw_Building') }}
+-- FROM file('/var/lib/clickhouse/user_files/bronze_infrared.csv')
 
 
 

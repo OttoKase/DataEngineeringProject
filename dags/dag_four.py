@@ -8,20 +8,22 @@ from pyiceberg.catalog import load_catalog
 from pyiceberg.schema import Schema, NestedField
 from pyiceberg.types import BooleanType, IntegerType, LongType, FloatType, DoubleType, StringType, TimestampType, TimestamptzType
 from pyiceberg.exceptions import NamespaceAlreadyExistsError, TableAlreadyExistsError
-from clickhouse_connect import Client  # pip install clickhouse-connect
-
+from clickhouse_connect.driver.client import Client
+# -----------------------
 # CONFIG
+# -----------------------
 DUCKDB_FILE = "/opt/airflow/db/lab.duckdb"
+
 CATALOG_NAME = "rest"
 CATALOG_URI = "http://iceberg_rest:8181"
 ICEBERG_NAMESPACE = "default"
-ICEBERG_TABLE = "bronze_infrared"  # Fixed table name
+ICEBERG_TABLE = "bronze_infrared"
 
 CLICKHOUSE_HOST = "clickhouse-server"
 CLICKHOUSE_PORT = 8123
 CLICKHOUSE_USER = "default"
 CLICKHOUSE_PASS = ""
-CLICKHOUSE_DB = "default"  # Target DB where Iceberg engine is enabled
+CLICKHOUSE_DB = "default"
 
 # -----------------------
 # HELPER FUNCTIONS
@@ -40,6 +42,7 @@ def arrow_type_to_iceberg(pa_type):
     if pa.types.is_timestamp(pa_type):
         return TimestamptzType() if pa_type.tz else TimestampType()
     return StringType()
+
 
 def cast_arrow_to_iceberg_schema(arrow_table: pa.Table, iceberg_schema: Schema) -> pa.Table:
     arrays = []
@@ -78,6 +81,7 @@ def create_iceberg_namespace(**context):
     except NamespaceAlreadyExistsError:
         print(f"Namespace exists, continuing: {ICEBERG_NAMESPACE}")
 
+
 def create_and_append_iceberg(**context):
     catalog = load_catalog(CATALOG_NAME, uri=CATALOG_URI)
     identifier = f"{ICEBERG_NAMESPACE}.{ICEBERG_TABLE}"
@@ -104,40 +108,48 @@ def create_and_append_iceberg(**context):
 
     context["ti"].xcom_push(key="iceberg_table", value=identifier)
 
+
 def show_iceberg_tables(**context):
     catalog = load_catalog(CATALOG_NAME, uri=CATALOG_URI)
     tables = catalog.list_tables(ICEBERG_NAMESPACE)
     print(f"Iceberg tables in namespace {ICEBERG_NAMESPACE}: {tables}")
     context["ti"].xcom_push(key="iceberg_tables", value=[str(t) for t in tables])
 
+
 def register_iceberg_in_clickhouse(**context):
-    iceberg_table = context["ti"].xcom_pull(key="iceberg_table")
-    if not iceberg_table:
-        raise ValueError("No Iceberg table found in XCom")
+    from clickhouse_connect import get_client
 
-    namespace, table_name = iceberg_table.split(".")
-    client = Client(host=CLICKHOUSE_HOST, port=CLICKHOUSE_PORT,
-                    username=CLICKHOUSE_USER, password=CLICKHOUSE_PASS,
-                    database=CLICKHOUSE_DB)
+    CLICKHOUSE_HOST = "clickhouse-server"
+    CLICKHOUSE_PORT = 8123
 
-    # Create Iceberg table in ClickHouse if not exists
-    create_query = f"""
-    CREATE TABLE IF NOT EXISTS {CLICKHOUSE_DB}.{namespace}_{table_name}
-    ENGINE = Iceberg('{CATALOG_NAME}', '{namespace}', '{table_name}');
+    client = get_client(host=CLICKHOUSE_HOST, port=CLICKHOUSE_PORT, username="default", password="")
+
+    create_sql = """
+    CREATE TABLE IF NOT EXISTS default.bronze_infrared
+    ENGINE = Iceberg
+    SETTINGS
+        catalog_type = 'datalake',
+        warehouse = 's3://project-bucket/',
+        s3_endpoint = 'http://minio:9000',
+        s3_access_key_id = 'minioadmin',
+        s3_secret_access_key = 'minioadmin',
+        s3_region = 'us-east-1',
+        s3_use_https = 0;
     """
-    client.command(create_query)
-    print(f"Registered Iceberg table in ClickHouse: {namespace}_{table_name}")
 
-    # Optionally fetch sample
-    sample = client.query(f"SELECT * FROM {CLICKHOUSE_DB}.{namespace}_{table_name} LIMIT 10").result_rows
-    print(f"Sample rows from ClickHouse: {sample}")
-    context["ti"].xcom_push(key="clickhouse_sample", value=sample)
+    client.command(create_sql)
+    print("Iceberg table registered in ClickHouse")
+
+
+
+
+
 
 # -----------------------
 # DAG DEFINITION
 # -----------------------
 with DAG(
-    dag_id="duckdb_to_iceberg_clickhouse",
+    dag_id="duckdb_to_iceberg_registerCH",
     start_date=datetime(2024, 1, 1),
     schedule_interval=None,
     catchup=False
@@ -159,9 +171,9 @@ with DAG(
     )
 
     register_ch = PythonOperator(
-        task_id="register_iceberg_clickhouse",
+        task_id="register_iceberg_in_clickhouse",
         python_callable=register_iceberg_in_clickhouse
     )
 
-    # DAG dependencies
     create_ns >> create_iceberg >> show_tables >> register_ch
+

@@ -1,28 +1,31 @@
-DROP DATABASE IF EXISTS peopletraffic_db;
+DROP DATABASE IF EXISTS peopletraffic;
+CREATE DATABASE peopletraffic;
 
-CREATE DATABASE peopletraffic_db;
+DROP DATABASE IF EXISTS dataeng;
+CREATE DATABASE dataeng;
 
--- ========== Dimensions ==========
-
-CREATE TABLE peopletraffic_db.DimBuilding (
-	BuildingKey   UInt32,
-	timestamp	DateTime(),
+CREATE TABLE IF NOT EXISTS peopletraffic.raw_Building (
+	timestamp	DateTime64(3),
 	name	String,
-    out    UInt8,
-    in    UInt8
-) ENGINE = MergeTree()
-ORDER BY (BuildingKey);
+    out   UInt8,
+    in    UInt8,
+    loaded_at DateTime DEFAULT now()
+) ENGINE = ReplacingMergeTree(loaded_at)
+PARTITION BY toYYYYMM(timestamp)
+ORDER BY (timestamp);
 
 
-CREATE TABLE peopletraffic_db.DimWeather (
-	WeatherKey   UInt32,
-	timestamp	DateTime(),
+CREATE TABLE IF NOT EXISTS peopletraffic.raw_Weather (
+	time	DateTime64(3),
 	temp	Float32,
-	prcp Float32
-) ENGINE = MergeTree()
-ORDER BY (WeatherKey);
+	prcp    Float32,
+	loaded_at DateTime DEFAULT now()
+) ENGINE = ReplacingMergeTree(loaded_at)
+PARTITION BY toYYYYMM(time)
+ORDER BY (time)
 
 
+/*
 CREATE TABLE peopletraffic_db.DimDate (
     DateKey   UInt32,
     FullDate  DateTime(),
@@ -58,7 +61,7 @@ CREATE TABLE peopletraffic_db.FactPeopleTraffic (
 	FullDate DateTime()
 ) ENGINE = MergeTree ()
 PARTITION BY toYYYYMM(FullDate)
-ORDER BY (FullDate, BuildingKey);
+ORDER BY (FullDate, BuildingKey);*/
 
 
 

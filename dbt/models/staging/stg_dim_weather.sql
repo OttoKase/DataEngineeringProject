@@ -1,9 +1,15 @@
+{{
+  config(
+    materialized='view'
+  )
+}}
+
 SELECT
-	WeatherKey,
-	timestamp,
+	time,
 	temp,
 	prcp
-FROM file('/var/lib/clickhouse/user_files/bronze_weather.csv')
+FROM {{ source('peopletraffic', 'raw_Weather') }}
+-- FROM file('/var/lib/clickhouse/user_files/bronze_weather.csv')
 
 
 

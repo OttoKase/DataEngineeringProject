@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: peopletraffic
+    description: Raw building data
+    database: peopletraffic
+    schema: peopletraffic
+    tables:
+      - name: raw_Building
+        description: Raw building data
+      - name: raw_Weather
+        description: Raw weather data
