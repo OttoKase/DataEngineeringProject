@@ -1,18 +1,13 @@
-name: 'peopletraffic_uc'
+name: peopletraffic_uc
 version: '1.0.0'
-
-profile: 'peopletraffic_uc'
-
+config-version: 2
+profile: peopletraffic_uc
 model-paths: ["models"]
-analysis-paths: ["analyses"]
 test-paths: ["tests"]
 seed-paths: ["seeds"]
-macro-paths: ["macros"]
-snapshot-paths: ["snapshots"]
-
-clean-targets:         # directories to be removed by `dbt clean`
-  - "target"
-  - "dbt_packages"
+docs-paths: ["docs"]
+target-path: "target"
+clean-targets: ["target"]
 
 models:
   peopletraffic_uc:
