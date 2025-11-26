@@ -140,8 +140,13 @@ Username - admin@open-metadata.org
 Password - admin
 ```
 
+Connect to Clickhouse database: peopletraffic.
 
-Second, create example database with tables and insert data (run the scripts in ./sql folder).
+Use the CH database: peopletraffic with tables.
+
+
+
+
 
 
 <details>
@@ -200,10 +205,35 @@ In the OpenMetadata UI:
 
 
 
+<summary>Superset docker-init.sh file execution enabling</summary>
+chmod +x docker/docker-init.sh
+chmod +x docker/docker-bootstrap.sh
 
 
+docker compose up --build
 
+Then open Superset in your browser:
 
+- URL: http://localhost:8088
+- Login: for now, use the default credentials ( `admin` / `admin`)
+
+### 0.3 Create a Superset service account
+
+Create a service account in ClickHouse for Superset application. It should have SELECT rights on supermarket schema.
+
+<details>
+<summary>Example solution</summary>
+
+```
+CREATE ROLE role_superset_full;
+
+CREATE USER service_superset_full IDENTIFIED WITH sha256_password BY 'superset_very_secret_password';
+
+GRANT role_superset_full TO service_superset_full;
+
+GRANT SELECT ON supermarket.* TO role_superset_full;
+```
+</details>
 
 
 

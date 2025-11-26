@@ -1,4 +1,4 @@
-peopletraffic_uc:     # must match "profile" in dbt_project.yml
+peopletraffic:     # must match "profile" in dbt_project.yml
   target: dev
   outputs:
     dev:

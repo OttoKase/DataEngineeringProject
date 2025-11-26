@@ -110,12 +110,12 @@ with DAG(
 
     run_create_tables = BashOperator(
         task_id="run_create_tables",
-        bash_command="docker exec clickhouse-server clickhouse-client --multiquery --queries-file=/sql/01_create_DB_and_tables.sql",
+        bash_command="docker exec clickhouse-server-omdviz clickhouse-client --multiquery --queries-file=/sql/01_create_DB_and_tables.sql",
     )
 
     run_load_queries = BashOperator(
         task_id="run_load_queries",
-        bash_command="docker exec clickhouse-server clickhouse-client --multiquery --queries-file=/sql/02_load_data_from_csv.sql",
+        bash_command="docker exec clickhouse-server-omdviz clickhouse-client --multiquery --queries-file=/sql/02_load_data_from_csv.sql",
     )
 
     fetch_task >> ingest_infrared_csv_task >>  run_create_tables  >> run_load_queries
