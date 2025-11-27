@@ -51,7 +51,7 @@ WHERE database='default';
 
 2. Create MinIO bucket:
 
-* Login: [http://localhost:9501]
+* Login: <http://localhost:9501>
 * Bucket: `project-bucket`
 
 3. Access DuckDB container via airflow-webserver:
