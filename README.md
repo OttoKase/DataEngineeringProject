@@ -59,7 +59,7 @@ WHERE database='default';
 Start airflow-webserver
 ```bash
  docker compose up -d airflow-webserver
-```bash
+```
 
 ```bash
 docker exec -it airflow-webserver python3 -c "
