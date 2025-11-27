@@ -85,10 +85,11 @@ con.close()
 Tables: [('bronze_infrared',), ('bronze_mobility',), ('bronze_weather',)]
 ```
 
-#
-# docker exec -it airflow-webserver bash
-#
-# python ./scripts/01_check_tables_induckdb.py
+```bash
+docker exec -it airflow-webserver bash
+```
+```bash
+python ./scripts/01_check_tables_induckdb.py
 ```
 
 4. Fetch data from ClickHOUSE
