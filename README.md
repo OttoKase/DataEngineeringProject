@@ -134,8 +134,13 @@ print(tables)
 
 ###############################
 
-docker exec -it clickhouse-server clickhouse-client
+```bash
+ docker compose up -d clickhouse-server
+```
 
+```bash
+docker exec -it clickhouse-server clickhouse-client
+```
 :) SHOW DATABASES;
 
 SHOW DATABASES
