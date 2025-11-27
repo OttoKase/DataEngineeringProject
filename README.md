@@ -83,7 +83,6 @@ con.close()
 "
 ```
 Tables: [('bronze_infrared',), ('bronze_mobility',), ('bronze_weather',)]
-```
 
 ```bash
 docker exec -it airflow-webserver bash
