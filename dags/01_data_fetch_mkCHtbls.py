@@ -100,13 +100,6 @@ with DAG(
     #     provide_context=True
     # )
 
-    # run_dbt_seed = BashOperator(
-    #     task_id="run_dbt",
-    #     bash_command="docker exec dbt dbt seed", #docker exec -it dbt dbt seed
-    # )
-
-    # FOR mart data layer
-    # docker exec -it dbt dbt run
 
     run_create_tables = BashOperator(
         task_id="run_create_tables",
@@ -118,5 +111,10 @@ with DAG(
         bash_command="docker exec clickhouse-server-omdviz clickhouse-client --multiquery --queries-file=/sql/02_load_data_from_csv.sql",
     )
 
-    fetch_task >> ingest_infrared_csv_task >>  run_create_tables  >> run_load_queries
+    run_dbt = BashOperator(
+        task_id="run_dbt",
+        bash_command="docker exec dbt dbt run", #docker exec -it dbt dbt seed
+    )
+
+    fetch_task >> ingest_infrared_csv_task >>  run_create_tables  >> run_load_queries >>  run_dbt
     # fetch_task >> ingest_infrared_csv_task >>  run_dbt_seed >> run_create_tables  >> run_load_queries

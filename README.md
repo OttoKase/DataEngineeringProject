@@ -1,6 +1,12 @@
 # DataEngineeringProject
 This repository contains group 8's project in Data Engineering course held in 2025 autumn
 
+
+
+
+Before the start the docker compose stack with containers should be built.
+
+
 ## Project Structure
 ```
 
@@ -9,10 +15,21 @@ This repository contains group 8's project in Data Engineering course held in 20
 ## How to Run
 
 ```
-docker compose up -d --build
+docker compose build --no-cache
+
+docker compose up -d
 
 ```
+## How to Up and Down a certain container
 
+```
+docker compose build --no-cache <service_name>
+docker compose up -d <service_name>
+
+docker compose stop <service_name>
+
+
+```
 
 2. Create MinIO bucket:
 
