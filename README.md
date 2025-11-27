@@ -28,8 +28,10 @@ docker compose up -d <service_name>
 
 docker compose stop <service_name>
 
-
 ```
+
+* NB! NB! While building and composing the Superset container it may happen that .... containers do not start from the terminal, howevere their building was Correct, then one should start them from the Docker Desktop. The same goes for Open Meta Data, i.e. if building and composing of the stack was successful ,but some services did not start, one can start them from Docker Desktop.
+
 
 2. Create MinIO bucket:
 
