@@ -83,7 +83,7 @@ con.close()
 "
 ```
 Tables: [('bronze_infrared',), ('bronze_mobility',), ('bronze_weather',)]
-
+*Selle osa vist peaks välja võtma:
 ```bash
 docker exec -it airflow-webserver bash
 ```
@@ -92,6 +92,11 @@ python ./scripts/01_check_tables_induckdb.py
 ```
 
 4. Fetch data from ClickHOUSE
+
+Start container:
+```bash
+docker compose up -d duckdb_lab
+```
 
 Check Iceberg tables via duckdb bash:
 
