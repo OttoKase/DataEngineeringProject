@@ -56,6 +56,11 @@ WHERE database='default';
 
 3. Access DuckDB container via airflow-webserver:
 
+Start airflow-webserver
+```bash
+ docker compose up -d airflow-webserver
+```bash
+
 ```bash
 docker exec -it airflow-webserver python3 -c "
 import duckdb
