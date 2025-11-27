@@ -1,91 +1,55 @@
 {{ config(materialized='incremental') }}
 
-WITH f AS (
+WITH building_hourly AS (
     SELECT
-        row_number() OVER () AS building_key,
-        weather_key,
-        datekey,
-        timekey,
-        PeopleTrafficAmount,
-        FullDate
-    FROM {{ ref('stg_dim_building') }}
+        building_key,
+        toStartOfHour(timestamp) AS timestamp_hour,
+        any(building_name) AS building_name,
+        SUM(people_out) AS people_out,
+        SUM(people_in) AS people_in
+    FROM {{ ref('dim_building') }}
+    {% if is_incremental() %}
+        WHERE timestamp > (SELECT max(timestamp_hour) FROM {{ this }})
+    {% endif %}
+    GROUP BY
+        building_key,
+        timestamp_hour
+),
+
+weather_ordered AS (
+    SELECT
+        row_number() OVER (ORDER BY time) - 1 AS weather_key,  -- start from 0
+        time AS weather_time,
+        temp,
+        prcp
+    FROM {{ ref('dim_weather') }}
+),
+
+joined AS (
+    SELECT
+        b.building_key,
+        b.building_name,
+        b.people_out,
+        b.people_in,
+        w.weather_key,
+        w.temp,
+        w.prcp,
+        b.people_out + b.people_in AS TotalPeople,
+        b.timestamp_hour AS join_timestamp
+    FROM building_hourly AS b
+    LEFT JOIN weather_ordered AS w
+        ON b.timestamp_hour = w.weather_time
 )
 
 SELECT
-    row_number() OVER () AS peoplefact_key,
-
-    -- Building
-    b.building_key,
-    b.name AS building_name,
-    b.out AS people_out,
-    b.in AS people_in,
-
-    -- Weather
-    w.weather_key,
-    w.temp,
-    w.prcr,
-
-    -- Measures
-    SUM(f.PeopleTrafficAmount) AS total_people,
-    MAX(f.FullDate) AS last_date
-
-FROM f
-LEFT JOIN {{ ref('dim_building') }} AS b
-    ON f.building_key = b.building_key
-
-LEFT JOIN {{ ref('dim_weather') }} AS w
-    ON f.weather_key = w.weather_key
-
-LEFT JOIN {{ ref('dim_date') }} AS d
-    ON f.datekey = d.datekey
-
-LEFT JOIN {{ ref('dim_time') }} AS t
-    ON f.timekey = t.timekey
-
-GROUP BY
-    b.building_key,
-    b.name,
-    b.out,
-    b.in,
-    w.weather_key,
-    w.temp,
-    w.prcr
-
-
--- {{ config(materialized='incremental') }}
---
---
--- SELECT
---     row_number() OVER () AS peoplefact_key,
---     b.building_key,
---     b.name AS building_name,
---     b.out AS people_out,
---     b.in AS people_in,
---     w.weather_key,
---     w.temp,
---     w.prcr,
---     SUM(f.PeopleTrafficAmount) AS TotalPeople,
---     MAX(f.FullDate) AS LastDate
--- FROM {{ ref('stg_dim_building') }} AS f
--- LEFT JOIN {{ ref('dim_building') }} AS b
---     ON f.building_key = b.building_key
--- LEFT JOIN {{ ref('dim_weather') }} AS w
---     ON f.weather_key = w.weather_key
--- LEFT JOIN {{ ref('dim_date') }} AS d
---     ON f.DateKey = d.DateKey
--- LEFT JOIN {{ ref('dim_time') }} AS t
---     ON f.TimeKey = t.TimeKey
-
-
--- GROUP BY
---     b.BuildingKey,
---     b.name --,
---     -- c.LastName,
---     -- c.City,
---     -- p.ProductKey,
---     -- p.ProductName,
---     -- s.StoreKey,
---     -- s.StoreName
-
-
-
+    row_number() OVER (ORDER BY building_key, weather_key) - 1 AS peoplefact_key,
+    building_key,
+    weather_key,
+    join_timestamp,
+    building_name,
+    people_out,
+    people_in,
+    temp,
+    prcp,
+    TotalPeople
+FROM joined

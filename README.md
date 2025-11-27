@@ -33,6 +33,22 @@ docker compose stop <service_name>
 * NB! NB! While building and composing the Superset container it may happen that .... containers do not start from the terminal, howevere their building was Correct, then one should start them from the Docker Desktop. The same goes for Open Meta Data, i.e. if building and composing of the stack was successful ,but some services did not start, one can start them from Docker Desktop.
 
 
+2. Data fetch, making models: staging, marts
+This section is needed to prepare the data-sets for the other tasks.
+The staging data is used in the Task: " Apche Iceberg", ./marts/fact_people_traffic is used in Tasks: ClickHouse, OpenMetaData, SuperSet.
+
+
+* To DROP all tables created in Clickhouse in "default" database:
+
+```bash
+docker exec -i clickhouse-server clickhouse-client --query "
+SELECT 'DROP TABLE IF EXISTS ' || name || ';'
+FROM system.tables
+WHERE database='default';
+" | docker exec -i clickhouse-server clickhouse-client
+```
+
+
 2. Create MinIO bucket:
 
 * Login: [http://localhost:9501]
