@@ -1,6 +1,12 @@
 # DataEngineeringProject
 This repository contains group 8's project in Data Engineering course held in 2025 autumn
 
+
+
+
+Before the start the docker compose stack with containers should be built.
+
+
 ## Project Structure
 ```
 
@@ -9,17 +15,51 @@ This repository contains group 8's project in Data Engineering course held in 20
 ## How to Run
 
 ```
-docker compose up -d --build
+docker compose build --no-cache
 
+docker compose up -d
+
+```
+## How to Up and Down a certain container
+
+```
+docker compose build --no-cache <service_name>
+docker compose up -d <service_name>
+
+docker compose stop <service_name>
+
+```
+
+* NB! NB! While building and composing the Superset container it may happen that .... containers do not start from the terminal, howevere their building was Correct, then one should start them from the Docker Desktop. The same goes for Open Meta Data, i.e. if building and composing of the stack was successful ,but some services did not start, one can start them from Docker Desktop.
+
+
+2. Data fetch, making models: staging, marts
+This section is needed to prepare the data-sets for the other tasks.
+The staging data is used in the Task: " Apche Iceberg", ./marts/fact_people_traffic is used in Tasks: ClickHouse, OpenMetaData, SuperSet.
+
+
+* To DROP all tables created in Clickhouse in "default" database:
+
+```bash
+docker exec -i clickhouse-server clickhouse-client --query "
+SELECT 'DROP TABLE IF EXISTS ' || name || ';'
+FROM system.tables
+WHERE database='default';
+" | docker exec -i clickhouse-server clickhouse-client
 ```
 
 
 2. Create MinIO bucket:
 
-* Login: [http://localhost:9501]
+* Login: <http://localhost:9501>
 * Bucket: `project-bucket`
 
 3. Access DuckDB container via airflow-webserver:
+
+Start airflow-webserver
+```bash
+ docker compose up -d airflow-webserver
+```
 
 ```bash
 docker exec -it airflow-webserver python3 -c "
@@ -43,15 +83,20 @@ con.close()
 "
 ```
 Tables: [('bronze_infrared',), ('bronze_mobility',), ('bronze_weather',)]
+*Selle osa vist peaks välja võtma:
+```bash
+docker exec -it airflow-webserver bash
 ```
-
-#
-# docker exec -it airflow-webserver bash
-#
-# python ./scripts/01_check_tables_induckdb.py
+```bash
+python ./scripts/01_check_tables_induckdb.py
 ```
 
 4. Fetch data from ClickHOUSE
+
+Start container:
+```bash
+docker compose up -d duckdb_lab
+```
 
 Check Iceberg tables via duckdb bash:
 
@@ -89,8 +134,13 @@ print(tables)
 
 ###############################
 
-docker exec -it clickhouse-server clickhouse-client
+```bash
+ docker compose up -d clickhouse-server
+```
 
+```bash
+docker exec -it clickhouse-server clickhouse-client
+```
 :) SHOW DATABASES;
 
 SHOW DATABASES
