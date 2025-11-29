@@ -1,9 +1,20 @@
 {{
   config(
-    materialized='view'
-  )
+    materialized='view'  )
 }}
 
+
+
+SELECT
+    name,
+    timestamp,
+    in,
+    out
+FROM {{ source('peopletraffic', 'raw_Building') }}
+
+
+
+/*
 SELECT
 	timestamp,
 	name,
@@ -15,7 +26,7 @@ FROM {{ source('peopletraffic', 'raw_Building') }}
 
 
 
-
+*/
 
 
 
