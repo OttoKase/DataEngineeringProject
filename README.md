@@ -528,7 +528,7 @@ NB! OMD service can work differently on windows and other OS. If needed, please 
 ![OMD images](/images/test_outcome.png)
 
 
-### Superset Dashboard visibility in OMD_table_descriptions
+### Superset Dashboard visibility in OMD
 ![SupersetDB visibility in OMD](/images/omd_supersetdb_connection.png)
 ![SupersetDB visibility in OMD](/images/OMD_superset_con_agent.png)
 
