@@ -1,0 +1,24 @@
+[2025-11-24T09:00:45.234+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: duckdb_to_iceberg_registerCH.register_iceberg_in_clickhouse manual__2025-11-24T09:00:39.696596+00:00 [queued]>
+[2025-11-24T09:00:45.241+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: duckdb_to_iceberg_registerCH.register_iceberg_in_clickhouse manual__2025-11-24T09:00:39.696596+00:00 [queued]>
+[2025-11-24T09:00:45.242+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-11-24T09:00:45.253+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): register_iceberg_in_clickhouse> on 2025-11-24 09:00:39.696596+00:00
+[2025-11-24T09:00:45.258+0000] {standard_task_runner.py:60} INFO - Started process 1520 to run task
+[2025-11-24T09:00:45.262+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'duckdb_to_iceberg_registerCH', 'register_iceberg_in_clickhouse', 'manual__2025-11-24T09:00:39.696596+00:00', '--job-id', '334', '--raw', '--subdir', 'DAGS_FOLDER/dag_four.py', '--cfg-path', '/tmp/tmpzxku0fi4']
+[2025-11-24T09:00:45.264+0000] {standard_task_runner.py:88} INFO - Job 334: Subtask register_iceberg_in_clickhouse
+[2025-11-24T09:00:45.322+0000] {task_command.py:423} INFO - Running <TaskInstance: duckdb_to_iceberg_registerCH.register_iceberg_in_clickhouse manual__2025-11-24T09:00:39.696596+00:00 [running]> on host f25e03a887f1
+[2025-11-24T09:00:45.414+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='duckdb_to_iceberg_registerCH' AIRFLOW_CTX_TASK_ID='register_iceberg_in_clickhouse' AIRFLOW_CTX_EXECUTION_DATE='2025-11-24T09:00:39.696596+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-24T09:00:39.696596+00:00'
+[2025-11-24T09:00:45.415+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/dag_four.py", line 125, in register_iceberg_in_clickhouse
+    client = Client(host=CLICKHOUSE_HOST, port=CLICKHOUSE_PORT, username="default", password="")
+TypeError: Can't instantiate abstract class Client with abstract methods _query_with_context, command, data_insert, get_client_setting, ping, raw_insert, raw_query, set_client_setting
+[2025-11-24T09:00:45.427+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=duckdb_to_iceberg_registerCH, task_id=register_iceberg_in_clickhouse, execution_date=20251124T090039, start_date=20251124T090045, end_date=20251124T090045
+[2025-11-24T09:00:45.439+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 334 for task register_iceberg_in_clickhouse (Can't instantiate abstract class Client with abstract methods _query_with_context, command, data_insert, get_client_setting, ping, raw_insert, raw_query, set_client_setting; 1520)
+[2025-11-24T09:00:45.481+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-11-24T09:00:45.508+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

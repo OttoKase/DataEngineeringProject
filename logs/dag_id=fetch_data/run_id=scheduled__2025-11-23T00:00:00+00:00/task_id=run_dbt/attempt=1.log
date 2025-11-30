@@ -1,0 +1,60 @@
+[2025-11-24T07:26:55.738+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_data.run_dbt scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-11-24T07:26:55.746+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_data.run_dbt scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-11-24T07:26:55.746+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-11-24T07:26:55.756+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): run_dbt> on 2025-11-23 00:00:00+00:00
+[2025-11-24T07:26:55.762+0000] {standard_task_runner.py:60} INFO - Started process 322 to run task
+[2025-11-24T07:26:55.769+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'fetch_data', 'run_dbt', 'scheduled__2025-11-23T00:00:00+00:00', '--job-id', '283', '--raw', '--subdir', 'DAGS_FOLDER/dag_one.py', '--cfg-path', '/tmp/tmpxmgcl1dq']
+[2025-11-24T07:26:55.773+0000] {standard_task_runner.py:88} INFO - Job 283: Subtask run_dbt
+[2025-11-24T07:26:55.829+0000] {task_command.py:423} INFO - Running <TaskInstance: fetch_data.run_dbt scheduled__2025-11-23T00:00:00+00:00 [running]> on host b8d844055de8
+[2025-11-24T07:26:56.042+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_data' AIRFLOW_CTX_TASK_ID='run_dbt' AIRFLOW_CTX_EXECUTION_DATE='2025-11-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-23T00:00:00+00:00'
+[2025-11-24T07:26:56.045+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-11-24T07:26:56.046+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'docker exec dbt dbt seed']
+[2025-11-24T07:26:56.062+0000] {subprocess.py:86} INFO - Output:
+[2025-11-24T07:26:57.567+0000] {subprocess.py:93} INFO - [0m07:26:57  Running with dbt=1.10.15
+[2025-11-24T07:26:57.737+0000] {subprocess.py:93} INFO - [0m07:26:57  Registered adapter: clickhouse=1.9.6
+[2025-11-24T07:26:57.865+0000] {subprocess.py:93} INFO - [0m07:26:57  Unable to do partial parsing because profile has changed
+[2025-11-24T07:26:58.803+0000] {subprocess.py:93} INFO - [0m07:26:58  Encountered an error:
+[2025-11-24T07:26:58.804+0000] {subprocess.py:93} INFO - Compilation Error
+[2025-11-24T07:26:58.804+0000] {subprocess.py:93} INFO -   Model 'model.ulemiste_city_insights_dbt.dim_time' (models/marts/dim_time.sql) depends on a node named 'stg_dim_time' which was not found
+[2025-11-24T07:26:59.639+0000] {subprocess.py:97} INFO - Command exited with return code 2
+[2025-11-24T07:26:59.653+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 2.
+[2025-11-24T07:26:59.657+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=fetch_data, task_id=run_dbt, execution_date=20251123T000000, start_date=20251124T072655, end_date=20251124T072659
+[2025-11-24T07:26:59.690+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 283 for task run_dbt (Bash command failed. The command returned a non-zero exit code 2.; 322)
+[2025-11-24T07:26:59.716+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-11-24T07:26:59.748+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-11-24T07:39:25.162+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_data.run_dbt scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-11-24T07:39:25.167+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_data.run_dbt scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-11-24T07:39:25.168+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-11-24T07:39:25.178+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): run_dbt> on 2025-11-23 00:00:00+00:00
+[2025-11-24T07:39:25.181+0000] {standard_task_runner.py:60} INFO - Started process 2690 to run task
+[2025-11-24T07:39:25.187+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'fetch_data', 'run_dbt', 'scheduled__2025-11-23T00:00:00+00:00', '--job-id', '291', '--raw', '--subdir', 'DAGS_FOLDER/dag_one.py', '--cfg-path', '/tmp/tmp3mst9654']
+[2025-11-24T07:39:25.190+0000] {standard_task_runner.py:88} INFO - Job 291: Subtask run_dbt
+[2025-11-24T07:39:25.245+0000] {task_command.py:423} INFO - Running <TaskInstance: fetch_data.run_dbt scheduled__2025-11-23T00:00:00+00:00 [running]> on host b8d844055de8
+[2025-11-24T07:39:25.467+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_data' AIRFLOW_CTX_TASK_ID='run_dbt' AIRFLOW_CTX_EXECUTION_DATE='2025-11-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-23T00:00:00+00:00'
+[2025-11-24T07:39:25.468+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-11-24T07:39:25.469+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'docker exec dbt dbt seed']
+[2025-11-24T07:39:25.478+0000] {subprocess.py:86} INFO - Output:
+[2025-11-24T07:39:26.899+0000] {subprocess.py:93} INFO - [0m07:39:26  Running with dbt=1.10.15
+[2025-11-24T07:39:27.081+0000] {subprocess.py:93} INFO - [0m07:39:27  Registered adapter: clickhouse=1.9.6
+[2025-11-24T07:39:27.228+0000] {subprocess.py:93} INFO - [0m07:39:27  Unable to do partial parsing because profile has changed
+[2025-11-24T07:39:28.204+0000] {subprocess.py:93} INFO - [0m07:39:28  Encountered an error:
+[2025-11-24T07:39:28.204+0000] {subprocess.py:93} INFO - Compilation Error
+[2025-11-24T07:39:28.204+0000] {subprocess.py:93} INFO -   Model 'model.ulemiste_city_insights_dbt.dim_time' (models/marts/dim_time.sql) depends on a node named 'stg_dim_time' which was not found
+[2025-11-24T07:39:29.108+0000] {subprocess.py:97} INFO - Command exited with return code 2
+[2025-11-24T07:39:29.132+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 2.
+[2025-11-24T07:39:29.139+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=fetch_data, task_id=run_dbt, execution_date=20251123T000000, start_date=20251124T073925, end_date=20251124T073929
+[2025-11-24T07:39:29.178+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 291 for task run_dbt (Bash command failed. The command returned a non-zero exit code 2.; 2690)
+[2025-11-24T07:39:29.218+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-11-24T07:39:29.260+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

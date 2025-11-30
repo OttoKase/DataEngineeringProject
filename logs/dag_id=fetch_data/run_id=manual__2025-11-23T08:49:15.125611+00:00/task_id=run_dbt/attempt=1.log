@@ -1,0 +1,90 @@
+[2025-11-23T08:49:51.642+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_data.run_dbt manual__2025-11-23T08:49:15.125611+00:00 [queued]>
+[2025-11-23T08:49:51.659+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_data.run_dbt manual__2025-11-23T08:49:15.125611+00:00 [queued]>
+[2025-11-23T08:49:51.660+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-11-23T08:49:51.689+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): run_dbt> on 2025-11-23 08:49:15.125611+00:00
+[2025-11-23T08:49:51.696+0000] {standard_task_runner.py:60} INFO - Started process 473 to run task
+[2025-11-23T08:49:51.701+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'fetch_data', 'run_dbt', 'manual__2025-11-23T08:49:15.125611+00:00', '--job-id', '225', '--raw', '--subdir', 'DAGS_FOLDER/dag_one.py', '--cfg-path', '/tmp/tmpaqw6aq5g']
+[2025-11-23T08:49:51.705+0000] {standard_task_runner.py:88} INFO - Job 225: Subtask run_dbt
+[2025-11-23T08:49:51.815+0000] {task_command.py:423} INFO - Running <TaskInstance: fetch_data.run_dbt manual__2025-11-23T08:49:15.125611+00:00 [running]> on host 83fe851b6a3d
+[2025-11-23T08:49:52.247+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_data' AIRFLOW_CTX_TASK_ID='run_dbt' AIRFLOW_CTX_EXECUTION_DATE='2025-11-23T08:49:15.125611+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-23T08:49:15.125611+00:00'
+[2025-11-23T08:49:52.249+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-11-23T08:49:52.251+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'docker exec dbt dbt seed']
+[2025-11-23T08:49:52.267+0000] {subprocess.py:86} INFO - Output:
+[2025-11-23T08:49:56.024+0000] {subprocess.py:93} INFO - [0m08:49:56  Running with dbt=1.10.15
+[2025-11-23T08:49:56.537+0000] {subprocess.py:93} INFO - [0m08:49:56  Registered adapter: clickhouse=1.9.6
+[2025-11-23T08:49:56.866+0000] {subprocess.py:93} INFO - [0m08:49:56  Unable to do partial parsing because profile has changed
+[2025-11-23T08:49:59.525+0000] {subprocess.py:93} INFO - [0m08:49:59  [[33mWARNING[0m]: Did not find matching node for patch with name 'DimDate' in the 'models' section of file 'models/marts/schema.yml'
+[2025-11-23T08:49:59.532+0000] {subprocess.py:93} INFO - [0m08:49:59  [[33mWARNING[0m]: Did not find matching node for patch with name 'DimTime' in the 'models' section of file 'models/marts/schema.yml'
+[2025-11-23T08:49:59.540+0000] {subprocess.py:93} INFO - [0m08:49:59  [[33mWARNING[0m]: Did not find matching node for patch with name 'DimBuilding' in the 'models' section of file 'models/marts/schema.yml'
+[2025-11-23T08:49:59.548+0000] {subprocess.py:93} INFO - [0m08:49:59  [[33mWARNING[0m]: Did not find matching node for patch with name 'DimWeather' in the 'models' section of file 'models/marts/schema.yml'
+[2025-11-23T08:49:59.557+0000] {subprocess.py:93} INFO - [0m08:49:59  [[33mWARNING[0m]: Did not find matching node for patch with name 'FactPeopleTraffic' in the 'models' section of file 'models/marts/schema.yml'
+[2025-11-23T08:49:59.822+0000] {subprocess.py:93} INFO - [0m08:49:59  [[33mWARNING[0m][MissingArgumentsPropertyInGenericTestDeprecation]: Deprecated
+[2025-11-23T08:49:59.823+0000] {subprocess.py:93} INFO - functionality
+[2025-11-23T08:49:59.823+0000] {subprocess.py:93} INFO - Found top-level arguments to test `relationships`. Arguments to generic tests
+[2025-11-23T08:49:59.824+0000] {subprocess.py:93} INFO - should be nested under the `arguments` property.`
+[2025-11-23T08:50:00.068+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.unique_DimDate_DateKey.33d175d160' (models/marts/schema.yml) depends on a node named 'DimDate' in package '' which was not found
+[2025-11-23T08:50:00.069+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.not_null_DimDate_DateKey.1c364727cc' (models/marts/schema.yml) depends on a node named 'DimDate' in package '' which was not found
+[2025-11-23T08:50:00.070+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.not_null_DimDate_FullDate.4d7bb5865e' (models/marts/schema.yml) depends on a node named 'DimDate' in package '' which was not found
+[2025-11-23T08:50:00.071+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.not_null_DimDate_Year.ded4b9dc24' (models/marts/schema.yml) depends on a node named 'DimDate' in package '' which was not found
+[2025-11-23T08:50:00.072+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.not_null_DimDate_Month.d364ef8dcb' (models/marts/schema.yml) depends on a node named 'DimDate' in package '' which was not found
+[2025-11-23T08:50:00.073+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.not_null_DimDate_Date.2d0d7c6c29' (models/marts/schema.yml) depends on a node named 'DimDate' in package '' which was not found
+[2025-11-23T08:50:00.075+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.not_null_DimDate_DayOfWeek.602256afa9' (models/marts/schema.yml) depends on a node named 'DimDate' in package '' which was not found
+[2025-11-23T08:50:00.077+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.unique_DimTime_TimeKey.2c2cfb809a' (models/marts/schema.yml) depends on a node named 'DimTime' in package '' which was not found
+[2025-11-23T08:50:00.078+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.not_null_DimTime_TimeKey.fcc168f097' (models/marts/schema.yml) depends on a node named 'DimTime' in package '' which was not found
+[2025-11-23T08:50:00.079+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.not_null_DimTime_FullTime.4c28ed4430' (models/marts/schema.yml) depends on a node named 'DimTime' in package '' which was not found
+[2025-11-23T08:50:00.080+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.not_null_DimTime_hour.b258f88304' (models/marts/schema.yml) depends on a node named 'DimTime' in package '' which was not found
+[2025-11-23T08:50:00.082+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.not_null_DimTime_minute.e2d6c2a119' (models/marts/schema.yml) depends on a node named 'DimTime' in package '' which was not found
+[2025-11-23T08:50:00.083+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.not_null_DimTime_second.dc83320f55' (models/marts/schema.yml) depends on a node named 'DimTime' in package '' which was not found
+[2025-11-23T08:50:00.084+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.unique_DimBuilding_BuildingKey.d8f7a6f718' (models/marts/schema.yml) depends on a node named 'DimBuilding' in package '' which was not found
+[2025-11-23T08:50:00.085+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.not_null_DimBuilding_BuildingKey.334cc7f6fb' (models/marts/schema.yml) depends on a node named 'DimBuilding' in package '' which was not found
+[2025-11-23T08:50:00.087+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.not_null_DimBuilding_timestamp.55d9dc00c9' (models/marts/schema.yml) depends on a node named 'DimBuilding' in package '' which was not found
+[2025-11-23T08:50:00.088+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.not_null_DimBuilding_name.f57259b18a' (models/marts/schema.yml) depends on a node named 'DimBuilding' in package '' which was not found
+[2025-11-23T08:50:00.090+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.not_null_DimBuilding_out.ce6bbe0f71' (models/marts/schema.yml) depends on a node named 'DimBuilding' in package '' which was not found
+[2025-11-23T08:50:00.092+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.not_null_DimBuilding_in.fb371f9f4c' (models/marts/schema.yml) depends on a node named 'DimBuilding' in package '' which was not found
+[2025-11-23T08:50:00.094+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.unique_DimWeather_WeatherKey.b4e02f077a' (models/marts/schema.yml) depends on a node named 'DimWeather' in package '' which was not found
+[2025-11-23T08:50:00.096+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.not_null_DimWeather_WeatherKey.e22711a26a' (models/marts/schema.yml) depends on a node named 'DimWeather' in package '' which was not found
+[2025-11-23T08:50:00.098+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.not_null_DimWeather_timestamp.13ce388446' (models/marts/schema.yml) depends on a node named 'DimWeather' in package '' which was not found
+[2025-11-23T08:50:00.100+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.not_null_DimWeather_temp.f0b34306d8' (models/marts/schema.yml) depends on a node named 'DimWeather' in package '' which was not found
+[2025-11-23T08:50:00.102+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.not_null_DimWeather_prcp.390ec3a7f9' (models/marts/schema.yml) depends on a node named 'DimWeather' in package '' which was not found
+[2025-11-23T08:50:00.105+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.unique_FactPeopleTraffic_PeopleTraffic.846277a84d' (models/marts/schema.yml) depends on a node named 'FactPeopleTraffic' in package '' which was not found
+[2025-11-23T08:50:00.107+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.not_null_FactPeopleTraffic_PeopleTraffic.862e16664d' (models/marts/schema.yml) depends on a node named 'FactPeopleTraffic' in package '' which was not found
+[2025-11-23T08:50:00.111+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.relationships_FactPeopleTraffic_DateKey__ref_DimDate_.fdf249bd57' (models/marts/schema.yml) depends on a node named 'DimDate' in package '' which was not found
+[2025-11-23T08:50:00.113+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.relationships_FactPeopleTraffic_DateKey__ref_DimDate_.fdf249bd57' (models/marts/schema.yml) depends on a node named 'FactPeopleTraffic' in package '' which was not found
+[2025-11-23T08:50:00.117+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.relationships_FactPeopleTraffic_TimeKey__ref_DimTime_.e5bf624e98' (models/marts/schema.yml) depends on a node named 'DimTime' in package '' which was not found
+[2025-11-23T08:50:00.119+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.relationships_FactPeopleTraffic_TimeKey__ref_DimTime_.e5bf624e98' (models/marts/schema.yml) depends on a node named 'FactPeopleTraffic' in package '' which was not found
+[2025-11-23T08:50:00.121+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.relationships_FactPeopleTraffic_BuildingKey__ref_DimBuilding_.0b00b7f414' (models/marts/schema.yml) depends on a node named 'DimBuilding' in package '' which was not found
+[2025-11-23T08:50:00.123+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.relationships_FactPeopleTraffic_BuildingKey__ref_DimBuilding_.0b00b7f414' (models/marts/schema.yml) depends on a node named 'FactPeopleTraffic' in package '' which was not found
+[2025-11-23T08:50:00.126+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.relationships_FactPeopleTraffic_WeatherKey__ref_DimWeather_.01c6e54c32' (models/marts/schema.yml) depends on a node named 'DimWeather' in package '' which was not found
+[2025-11-23T08:50:00.127+0000] {subprocess.py:93} INFO - [0m08:50:00  [[33mWARNING[0m]: Test 'test.ulemiste_city_insights_dbt.relationships_FactPeopleTraffic_WeatherKey__ref_DimWeather_.01c6e54c32' (models/marts/schema.yml) depends on a node named 'FactPeopleTraffic' in package '' which was not found
+[2025-11-23T08:50:00.698+0000] {subprocess.py:93} INFO - [0m08:50:00  Found 4 models, 2 seeds, 2 sources, 485 macros
+[2025-11-23T08:50:00.705+0000] {subprocess.py:93} INFO - [0m08:50:00
+[2025-11-23T08:50:00.715+0000] {subprocess.py:93} INFO - [0m08:50:00  Concurrency: 1 threads (target='dev')
+[2025-11-23T08:50:00.717+0000] {subprocess.py:93} INFO - [0m08:50:00
+[2025-11-23T08:50:01.574+0000] {subprocess.py:93} INFO - WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=0, status=None)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPConnection object at 0x7fe243f9c250>: Failed to resolve 'clickhouse-server' ([Errno -2] Name or service not known)")': /?
+[2025-11-23T08:50:01.583+0000] {subprocess.py:93} INFO - WARNING:clickhouse_connect.driver.httpclient:Unexpected Http Driver Exception
+[2025-11-23T08:50:02.597+0000] {subprocess.py:93} INFO - WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=0, status=None)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPConnection object at 0x7fe239506d50>: Failed to resolve 'clickhouse-server' ([Errno -2] Name or service not known)")': /?
+[2025-11-23T08:50:02.606+0000] {subprocess.py:93} INFO - WARNING:clickhouse_connect.driver.httpclient:Unexpected Http Driver Exception
+[2025-11-23T08:50:02.613+0000] {subprocess.py:93} INFO - [0m08:50:02
+[2025-11-23T08:50:02.614+0000] {subprocess.py:93} INFO - [0m08:50:02  Finished running  in 0 hours 0 minutes and 1.90 seconds (1.90s).
+[2025-11-23T08:50:02.616+0000] {subprocess.py:93} INFO - [0m08:50:02  Encountered an error:
+[2025-11-23T08:50:02.617+0000] {subprocess.py:93} INFO - Database Error
+[2025-11-23T08:50:02.618+0000] {subprocess.py:93} INFO -   Error HTTPConnectionPool(host='clickhouse-server', port=8123): Max retries exceeded with url: /? (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x7fe2395076d0>: Failed to resolve 'clickhouse-server' ([Errno -2] Name or service not known)")) executing HTTP request attempt 1 (http://clickhouse-server:8123)
+[2025-11-23T08:50:02.619+0000] {subprocess.py:93} INFO - [0m08:50:02  [[33mWARNING[0m][DeprecationsSummary]: Deprecated functionality
+[2025-11-23T08:50:02.619+0000] {subprocess.py:93} INFO - Summary of encountered deprecations:
+[2025-11-23T08:50:02.620+0000] {subprocess.py:93} INFO - - MissingArgumentsPropertyInGenericTestDeprecation: 4 occurrences
+[2025-11-23T08:50:02.620+0000] {subprocess.py:93} INFO - To see all deprecation instances instead of just the first occurrence of each,
+[2025-11-23T08:50:02.620+0000] {subprocess.py:93} INFO - run command again with the `--show-all-deprecations` flag. You may also need to
+[2025-11-23T08:50:02.621+0000] {subprocess.py:93} INFO - run with `--no-partial-parse` as some deprecations are only encountered during
+[2025-11-23T08:50:02.621+0000] {subprocess.py:93} INFO - parsing.
+[2025-11-23T08:50:05.419+0000] {subprocess.py:97} INFO - Command exited with return code 2
+[2025-11-23T08:50:05.497+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 2.
+[2025-11-23T08:50:05.516+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=fetch_data, task_id=run_dbt, execution_date=20251123T084915, start_date=20251123T084951, end_date=20251123T085005
+[2025-11-23T08:50:05.607+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 225 for task run_dbt (Bash command failed. The command returned a non-zero exit code 2.; 473)
+[2025-11-23T08:50:05.646+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-11-23T08:50:05.745+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

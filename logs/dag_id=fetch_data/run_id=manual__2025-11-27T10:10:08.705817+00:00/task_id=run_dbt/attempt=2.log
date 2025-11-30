@@ -1,0 +1,61 @@
+[2025-11-27T10:16:24.705+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_data.run_dbt manual__2025-11-27T10:10:08.705817+00:00 [queued]>
+[2025-11-27T10:16:24.744+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_data.run_dbt manual__2025-11-27T10:10:08.705817+00:00 [queued]>
+[2025-11-27T10:16:24.746+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 2
+[2025-11-27T10:16:24.800+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): run_dbt> on 2025-11-27 10:10:08.705817+00:00
+[2025-11-27T10:16:24.812+0000] {standard_task_runner.py:60} INFO - Started process 14616 to run task
+[2025-11-27T10:16:24.825+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'fetch_data', 'run_dbt', 'manual__2025-11-27T10:10:08.705817+00:00', '--job-id', '543', '--raw', '--subdir', 'DAGS_FOLDER/01_data_fetch_mkCHtbls.py', '--cfg-path', '/tmp/tmps4a3t4ia']
+[2025-11-27T10:16:24.835+0000] {standard_task_runner.py:88} INFO - Job 543: Subtask run_dbt
+[2025-11-27T10:16:25.034+0000] {task_command.py:423} INFO - Running <TaskInstance: fetch_data.run_dbt manual__2025-11-27T10:10:08.705817+00:00 [running]> on host 8e7e8c622b15
+[2025-11-27T10:16:25.669+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_data' AIRFLOW_CTX_TASK_ID='run_dbt' AIRFLOW_CTX_EXECUTION_DATE='2025-11-27T10:10:08.705817+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-27T10:10:08.705817+00:00'
+[2025-11-27T10:16:25.672+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-11-27T10:16:25.673+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'docker exec dbt dbt run']
+[2025-11-27T10:16:25.697+0000] {subprocess.py:86} INFO - Output:
+[2025-11-27T10:16:28.838+0000] {subprocess.py:93} INFO - [0m10:16:28  Running with dbt=1.10.15
+[2025-11-27T10:16:29.469+0000] {subprocess.py:93} INFO - [0m10:16:29  Registered adapter: clickhouse=1.9.6
+[2025-11-27T10:16:29.803+0000] {subprocess.py:93} INFO - [0m10:16:29  [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+[2025-11-27T10:16:29.804+0000] {subprocess.py:93} INFO - There are 3 unused configuration paths:
+[2025-11-27T10:16:29.804+0000] {subprocess.py:93} INFO - - models.peopletraffic_uc.gold
+[2025-11-27T10:16:29.805+0000] {subprocess.py:93} INFO - - models.peopletraffic_uc.silver
+[2025-11-27T10:16:29.806+0000] {subprocess.py:93} INFO - - models.peopletraffic_uc.bronze
+[2025-11-27T10:16:30.126+0000] {subprocess.py:93} INFO - [0m10:16:30  Found 7 models, 15 data tests, 2 sources, 485 macros
+[2025-11-27T10:16:30.133+0000] {subprocess.py:93} INFO - [0m10:16:30
+[2025-11-27T10:16:30.135+0000] {subprocess.py:93} INFO - [0m10:16:30  Concurrency: 1 threads (target='dev')
+[2025-11-27T10:16:30.136+0000] {subprocess.py:93} INFO - [0m10:16:30
+[2025-11-27T10:16:31.483+0000] {subprocess.py:93} INFO - [0m10:16:31  1 of 7 START sql incremental model `default`.`dim_time` ........................ [RUN]
+[2025-11-27T10:16:31.854+0000] {subprocess.py:93} INFO - [0m10:16:31  1 of 7 OK created sql incremental model `default`.`dim_time` ................... [[32mOK[0m in 0.36s]
+[2025-11-27T10:16:31.865+0000] {subprocess.py:93} INFO - [0m10:16:31  2 of 7 START sql view model `default`.`stg_dim_building` ....................... [RUN]
+[2025-11-27T10:16:32.094+0000] {subprocess.py:93} INFO - [0m10:16:32  2 of 7 OK created sql view model `default`.`stg_dim_building` .................. [[32mOK[0m in 0.22s]
+[2025-11-27T10:16:32.114+0000] {subprocess.py:93} INFO - [0m10:16:32  3 of 7 START sql view model `default`.`stg_dim_weather` ........................ [RUN]
+[2025-11-27T10:16:32.211+0000] {subprocess.py:93} INFO - [0m10:16:32  3 of 7 OK created sql view model `default`.`stg_dim_weather` ................... [[32mOK[0m in 0.09s]
+[2025-11-27T10:16:32.217+0000] {subprocess.py:93} INFO - [0m10:16:32  4 of 7 START sql incremental model `default`.`dim_building` .................... [RUN]
+[2025-11-27T10:16:32.318+0000] {subprocess.py:93} INFO - [0m10:16:32  4 of 7 OK created sql incremental model `default`.`dim_building` ............... [[32mOK[0m in 0.10s]
+[2025-11-27T10:16:32.323+0000] {subprocess.py:93} INFO - [0m10:16:32  5 of 7 START sql incremental model `default`.`dim_date` ........................ [RUN]
+[2025-11-27T10:16:32.431+0000] {subprocess.py:93} INFO - [0m10:16:32  5 of 7 OK created sql incremental model `default`.`dim_date` ................... [[32mOK[0m in 0.11s]
+[2025-11-27T10:16:32.435+0000] {subprocess.py:93} INFO - [0m10:16:32  6 of 7 START sql incremental model `default`.`dim_weather` ..................... [RUN]
+[2025-11-27T10:16:32.503+0000] {subprocess.py:93} INFO - [0m10:16:32  6 of 7 OK created sql incremental model `default`.`dim_weather` ................ [[32mOK[0m in 0.06s]
+[2025-11-27T10:16:32.514+0000] {subprocess.py:93} INFO - [0m10:16:32  7 of 7 START sql incremental model `default`.`fact_people_traffic` ............. [RUN]
+[2025-11-27T10:16:32.617+0000] {subprocess.py:93} INFO - [0m10:16:32  7 of 7 ERROR creating sql incremental model `default`.`fact_people_traffic` .... [[31mERROR[0m in 0.10s]
+[2025-11-27T10:16:32.629+0000] {subprocess.py:93} INFO - [0m10:16:32
+[2025-11-27T10:16:32.630+0000] {subprocess.py:93} INFO - [0m10:16:32  Finished running 5 incremental models, 2 view models in 0 hours 0 minutes and 2.49 seconds (2.49s).
+[2025-11-27T10:16:32.715+0000] {subprocess.py:93} INFO - [0m10:16:32
+[2025-11-27T10:16:32.716+0000] {subprocess.py:93} INFO - [0m10:16:32  [31mCompleted with 1 error, 0 partial successes, and 0 warnings:[0m
+[2025-11-27T10:16:32.717+0000] {subprocess.py:93} INFO - [0m10:16:32
+[2025-11-27T10:16:32.718+0000] {subprocess.py:93} INFO - [0m10:16:32  [31mFailure in model fact_people_traffic (models/marts/fact_people_traffic.sql)[0m
+[2025-11-27T10:16:32.719+0000] {subprocess.py:93} INFO - [0m10:16:32    Database Error in model fact_people_traffic (models/marts/fact_people_traffic.sql)
+[2025-11-27T10:16:32.720+0000] {subprocess.py:93} INFO -   Received ClickHouse exception, code: 47, server response: Code: 47. DB::Exception: Unknown expression identifier `weather_key` in scope  f. (UNKNOWN_IDENTIFIER) (version 25.10.2.65 (official build)) (for url http://clickhouse-server:8123)
+[2025-11-27T10:16:32.720+0000] {subprocess.py:93} INFO - [0m10:16:32
+[2025-11-27T10:16:32.721+0000] {subprocess.py:93} INFO - [0m10:16:32    compiled code at target/compiled/peopletraffic/models/marts/fact_people_traffic.sql
+[2025-11-27T10:16:32.722+0000] {subprocess.py:93} INFO - [0m10:16:32
+[2025-11-27T10:16:32.723+0000] {subprocess.py:93} INFO - [0m10:16:32  Done. PASS=6 WARN=0 ERROR=1 SKIP=0 NO-OP=0 TOTAL=7
+[2025-11-27T10:16:34.313+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-11-27T10:16:34.374+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-11-27T10:16:34.387+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=fetch_data, task_id=run_dbt, execution_date=20251127T101008, start_date=20251127T101624, end_date=20251127T101634
+[2025-11-27T10:16:34.465+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 543 for task run_dbt (Bash command failed. The command returned a non-zero exit code 1.; 14616)
+[2025-11-27T10:16:34.508+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-11-27T10:16:34.556+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,52 @@
+[2025-11-25T07:24:38.719+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_data.fetch_weather_data scheduled__2025-11-24T00:00:00+00:00 [queued]>
+[2025-11-25T07:24:38.727+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_data.fetch_weather_data scheduled__2025-11-24T00:00:00+00:00 [queued]>
+[2025-11-25T07:24:38.728+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-11-25T07:24:38.741+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): fetch_weather_data> on 2025-11-24 00:00:00+00:00
+[2025-11-25T07:24:38.745+0000] {standard_task_runner.py:60} INFO - Started process 278 to run task
+[2025-11-25T07:24:38.751+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'fetch_data', 'fetch_weather_data', 'scheduled__2025-11-24T00:00:00+00:00', '--job-id', '372', '--raw', '--subdir', 'DAGS_FOLDER/dag_one.py', '--cfg-path', '/tmp/tmpmgvdjb_y']
+[2025-11-25T07:24:38.755+0000] {standard_task_runner.py:88} INFO - Job 372: Subtask fetch_weather_data
+[2025-11-25T07:24:38.823+0000] {task_command.py:423} INFO - Running <TaskInstance: fetch_data.fetch_weather_data scheduled__2025-11-24T00:00:00+00:00 [running]> on host d0d6cfb0728d
+[2025-11-25T07:24:39.094+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_data' AIRFLOW_CTX_TASK_ID='fetch_weather_data' AIRFLOW_CTX_EXECUTION_DATE='2025-11-24T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-24T00:00:00+00:00'
+[2025-11-25T07:24:41.852+0000] {python.py:201} INFO - Done. Returned value was: None
+[2025-11-25T07:24:41.864+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=fetch_data, task_id=fetch_weather_data, execution_date=20251124T000000, start_date=20251125T072438, end_date=20251125T072441
+[2025-11-25T07:24:41.917+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-11-25T07:24:41.950+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-11-25T10:46:11.509+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_data.fetch_weather_data scheduled__2025-11-24T00:00:00+00:00 [queued]>
+[2025-11-25T10:46:11.517+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_data.fetch_weather_data scheduled__2025-11-24T00:00:00+00:00 [queued]>
+[2025-11-25T10:46:11.518+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-11-25T10:46:11.529+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): fetch_weather_data> on 2025-11-24 00:00:00+00:00
+[2025-11-25T10:46:11.534+0000] {standard_task_runner.py:60} INFO - Started process 645 to run task
+[2025-11-25T10:46:11.538+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'fetch_data', 'fetch_weather_data', 'scheduled__2025-11-24T00:00:00+00:00', '--job-id', '397', '--raw', '--subdir', 'DAGS_FOLDER/dag_one.py', '--cfg-path', '/tmp/tmpxdlh_sml']
+[2025-11-25T10:46:11.542+0000] {standard_task_runner.py:88} INFO - Job 397: Subtask fetch_weather_data
+[2025-11-25T10:46:11.604+0000] {task_command.py:423} INFO - Running <TaskInstance: fetch_data.fetch_weather_data scheduled__2025-11-24T00:00:00+00:00 [running]> on host e243512bdaab
+[2025-11-25T10:46:11.832+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_data' AIRFLOW_CTX_TASK_ID='fetch_weather_data' AIRFLOW_CTX_EXECUTION_DATE='2025-11-24T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-24T00:00:00+00:00'
+[2025-11-25T10:46:13.825+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/dag_one.py", line 32, in fetch_weather_data
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+  File "/usr/local/lib/python3.8/os.py", line 223, in makedirs
+    mkdir(name, mode)
+PermissionError: [Errno 13] Permission denied: '../sample_data/'
+[2025-11-25T10:46:13.837+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=fetch_data, task_id=fetch_weather_data, execution_date=20251124T000000, start_date=20251125T104611, end_date=20251125T104613
+[2025-11-25T10:46:13.855+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 397 for task fetch_weather_data ([Errno 13] Permission denied: '../sample_data/'; 645)
+[2025-11-25T10:46:13.890+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-11-25T10:46:13.946+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-11-25T11:35:32.462+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_data.fetch_weather_data scheduled__2025-11-24T00:00:00+00:00 [queued]>
+[2025-11-25T11:35:32.468+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_data.fetch_weather_data scheduled__2025-11-24T00:00:00+00:00 [queued]>
+[2025-11-25T11:35:32.469+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-11-25T11:35:32.481+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): fetch_weather_data> on 2025-11-24 00:00:00+00:00
+[2025-11-25T11:35:32.487+0000] {standard_task_runner.py:60} INFO - Started process 2658 to run task
+[2025-11-25T11:35:32.489+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'fetch_data', 'fetch_weather_data', 'scheduled__2025-11-24T00:00:00+00:00', '--job-id', '441', '--raw', '--subdir', 'DAGS_FOLDER/01_data_fetch_mkCHtbls.py', '--cfg-path', '/tmp/tmp_03zbetl']
+[2025-11-25T11:35:32.491+0000] {standard_task_runner.py:88} INFO - Job 441: Subtask fetch_weather_data
+[2025-11-25T11:35:32.551+0000] {task_command.py:423} INFO - Running <TaskInstance: fetch_data.fetch_weather_data scheduled__2025-11-24T00:00:00+00:00 [running]> on host 421e567693d1
+[2025-11-25T11:35:32.781+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_data' AIRFLOW_CTX_TASK_ID='fetch_weather_data' AIRFLOW_CTX_EXECUTION_DATE='2025-11-24T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-24T00:00:00+00:00'
+[2025-11-25T11:35:32.845+0000] {python.py:201} INFO - Done. Returned value was: None
+[2025-11-25T11:35:32.854+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=fetch_data, task_id=fetch_weather_data, execution_date=20251124T000000, start_date=20251125T113532, end_date=20251125T113532
+[2025-11-25T11:35:32.875+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-11-25T11:35:32.903+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

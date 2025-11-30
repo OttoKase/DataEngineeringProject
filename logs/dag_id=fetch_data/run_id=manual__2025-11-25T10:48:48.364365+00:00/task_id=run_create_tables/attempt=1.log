@@ -1,0 +1,16 @@
+[2025-11-25T10:49:00.260+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_data.run_create_tables manual__2025-11-25T10:48:48.364365+00:00 [queued]>
+[2025-11-25T10:49:00.268+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_data.run_create_tables manual__2025-11-25T10:48:48.364365+00:00 [queued]>
+[2025-11-25T10:49:00.268+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-11-25T10:49:00.280+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): run_create_tables> on 2025-11-25 10:48:48.364365+00:00
+[2025-11-25T10:49:00.283+0000] {standard_task_runner.py:60} INFO - Started process 1201 to run task
+[2025-11-25T10:49:00.286+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'fetch_data', 'run_create_tables', 'manual__2025-11-25T10:48:48.364365+00:00', '--job-id', '401', '--raw', '--subdir', 'DAGS_FOLDER/dag_one.py', '--cfg-path', '/tmp/tmpea11jltw']
+[2025-11-25T10:49:00.288+0000] {standard_task_runner.py:88} INFO - Job 401: Subtask run_create_tables
+[2025-11-25T10:49:00.352+0000] {task_command.py:423} INFO - Running <TaskInstance: fetch_data.run_create_tables manual__2025-11-25T10:48:48.364365+00:00 [running]> on host e243512bdaab
+[2025-11-25T10:49:00.599+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_data' AIRFLOW_CTX_TASK_ID='run_create_tables' AIRFLOW_CTX_EXECUTION_DATE='2025-11-25T10:48:48.364365+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-25T10:48:48.364365+00:00'
+[2025-11-25T10:49:00.602+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-11-25T10:49:00.604+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'docker exec clickhouse-server clickhouse-client --multiquery --queries-file=/sql/01_create_DB_and_tables.sql']
+[2025-11-25T10:49:00.620+0000] {subprocess.py:86} INFO - Output:
+[2025-11-25T10:49:00.804+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-11-25T10:49:00.887+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=fetch_data, task_id=run_create_tables, execution_date=20251125T104848, start_date=20251125T104900, end_date=20251125T104900
+[2025-11-25T10:49:00.957+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-11-25T10:49:01.016+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

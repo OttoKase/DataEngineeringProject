@@ -1,0 +1,58 @@
+[2025-11-25T10:51:28.733+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_data.run_load_queries scheduled__2025-11-24T00:00:00+00:00 [queued]>
+[2025-11-25T10:51:28.740+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_data.run_load_queries scheduled__2025-11-24T00:00:00+00:00 [queued]>
+[2025-11-25T10:51:28.740+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-11-25T10:51:28.752+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): run_load_queries> on 2025-11-24 00:00:00+00:00
+[2025-11-25T10:51:28.758+0000] {standard_task_runner.py:60} INFO - Started process 1852 to run task
+[2025-11-25T10:51:28.760+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'fetch_data', 'run_load_queries', 'scheduled__2025-11-24T00:00:00+00:00', '--job-id', '409', '--raw', '--subdir', 'DAGS_FOLDER/dag_one.py', '--cfg-path', '/tmp/tmpqnpu5z80']
+[2025-11-25T10:51:28.763+0000] {standard_task_runner.py:88} INFO - Job 409: Subtask run_load_queries
+[2025-11-25T10:51:28.818+0000] {task_command.py:423} INFO - Running <TaskInstance: fetch_data.run_load_queries scheduled__2025-11-24T00:00:00+00:00 [running]> on host e243512bdaab
+[2025-11-25T10:51:29.054+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_data' AIRFLOW_CTX_TASK_ID='run_load_queries' AIRFLOW_CTX_EXECUTION_DATE='2025-11-24T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-24T00:00:00+00:00'
+[2025-11-25T10:51:29.055+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-11-25T10:51:29.056+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'docker exec clickhouse-server clickhouse-client --multiquery --queries-file=/sql/02_load_data_from_csv.sql']
+[2025-11-25T10:51:29.071+0000] {subprocess.py:86} INFO - Output:
+[2025-11-25T10:51:29.174+0000] {subprocess.py:93} INFO - Received exception from server (version 25.10.2):
+[2025-11-25T10:51:29.174+0000] {subprocess.py:93} INFO - Code: 400. DB::Exception: Received from localhost:9000. DB::ErrnoException. DB::ErrnoException: Cannot stat file /var/lib/clickhouse/user_files/bronze_infrared.csv: , errno: 2, strerror: No such file or directory: The table structure cannot be extracted from a CSVWithNames format file. You can specify the structure manually: (in file/uri /var/lib/clickhouse/user_files/bronze_infrared.csv). (CANNOT_STAT)
+[2025-11-25T10:51:29.174+0000] {subprocess.py:93} INFO - (query: -- ========== Dimensions ==========
+[2025-11-25T10:51:29.175+0000] {subprocess.py:93} INFO - 
+[2025-11-25T10:51:29.175+0000] {subprocess.py:93} INFO - INSERT INTO peopletraffic.raw_Building
+[2025-11-25T10:51:29.175+0000] {subprocess.py:93} INFO - (
+[2025-11-25T10:51:29.175+0000] {subprocess.py:93} INFO - timestamp,
+[2025-11-25T10:51:29.175+0000] {subprocess.py:93} INFO - 	name,
+[2025-11-25T10:51:29.175+0000] {subprocess.py:93} INFO -     out,
+[2025-11-25T10:51:29.176+0000] {subprocess.py:93} INFO -     in
+[2025-11-25T10:51:29.176+0000] {subprocess.py:93} INFO - )
+[2025-11-25T10:51:29.176+0000] {subprocess.py:93} INFO - 
+[2025-11-25T10:51:29.176+0000] {subprocess.py:93} INFO - SELECT
+[2025-11-25T10:51:29.176+0000] {subprocess.py:93} INFO -     toDateTime(timestamp),
+[2025-11-25T10:51:29.176+0000] {subprocess.py:93} INFO -     toString(name),
+[2025-11-25T10:51:29.176+0000] {subprocess.py:93} INFO -     toUInt8(out),
+[2025-11-25T10:51:29.177+0000] {subprocess.py:93} INFO -     toUInt8(in)
+[2025-11-25T10:51:29.177+0000] {subprocess.py:93} INFO - FROM file('bronze_infrared.csv', 'CSVWithNames');)
+[2025-11-25T10:51:29.185+0000] {subprocess.py:97} INFO - Command exited with return code 144
+[2025-11-25T10:51:29.201+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 144.
+[2025-11-25T10:51:29.203+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=fetch_data, task_id=run_load_queries, execution_date=20251124T000000, start_date=20251125T105128, end_date=20251125T105129
+[2025-11-25T10:51:29.230+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 409 for task run_load_queries (Bash command failed. The command returned a non-zero exit code 144.; 1852)
+[2025-11-25T10:51:29.269+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-11-25T10:51:29.289+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-11-25T11:40:50.051+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_data.run_load_queries scheduled__2025-11-24T00:00:00+00:00 [queued]>
+[2025-11-25T11:40:50.060+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_data.run_load_queries scheduled__2025-11-24T00:00:00+00:00 [queued]>
+[2025-11-25T11:40:50.061+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-11-25T11:40:50.075+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): run_load_queries> on 2025-11-24 00:00:00+00:00
+[2025-11-25T11:40:50.080+0000] {standard_task_runner.py:60} INFO - Started process 3908 to run task
+[2025-11-25T11:40:50.085+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'fetch_data', 'run_load_queries', 'scheduled__2025-11-24T00:00:00+00:00', '--job-id', '452', '--raw', '--subdir', 'DAGS_FOLDER/01_data_fetch_mkCHtbls.py', '--cfg-path', '/tmp/tmp24uszjv2']
+[2025-11-25T11:40:50.089+0000] {standard_task_runner.py:88} INFO - Job 452: Subtask run_load_queries
+[2025-11-25T11:40:50.155+0000] {task_command.py:423} INFO - Running <TaskInstance: fetch_data.run_load_queries scheduled__2025-11-24T00:00:00+00:00 [running]> on host 421e567693d1
+[2025-11-25T11:40:50.390+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_data' AIRFLOW_CTX_TASK_ID='run_load_queries' AIRFLOW_CTX_EXECUTION_DATE='2025-11-24T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-24T00:00:00+00:00'
+[2025-11-25T11:40:50.391+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-11-25T11:40:50.393+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'docker exec clickhouse-server clickhouse-client --multiquery --queries-file=/sql/02_load_data_from_csv.sql']
+[2025-11-25T11:40:50.404+0000] {subprocess.py:86} INFO - Output:
+[2025-11-25T11:40:50.674+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-11-25T11:40:50.712+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=fetch_data, task_id=run_load_queries, execution_date=20251124T000000, start_date=20251125T114050, end_date=20251125T114050
+[2025-11-25T11:40:50.754+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-11-25T11:40:50.775+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

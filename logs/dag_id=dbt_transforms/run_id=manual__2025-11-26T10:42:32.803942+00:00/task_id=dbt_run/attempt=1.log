@@ -1,0 +1,45 @@
+[2025-11-26T10:42:34.106+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dbt_transforms.dbt_run manual__2025-11-26T10:42:32.803942+00:00 [queued]>
+[2025-11-26T10:42:34.136+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dbt_transforms.dbt_run manual__2025-11-26T10:42:32.803942+00:00 [queued]>
+[2025-11-26T10:42:34.138+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-11-26T10:42:34.192+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): dbt_run> on 2025-11-26 10:42:32.803942+00:00
+[2025-11-26T10:42:34.201+0000] {standard_task_runner.py:60} INFO - Started process 5005 to run task
+[2025-11-26T10:42:34.210+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dbt_transforms', 'dbt_run', 'manual__2025-11-26T10:42:32.803942+00:00', '--job-id', '488', '--raw', '--subdir', 'DAGS_FOLDER/011_dbt_transforms.py', '--cfg-path', '/tmp/tmp5t6x4qyo']
+[2025-11-26T10:42:34.219+0000] {standard_task_runner.py:88} INFO - Job 488: Subtask dbt_run
+[2025-11-26T10:42:34.376+0000] {task_command.py:423} INFO - Running <TaskInstance: dbt_transforms.dbt_run manual__2025-11-26T10:42:32.803942+00:00 [running]> on host 5b6237d76f75
+[2025-11-26T10:42:34.845+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='dbt_transforms' AIRFLOW_CTX_TASK_ID='dbt_run' AIRFLOW_CTX_EXECUTION_DATE='2025-11-26T10:42:32.803942+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-26T10:42:32.803942+00:00'
+[2025-11-26T10:42:34.858+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-11-26T10:42:34.862+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', "docker exec dbt bash -lc 'cd /dbt && dbt run --profiles-dir /dbt'"]
+[2025-11-26T10:42:34.891+0000] {subprocess.py:86} INFO - Output:
+[2025-11-26T10:42:40.552+0000] {subprocess.py:93} INFO - [0m10:42:40  Running with dbt=1.10.15
+[2025-11-26T10:42:41.126+0000] {subprocess.py:93} INFO - [0m10:42:41  Registered adapter: clickhouse=1.9.6
+[2025-11-26T10:42:41.276+0000] {subprocess.py:93} INFO - [0m10:42:41  Unable to do partial parsing because saved manifest not found. Starting full parse.
+[2025-11-26T10:42:43.849+0000] {subprocess.py:93} INFO - [0m10:42:43  [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+[2025-11-26T10:42:43.850+0000] {subprocess.py:93} INFO - There are 3 unused configuration paths:
+[2025-11-26T10:42:43.852+0000] {subprocess.py:93} INFO - - models.peopletraffic_uc.gold
+[2025-11-26T10:42:43.853+0000] {subprocess.py:93} INFO - - models.peopletraffic_uc.silver
+[2025-11-26T10:42:43.855+0000] {subprocess.py:93} INFO - - models.peopletraffic_uc.bronze
+[2025-11-26T10:42:44.189+0000] {subprocess.py:93} INFO - [0m10:42:44  Found 7 models, 15 data tests, 2 sources, 485 macros
+[2025-11-26T10:42:44.198+0000] {subprocess.py:93} INFO - [0m10:42:44
+[2025-11-26T10:42:44.200+0000] {subprocess.py:93} INFO - [0m10:42:44  Concurrency: 1 threads (target='dev')
+[2025-11-26T10:42:44.200+0000] {subprocess.py:93} INFO - [0m10:42:44
+[2025-11-26T10:42:46.696+0000] {subprocess.py:93} INFO - WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=0, status=None)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPConnection object at 0x7f110bb5cdd0>: Failed to resolve 'clickhouse-server-omdviz' ([Errno -2] Name or service not known)")': /?
+[2025-11-26T10:42:46.713+0000] {subprocess.py:93} INFO - WARNING:clickhouse_connect.driver.httpclient:Unexpected Http Driver Exception
+[2025-11-26T10:42:47.744+0000] {subprocess.py:93} INFO - WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=0, status=None)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPConnection object at 0x7f110011a510>: Failed to resolve 'clickhouse-server-omdviz' ([Errno -2] Name or service not known)")': /?
+[2025-11-26T10:42:47.768+0000] {subprocess.py:93} INFO - WARNING:clickhouse_connect.driver.httpclient:Unexpected Http Driver Exception
+[2025-11-26T10:42:47.811+0000] {subprocess.py:93} INFO - [0m10:42:47
+[2025-11-26T10:42:47.823+0000] {subprocess.py:93} INFO - [0m10:42:47  Finished running  in 0 hours 0 minutes and 3.60 seconds (3.60s).
+[2025-11-26T10:42:47.828+0000] {subprocess.py:93} INFO - [0m10:42:47  Encountered an error:
+[2025-11-26T10:42:47.831+0000] {subprocess.py:93} INFO - Database Error
+[2025-11-26T10:42:47.833+0000] {subprocess.py:93} INFO -   Error HTTPConnectionPool(host='clickhouse-server-omdviz', port=8123): Max retries exceeded with url: /? (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x7f110011ae90>: Failed to resolve 'clickhouse-server-omdviz' ([Errno -2] Name or service not known)")) executing HTTP request attempt 1 (http://clickhouse-server-omdviz:8123)
+[2025-11-26T10:42:49.418+0000] {subprocess.py:97} INFO - Command exited with return code 2
+[2025-11-26T10:42:49.474+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 2.
+[2025-11-26T10:42:49.485+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=dbt_transforms, task_id=dbt_run, execution_date=20251126T104232, start_date=20251126T104234, end_date=20251126T104249
+[2025-11-26T10:42:49.548+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 488 for task dbt_run (Bash command failed. The command returned a non-zero exit code 2.; 5005)
+[2025-11-26T10:42:49.604+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-11-26T10:42:49.676+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

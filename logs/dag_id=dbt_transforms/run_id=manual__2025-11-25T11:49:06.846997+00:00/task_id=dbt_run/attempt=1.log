@@ -1,0 +1,47 @@
+[2025-11-25T11:49:07.230+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dbt_transforms.dbt_run manual__2025-11-25T11:49:06.846997+00:00 [queued]>
+[2025-11-25T11:49:07.244+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dbt_transforms.dbt_run manual__2025-11-25T11:49:06.846997+00:00 [queued]>
+[2025-11-25T11:49:07.246+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-11-25T11:49:07.268+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): dbt_run> on 2025-11-25 11:49:06.846997+00:00
+[2025-11-25T11:49:07.274+0000] {standard_task_runner.py:60} INFO - Started process 5639 to run task
+[2025-11-25T11:49:07.277+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dbt_transforms', 'dbt_run', 'manual__2025-11-25T11:49:06.846997+00:00', '--job-id', '459', '--raw', '--subdir', 'DAGS_FOLDER/011_dbt_transforms.py', '--cfg-path', '/tmp/tmpl593j_gj']
+[2025-11-25T11:49:07.279+0000] {standard_task_runner.py:88} INFO - Job 459: Subtask dbt_run
+[2025-11-25T11:49:07.375+0000] {task_command.py:423} INFO - Running <TaskInstance: dbt_transforms.dbt_run manual__2025-11-25T11:49:06.846997+00:00 [running]> on host 421e567693d1
+[2025-11-25T11:49:07.534+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='dbt_transforms' AIRFLOW_CTX_TASK_ID='dbt_run' AIRFLOW_CTX_EXECUTION_DATE='2025-11-25T11:49:06.846997+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-25T11:49:06.846997+00:00'
+[2025-11-25T11:49:07.536+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-11-25T11:49:07.537+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', "docker exec dbt bash -lc 'cd /dbt && dbt run --profiles-dir /dbt'"]
+[2025-11-25T11:49:07.547+0000] {subprocess.py:86} INFO - Output:
+[2025-11-25T11:49:09.240+0000] {subprocess.py:93} INFO - [0m11:49:09  Running with dbt=1.10.15
+[2025-11-25T11:49:09.437+0000] {subprocess.py:93} INFO - [0m11:49:09  Registered adapter: clickhouse=1.9.6
+[2025-11-25T11:49:09.570+0000] {subprocess.py:93} INFO - [0m11:49:09  Unable to do partial parsing because profile has changed
+[2025-11-25T11:49:09.575+0000] {subprocess.py:93} INFO - [0m11:49:09  Unable to do partial parsing because a project dependency has been added
+[2025-11-25T11:49:09.583+0000] {subprocess.py:93} INFO - [0m11:49:09  Encountered an error:
+[2025-11-25T11:49:09.583+0000] {subprocess.py:93} INFO - Parsing Error
+[2025-11-25T11:49:09.584+0000] {subprocess.py:93} INFO -   Error reading peopletraffic_uc: marts/schema.yml - Runtime Error
+[2025-11-25T11:49:09.584+0000] {subprocess.py:93} INFO -     Syntax error near line 8
+[2025-11-25T11:49:09.584+0000] {subprocess.py:93} INFO -     ------------------------------
+[2025-11-25T11:49:09.585+0000] {subprocess.py:93} INFO -     5  |     description: "Fact table of people traffic"
+[2025-11-25T11:49:09.585+0000] {subprocess.py:93} INFO -     6  |     columns:
+[2025-11-25T11:49:09.585+0000] {subprocess.py:93} INFO -     7  |       - name: name
+[2025-11-25T11:49:09.585+0000] {subprocess.py:93} INFO -     8  |       description: "Unique identifier"
+[2025-11-25T11:49:09.586+0000] {subprocess.py:93} INFO -     9  |       tests:
+[2025-11-25T11:49:09.586+0000] {subprocess.py:93} INFO -     10 |         - not_null
+[2025-11-25T11:49:09.586+0000] {subprocess.py:93} INFO -     11 |       - name: out
+[2025-11-25T11:49:09.586+0000] {subprocess.py:93} INFO - 
+[2025-11-25T11:49:09.587+0000] {subprocess.py:93} INFO -     Raw Error:
+[2025-11-25T11:49:09.587+0000] {subprocess.py:93} INFO -     ------------------------------
+[2025-11-25T11:49:09.587+0000] {subprocess.py:93} INFO -     while parsing a block collection
+[2025-11-25T11:49:09.588+0000] {subprocess.py:93} INFO -       in "<unicode string>", line 7, column 7
+[2025-11-25T11:49:09.588+0000] {subprocess.py:93} INFO -     did not find expected '-' indicator
+[2025-11-25T11:49:09.588+0000] {subprocess.py:93} INFO -       in "<unicode string>", line 8, column 7
+[2025-11-25T11:49:10.418+0000] {subprocess.py:97} INFO - Command exited with return code 2
+[2025-11-25T11:49:10.452+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 2.
+[2025-11-25T11:49:10.457+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=dbt_transforms, task_id=dbt_run, execution_date=20251125T114906, start_date=20251125T114907, end_date=20251125T114910
+[2025-11-25T11:49:10.479+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 459 for task dbt_run (Bash command failed. The command returned a non-zero exit code 2.; 5639)
+[2025-11-25T11:49:10.490+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-11-25T11:49:10.525+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

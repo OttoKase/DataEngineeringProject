@@ -1,0 +1,73 @@
+[2025-11-26T17:25:53.863+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dbt_transforms.dbt_run manual__2025-11-26T17:25:51.706292+00:00 [queued]>
+[2025-11-26T17:25:53.910+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dbt_transforms.dbt_run manual__2025-11-26T17:25:51.706292+00:00 [queued]>
+[2025-11-26T17:25:53.912+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-11-26T17:25:53.981+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): dbt_run> on 2025-11-26 17:25:51.706292+00:00
+[2025-11-26T17:25:53.997+0000] {standard_task_runner.py:60} INFO - Started process 7391 to run task
+[2025-11-26T17:25:54.009+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dbt_transforms', 'dbt_run', 'manual__2025-11-26T17:25:51.706292+00:00', '--job-id', '511', '--raw', '--subdir', 'DAGS_FOLDER/011_dbt_transforms.py', '--cfg-path', '/tmp/tmpetdly0nv']
+[2025-11-26T17:25:54.017+0000] {standard_task_runner.py:88} INFO - Job 511: Subtask dbt_run
+[2025-11-26T17:25:54.313+0000] {task_command.py:423} INFO - Running <TaskInstance: dbt_transforms.dbt_run manual__2025-11-26T17:25:51.706292+00:00 [running]> on host 776aa681496a
+[2025-11-26T17:25:54.751+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='dbt_transforms' AIRFLOW_CTX_TASK_ID='dbt_run' AIRFLOW_CTX_EXECUTION_DATE='2025-11-26T17:25:51.706292+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-26T17:25:51.706292+00:00'
+[2025-11-26T17:25:54.755+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-11-26T17:25:54.758+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', "docker exec dbt bash -lc 'cd /dbt && dbt run --profiles-dir /dbt'"]
+[2025-11-26T17:25:54.778+0000] {subprocess.py:86} INFO - Output:
+[2025-11-26T17:25:58.597+0000] {subprocess.py:93} INFO - [0m17:25:58  Running with dbt=1.10.15
+[2025-11-26T17:25:59.235+0000] {subprocess.py:93} INFO - [0m17:25:59  Registered adapter: clickhouse=1.9.6
+[2025-11-26T17:25:59.976+0000] {subprocess.py:93} INFO - [0m17:25:59  [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+[2025-11-26T17:25:59.978+0000] {subprocess.py:93} INFO - There are 3 unused configuration paths:
+[2025-11-26T17:25:59.979+0000] {subprocess.py:93} INFO - - models.peopletraffic_uc.gold
+[2025-11-26T17:25:59.981+0000] {subprocess.py:93} INFO - - models.peopletraffic_uc.silver
+[2025-11-26T17:25:59.984+0000] {subprocess.py:93} INFO - - models.peopletraffic_uc.bronze
+[2025-11-26T17:26:00.783+0000] {subprocess.py:93} INFO - [0m17:26:00  Found 7 models, 15 data tests, 2 sources, 485 macros
+[2025-11-26T17:26:00.807+0000] {subprocess.py:93} INFO - [0m17:26:00
+[2025-11-26T17:26:00.813+0000] {subprocess.py:93} INFO - [0m17:26:00  Concurrency: 1 threads (target='dev')
+[2025-11-26T17:26:00.821+0000] {subprocess.py:93} INFO - [0m17:26:00
+[2025-11-26T17:26:02.924+0000] {subprocess.py:93} INFO - [0m17:26:02  1 of 7 START sql incremental model `default`.`dim_time` ........................ [RUN]
+[2025-11-26T17:26:03.676+0000] {subprocess.py:93} INFO - [0m17:26:03  1 of 7 OK created sql incremental model `default`.`dim_time` ................... [[32mOK[0m in 0.73s]
+[2025-11-26T17:26:03.690+0000] {subprocess.py:93} INFO - [0m17:26:03  2 of 7 START sql view model `default`.`stg_dim_building` ....................... [RUN]
+[2025-11-26T17:26:03.999+0000] {subprocess.py:93} INFO - [0m17:26:03  2 of 7 OK created sql view model `default`.`stg_dim_building` .................. [[32mOK[0m in 0.30s]
+[2025-11-26T17:26:04.014+0000] {subprocess.py:93} INFO - [0m17:26:04  3 of 7 START sql view model `default`.`stg_dim_weather` ........................ [RUN]
+[2025-11-26T17:26:04.137+0000] {subprocess.py:93} INFO - [0m17:26:04  3 of 7 OK created sql view model `default`.`stg_dim_weather` ................... [[32mOK[0m in 0.11s]
+[2025-11-26T17:26:04.149+0000] {subprocess.py:93} INFO - [0m17:26:04  4 of 7 START sql incremental model `default`.`dim_building` .................... [RUN]
+[2025-11-26T17:26:04.450+0000] {subprocess.py:93} INFO - [0m17:26:04  4 of 7 ERROR creating sql incremental model `default`.`dim_building` ........... [[31mERROR[0m in 0.29s]
+[2025-11-26T17:26:04.464+0000] {subprocess.py:93} INFO - [0m17:26:04  5 of 7 START sql incremental model `default`.`dim_date` ........................ [RUN]
+[2025-11-26T17:26:04.559+0000] {subprocess.py:93} INFO - [0m17:26:04  5 of 7 ERROR creating sql incremental model `default`.`dim_date` ............... [[31mERROR[0m in 0.08s]
+[2025-11-26T17:26:04.577+0000] {subprocess.py:93} INFO - [0m17:26:04  6 of 7 START sql incremental model `default`.`dim_weather` ..................... [RUN]
+[2025-11-26T17:26:04.691+0000] {subprocess.py:93} INFO - [0m17:26:04  6 of 7 ERROR creating sql incremental model `default`.`dim_weather` ............ [[31mERROR[0m in 0.10s]
+[2025-11-26T17:26:04.710+0000] {subprocess.py:93} INFO - [0m17:26:04  7 of 7 SKIP relation default.fact_people_traffic ............................... [[33mSKIP[0m]
+[2025-11-26T17:26:04.738+0000] {subprocess.py:93} INFO - [0m17:26:04
+[2025-11-26T17:26:04.741+0000] {subprocess.py:93} INFO - [0m17:26:04  Finished running 5 incremental models, 2 view models in 0 hours 0 minutes and 3.91 seconds (3.91s).
+[2025-11-26T17:26:04.945+0000] {subprocess.py:93} INFO - [0m17:26:04
+[2025-11-26T17:26:04.948+0000] {subprocess.py:93} INFO - [0m17:26:04  [31mCompleted with 3 errors, 0 partial successes, and 0 warnings:[0m
+[2025-11-26T17:26:04.951+0000] {subprocess.py:93} INFO - [0m17:26:04
+[2025-11-26T17:26:04.956+0000] {subprocess.py:93} INFO - [0m17:26:04  [31mFailure in model dim_building (models/marts/dim_building.sql)[0m
+[2025-11-26T17:26:04.959+0000] {subprocess.py:93} INFO - [0m17:26:04    Database Error in model dim_building (models/marts/dim_building.sql)
+[2025-11-26T17:26:04.961+0000] {subprocess.py:93} INFO -   Received ClickHouse exception, code: 215, server response: Code: 215. DB::Exception: Column 'default.stg_dim_building.timestamp' is not under aggregate function and not in GROUP BY keys. In query SELECT row_number() OVER () AS building_key, timestamp, name AS building_name, out AS people_out, in AS people_in FROM default.stg_dim_building GROUP BY name. (NOT_AN_AGGREGATE) (version 25.10.2.65 (official build)) (for url http://clickhouse-server:8123)
+[2025-11-26T17:26:04.966+0000] {subprocess.py:93} INFO - [0m17:26:04
+[2025-11-26T17:26:04.970+0000] {subprocess.py:93} INFO - [0m17:26:04    compiled code at target/compiled/peopletraffic/models/marts/dim_building.sql
+[2025-11-26T17:26:04.974+0000] {subprocess.py:93} INFO - [0m17:26:04
+[2025-11-26T17:26:04.978+0000] {subprocess.py:93} INFO - [0m17:26:04  [31mFailure in model dim_date (models/marts/dim_date.sql)[0m
+[2025-11-26T17:26:04.984+0000] {subprocess.py:93} INFO - [0m17:26:04    Database Error in model dim_date (models/marts/dim_date.sql)
+[2025-11-26T17:26:04.986+0000] {subprocess.py:93} INFO -   Received ClickHouse exception, code: 47, server response: Code: 47. DB::Exception: Unknown expression or function identifier `started_at` in scope SELECT toUInt32(toYYYYMMDD(started_at)) AS date_key, toDate(started_at) AS full_date, caseWithExpression(toDayOfWeek(started_at), 1, 'Monday', 2, 'Tuesday', 3, 'Wednesday', 4, 'Thursday', 5, 'Friday', 6, 'Saturday', 7, 'Sunday', NULL) AS day_of_week, toDayOfWeek(started_at) AS day_of_week_num, (toDayOfWeek(started_at) IN (6, 7)) OR (formatDateTime(started_at, '%m-%d') IN ('01-01', '06-19', '07-04', '09-11', '10-31', '11-11', '12-25', '12-31')) OR ((toMonth(started_at) = 1) AND (toDayOfWeek(started_at) = 1) AND ((toDayOfMonth(started_at) >= 15) AND (toDayOfMonth(started_at) <= 21))) OR ((toMonth(started_at) = 2) AND (toDayOfWeek(started_at) = 1) AND ((toDayOfMonth(started_at) >= 15) AND (toDayOfMonth(started_at) <= 21))) OR ((toMonth(started_at) = 5) AND (toDayOfWeek(started_at) = 1) AND ((toDayOfMonth(started_at) >= 25) AND (toDayOfMonth(started_at) <= 31))) OR ((toMonth(started_at) = 9) AND (toDayOfWeek(started_at) = 1) AND ((toDayOfMonth(started_at) >= 1) AND (toDayOfMonth(started_at) <= 7))) OR ((toMonth(started_at) = 10) AND (toDayOfWeek(started_at) = 1) AND ((toDayOfMonth(started_at) >= 8) AND (toDayOfMonth(started_at) <= 14))) OR ((toMonth(started_at) = 11) AND (toDayOfWeek(started_at) = 2) AND ((toDayOfMonth(started_at) >= 1) AND (toDayOfMonth(started_at) <= 7))) OR ((toMonth(started_at) = 11) AND (toDayOfWeek(started_at) = 4) AND ((toDayOfMonth(started_at) >= 22) AND (toDayOfMonth(started_at) <= 28))) AS is_holiday, multiIf(toMonth(started_at) IN (12, 1, 2), 'Winter', toMonth(started_at) IN (3, 4, 5), 'Spring', toMonth(started_at) IN (6, 7, 8), 'Summer', 'Fall') AS season, toMonth(started_at) AS month, toYear(started_at) AS year FROM default.stg_dim_building GROUP BY toUInt32(toYYYYMMDD(started_at)), toDate(started_at), toDayOfWeek(started_at), toMonth(started_at), toYear(started_at), (toDayOfWeek(started_at) IN (6, 7)) OR (formatDateTime(started_at, '%m-%d') IN ('01-01', '06-19', '07-04', '09-11', '10-31', '11-11', '12-25', '12-31')) OR ((toMonth(started_at) = 1) AND (toDayOfWeek(started_at) = 1) AND ((toDayOfMonth(started_at) >= 15) AND (toDayOfMonth(started_at) <= 21))) OR ((toMonth(started_at) = 2) AND (toDayOfWeek(started_at) = 1) AND ((toDayOfMonth(started_at) >= 15) AND (toDayOfMonth(started_at) <= 21))) OR ((toMonth(started_at) = 5) AND (toDayOfWeek(started_at) = 1) AND ((toDayOfMonth(started_at) >= 25) AND (toDayOfMonth(started_at) <= 31))) OR ((toMonth(started_at) = 9) AND (toDayOfWeek(started_at) = 1) AND ((toDayOfMonth(started_at) >= 1) AND (toDayOfMonth(started_at) <= 7))) OR ((toMonth(started_at) = 10) AND (toDayOfWeek(started_at) = 1) AND ((toDayOfMonth(started_at) >= 8) AND (toDayOfMonth(started_at) <= 14))) OR ((toMonth(started_at) = 11) AND (toDayOfWeek(started_at) = 2) AND ((toDayOfMonth(started_at) >= 1) AND (toDayOfMonth(started_at) <= 7))) OR ((toMonth(started_at) = 11) AND (toDayOfWeek(started_at) = 4) AND ((toDayOfMonth(started_at) >= 22) AND (toDayOfMonth(started_at) <= 28))), multiIf(toMonth(started_at) IN (12, 1, 2), 'Winter', toMonth(started_at) IN (3, 4, 5), 'Spring', toMonth(started_at) IN (6, 7, 8), 'Summer', 'Fall'). (UNKNOWN_IDENTIFIER) (version 25.10.2.65 (official build)) (for url http://clickhouse-server:8123)
+[2025-11-26T17:26:04.988+0000] {subprocess.py:93} INFO - [0m17:26:04
+[2025-11-26T17:26:04.990+0000] {subprocess.py:93} INFO - [0m17:26:04    compiled code at target/compiled/peopletraffic/models/marts/dim_date.sql
+[2025-11-26T17:26:04.994+0000] {subprocess.py:93} INFO - [0m17:26:04
+[2025-11-26T17:26:04.999+0000] {subprocess.py:93} INFO - [0m17:26:04  [31mFailure in model dim_weather (models/marts/dim_weather.sql)[0m
+[2025-11-26T17:26:05.002+0000] {subprocess.py:93} INFO - [0m17:26:04    Database Error in model dim_weather (models/marts/dim_weather.sql)
+[2025-11-26T17:26:05.004+0000] {subprocess.py:93} INFO -   Received ClickHouse exception, code: 20, server response: Code: 20. DB::Exception: Number of columns doesn't match (source: 4 and result: 3). (NUMBER_OF_COLUMNS_DOESNT_MATCH) (version 25.10.2.65 (official build)) (for url http://clickhouse-server:8123)
+[2025-11-26T17:26:05.014+0000] {subprocess.py:93} INFO -   compiled code at target/run/peopletraffic/models/marts/dim_weather.sql
+[2025-11-26T17:26:05.016+0000] {subprocess.py:93} INFO - [0m17:26:05
+[2025-11-26T17:26:05.020+0000] {subprocess.py:93} INFO - [0m17:26:05    compiled code at target/compiled/peopletraffic/models/marts/dim_weather.sql
+[2025-11-26T17:26:05.023+0000] {subprocess.py:93} INFO - [0m17:26:05
+[2025-11-26T17:26:05.028+0000] {subprocess.py:93} INFO - [0m17:26:05  Done. PASS=3 WARN=0 ERROR=3 SKIP=1 NO-OP=0 TOTAL=7
+[2025-11-26T17:26:06.877+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-11-26T17:26:06.920+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-11-26T17:26:06.928+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=dbt_transforms, task_id=dbt_run, execution_date=20251126T172551, start_date=20251126T172553, end_date=20251126T172606
+[2025-11-26T17:26:06.973+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 511 for task dbt_run (Bash command failed. The command returned a non-zero exit code 1.; 7391)
+[2025-11-26T17:26:06.991+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-11-26T17:26:07.035+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

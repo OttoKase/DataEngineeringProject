@@ -1,0 +1,78 @@
+version: 2
+
+models:
+  - name: fact_people_traffic
+    description: "Fact table of people traffic"
+    columns:
+      - name: name
+        description: "Unique identifier"
+        tests:
+          - not_null
+      - name: out
+        description: "Reference to the date dimension"
+        tests:
+          - not_null
+      - name: in
+        description: "Reference to the time dimension"
+        tests:
+          - not_null
+      - name: temp
+        description: "Reference to the building dimension"
+        tests:
+          - not_null
+      - name: prcp
+        description: "Reference to the weather dimension"
+        tests:
+          - not_null
+      - name: TotalPeople
+        description: "Incoming people"
+        tests:
+          - not_null
+      - name: LastDate
+        description: "Outgoing people"
+        tests:
+          - not_null
+
+  - name: dim_time
+    description: Time dimension table
+    columns:
+      - name: time_key
+        description: Primary key (HHMMSS format)
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_date
+    description: Date dimension table
+    columns:
+      - name: date_key
+        description: Primary key (YYYYMMDD format)
+        tests:
+          - unique
+          - not_null
+      - name: full_date
+        description: Full date value
+        tests:
+          - not_null
+      - name: is_holiday
+        description: Flag indicating if date is a holiday
+
+  - name: dim_weather
+    description: Weather dimension table
+    columns:
+      - name: time
+        description: Surrogate key for weather conditions
+        tests:
+          # - unique
+          - not_null
+      - name: temp
+        description: Surrogate key for weather conditions
+        tests:
+          # - unique
+          - not_null
+      - name: prcp
+        description: Surrogate key for weather conditions
+        tests:
+          # - unique
+          - not_null
+

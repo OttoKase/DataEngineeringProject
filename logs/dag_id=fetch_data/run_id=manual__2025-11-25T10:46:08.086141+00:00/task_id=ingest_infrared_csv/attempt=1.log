@@ -1,0 +1,15 @@
+[2025-11-25T10:51:20.808+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_data.ingest_infrared_csv manual__2025-11-25T10:46:08.086141+00:00 [queued]>
+[2025-11-25T10:51:20.821+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_data.ingest_infrared_csv manual__2025-11-25T10:46:08.086141+00:00 [queued]>
+[2025-11-25T10:51:20.821+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-11-25T10:51:20.834+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): ingest_infrared_csv> on 2025-11-25 10:46:08.086141+00:00
+[2025-11-25T10:51:20.838+0000] {standard_task_runner.py:60} INFO - Started process 1687 to run task
+[2025-11-25T10:51:20.843+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'fetch_data', 'ingest_infrared_csv', 'manual__2025-11-25T10:46:08.086141+00:00', '--job-id', '406', '--raw', '--subdir', 'DAGS_FOLDER/dag_one.py', '--cfg-path', '/tmp/tmpxmedpgr2']
+[2025-11-25T10:51:20.847+0000] {standard_task_runner.py:88} INFO - Job 406: Subtask ingest_infrared_csv
+[2025-11-25T10:51:20.911+0000] {task_command.py:423} INFO - Running <TaskInstance: fetch_data.ingest_infrared_csv manual__2025-11-25T10:46:08.086141+00:00 [running]> on host e243512bdaab
+[2025-11-25T10:51:21.127+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_data' AIRFLOW_CTX_TASK_ID='ingest_infrared_csv' AIRFLOW_CTX_EXECUTION_DATE='2025-11-25T10:46:08.086141+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-25T10:46:08.086141+00:00'
+[2025-11-25T10:51:21.991+0000] {logging_mixin.py:188} INFO - CSV data loaded, rows: 410395
+[2025-11-25T10:51:22.524+0000] {logging_mixin.py:188} INFO - CSV data saved to /opt/***/sample_datas/bronze_infrared.csv
+[2025-11-25T10:51:22.526+0000] {python.py:201} INFO - Done. Returned value was: None
+[2025-11-25T10:51:22.541+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=fetch_data, task_id=ingest_infrared_csv, execution_date=20251125T104608, start_date=20251125T105120, end_date=20251125T105122
+[2025-11-25T10:51:22.579+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-11-25T10:51:22.612+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

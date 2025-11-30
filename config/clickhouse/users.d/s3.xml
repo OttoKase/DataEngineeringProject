@@ -1,0 +1,13 @@
+<yandex>
+  <users>
+    <default>
+      <allow_s3>true</allow_s3>
+      <allow_experimental_object_type>true</allow_experimental_object_type>
+      <allow_experimental_fast_iceberg>true</allow_experimental_fast_iceberg>
+    </default>
+  </users>
+</yandex>
+
+
+
+

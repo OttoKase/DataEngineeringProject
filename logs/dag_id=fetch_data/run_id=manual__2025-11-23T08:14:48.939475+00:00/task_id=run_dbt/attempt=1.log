@@ -1,0 +1,39 @@
+[2025-11-23T08:15:12.452+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_data.run_dbt manual__2025-11-23T08:14:48.939475+00:00 [queued]>
+[2025-11-23T08:15:12.464+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_data.run_dbt manual__2025-11-23T08:14:48.939475+00:00 [queued]>
+[2025-11-23T08:15:12.465+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-11-23T08:15:12.485+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): run_dbt> on 2025-11-23 08:14:48.939475+00:00
+[2025-11-23T08:15:12.491+0000] {standard_task_runner.py:60} INFO - Started process 95249 to run task
+[2025-11-23T08:15:12.495+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'fetch_data', 'run_dbt', 'manual__2025-11-23T08:14:48.939475+00:00', '--job-id', '211', '--raw', '--subdir', 'DAGS_FOLDER/dag_one.py', '--cfg-path', '/tmp/tmpx1myvp19']
+[2025-11-23T08:15:12.497+0000] {standard_task_runner.py:88} INFO - Job 211: Subtask run_dbt
+[2025-11-23T08:15:12.580+0000] {task_command.py:423} INFO - Running <TaskInstance: fetch_data.run_dbt manual__2025-11-23T08:14:48.939475+00:00 [running]> on host 5fa4049fde26
+[2025-11-23T08:15:12.901+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_data' AIRFLOW_CTX_TASK_ID='run_dbt' AIRFLOW_CTX_EXECUTION_DATE='2025-11-23T08:14:48.939475+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-23T08:14:48.939475+00:00'
+[2025-11-23T08:15:12.903+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-11-23T08:15:12.904+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'docker exec dbt dbt seed']
+[2025-11-23T08:15:12.923+0000] {subprocess.py:86} INFO - Output:
+[2025-11-23T08:15:14.842+0000] {subprocess.py:93} INFO - [0m08:15:14  Running with dbt=1.10.15
+[2025-11-23T08:15:15.143+0000] {subprocess.py:93} INFO - [0m08:15:15  Registered adapter: clickhouse=1.9.6
+[2025-11-23T08:15:15.643+0000] {subprocess.py:93} INFO - [0m08:15:15  Found 2 seeds, 4 models, 2 sources, 485 macros
+[2025-11-23T08:15:15.651+0000] {subprocess.py:93} INFO - [0m08:15:15
+[2025-11-23T08:15:15.652+0000] {subprocess.py:93} INFO - [0m08:15:15  Concurrency: 1 threads (target='dev')
+[2025-11-23T08:15:15.654+0000] {subprocess.py:93} INFO - [0m08:15:15
+[2025-11-23T08:15:16.259+0000] {subprocess.py:93} INFO - WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=0, status=None)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPConnection object at 0x7fbefcdf0a50>: Failed to resolve 'clickhouse-server' ([Errno -2] Name or service not known)")': /?
+[2025-11-23T08:15:16.267+0000] {subprocess.py:93} INFO - WARNING:clickhouse_connect.driver.httpclient:Unexpected Http Driver Exception
+[2025-11-23T08:15:17.283+0000] {subprocess.py:93} INFO - WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=0, status=None)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPConnection object at 0x7fbefcdf2450>: Failed to resolve 'clickhouse-server' ([Errno -2] Name or service not known)")': /?
+[2025-11-23T08:15:17.292+0000] {subprocess.py:93} INFO - WARNING:clickhouse_connect.driver.httpclient:Unexpected Http Driver Exception
+[2025-11-23T08:15:17.303+0000] {subprocess.py:93} INFO - [0m08:15:17
+[2025-11-23T08:15:17.304+0000] {subprocess.py:93} INFO - [0m08:15:17  Finished running  in 0 hours 0 minutes and 1.65 seconds (1.65s).
+[2025-11-23T08:15:17.307+0000] {subprocess.py:93} INFO - [0m08:15:17  Encountered an error:
+[2025-11-23T08:15:17.308+0000] {subprocess.py:93} INFO - Database Error
+[2025-11-23T08:15:17.309+0000] {subprocess.py:93} INFO -   Error HTTPConnectionPool(host='clickhouse-server', port=8123): Max retries exceeded with url: /? (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x7fbefcdf2dd0>: Failed to resolve 'clickhouse-server' ([Errno -2] Name or service not known)")) executing HTTP request attempt 1 (http://clickhouse-server:8123)
+[2025-11-23T08:15:19.572+0000] {subprocess.py:97} INFO - Command exited with return code 2
+[2025-11-23T08:15:19.610+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 2.
+[2025-11-23T08:15:19.618+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=fetch_data, task_id=run_dbt, execution_date=20251123T081448, start_date=20251123T081512, end_date=20251123T081519
+[2025-11-23T08:15:19.656+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 211 for task run_dbt (Bash command failed. The command returned a non-zero exit code 2.; 95249)
+[2025-11-23T08:15:19.706+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-11-23T08:15:19.753+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

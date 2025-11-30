@@ -1,0 +1,32 @@
+[2025-11-25T10:17:14.596+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_data.run_create_tables manual__2025-11-25T10:17:00.391277+00:00 [queued]>
+[2025-11-25T10:17:14.604+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_data.run_create_tables manual__2025-11-25T10:17:00.391277+00:00 [queued]>
+[2025-11-25T10:17:14.604+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-11-25T10:17:14.617+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): run_create_tables> on 2025-11-25 10:17:00.391277+00:00
+[2025-11-25T10:17:14.621+0000] {standard_task_runner.py:60} INFO - Started process 2863 to run task
+[2025-11-25T10:17:14.623+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'fetch_data', 'run_create_tables', 'manual__2025-11-25T10:17:00.391277+00:00', '--job-id', '379', '--raw', '--subdir', 'DAGS_FOLDER/dag_one.py', '--cfg-path', '/tmp/tmp3i3bt7ug']
+[2025-11-25T10:17:14.626+0000] {standard_task_runner.py:88} INFO - Job 379: Subtask run_create_tables
+[2025-11-25T10:17:14.700+0000] {task_command.py:423} INFO - Running <TaskInstance: fetch_data.run_create_tables manual__2025-11-25T10:17:00.391277+00:00 [running]> on host 72d28f111e30
+[2025-11-25T10:17:14.932+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_data' AIRFLOW_CTX_TASK_ID='run_create_tables' AIRFLOW_CTX_EXECUTION_DATE='2025-11-25T10:17:00.391277+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-25T10:17:00.391277+00:00'
+[2025-11-25T10:17:14.933+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-11-25T10:17:14.934+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'docker exec clickhouse-server clickhouse-client --multiquery --queries-file=/sql/01_create_DB_and_tables.sql']
+[2025-11-25T10:17:14.948+0000] {subprocess.py:86} INFO - Output:
+[2025-11-25T10:17:15.167+0000] {subprocess.py:93} INFO - Code: 62. DB::Exception: Syntax error: failed at position 171 (() (line 7, col 41): (
+[2025-11-25T10:17:15.168+0000] {subprocess.py:93} INFO - 	timestamp	DateTime64(3),
+[2025-11-25T10:17:15.168+0000] {subprocess.py:93} INFO - 	name	String,
+[2025-11-25T10:17:15.168+0000] {subprocess.py:93} INFO -     out   UInt8,
+[2025-11-25T10:17:15.169+0000] {subprocess.py:93} INFO -     in    UInt8,
+[2025-11-25T10:17:15.169+0000] {subprocess.py:93} INFO -     loaded_at DateTime DEFAULT now(
+[2025-11-25T10:17:15.169+0000] {subprocess.py:93} INFO - ) ENGINE = ReplacingMergeTree(loaded_a... Unmatched parentheses: (. (SYNTAX_ERROR)
+[2025-11-25T10:17:15.169+0000] {subprocess.py:93} INFO - 
+[2025-11-25T10:17:15.179+0000] {subprocess.py:97} INFO - Command exited with return code 62
+[2025-11-25T10:17:15.192+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 62.
+[2025-11-25T10:17:15.194+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=fetch_data, task_id=run_create_tables, execution_date=20251125T101700, start_date=20251125T101714, end_date=20251125T101715
+[2025-11-25T10:17:15.210+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 379 for task run_create_tables (Bash command failed. The command returned a non-zero exit code 62.; 2863)
+[2025-11-25T10:17:15.220+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-11-25T10:17:15.242+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

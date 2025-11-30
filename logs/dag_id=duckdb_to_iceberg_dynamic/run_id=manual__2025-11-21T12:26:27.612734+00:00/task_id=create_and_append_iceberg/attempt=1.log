@@ -1,0 +1,27 @@
+[2025-11-21T12:26:31.390+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: duckdb_to_iceberg_dynamic.create_and_append_iceberg manual__2025-11-21T12:26:27.612734+00:00 [queued]>
+[2025-11-21T12:26:31.400+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: duckdb_to_iceberg_dynamic.create_and_append_iceberg manual__2025-11-21T12:26:27.612734+00:00 [queued]>
+[2025-11-21T12:26:31.400+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-11-21T12:26:31.416+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): create_and_append_iceberg> on 2025-11-21 12:26:27.612734+00:00
+[2025-11-21T12:26:31.420+0000] {standard_task_runner.py:60} INFO - Started process 21396 to run task
+[2025-11-21T12:26:31.425+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'duckdb_to_iceberg_dynamic', 'create_and_append_iceberg', 'manual__2025-11-21T12:26:27.612734+00:00', '--job-id', '101', '--raw', '--subdir', 'DAGS_FOLDER/dag_three.py', '--cfg-path', '/tmp/tmpur_u9cwe']
+[2025-11-21T12:26:31.427+0000] {standard_task_runner.py:88} INFO - Job 101: Subtask create_and_append_iceberg
+[2025-11-21T12:26:31.497+0000] {task_command.py:423} INFO - Running <TaskInstance: duckdb_to_iceberg_dynamic.create_and_append_iceberg manual__2025-11-21T12:26:27.612734+00:00 [running]> on host 5fa4049fde26
+[2025-11-21T12:26:31.605+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='duckdb_to_iceberg_dynamic' AIRFLOW_CTX_TASK_ID='create_and_append_iceberg' AIRFLOW_CTX_EXECUTION_DATE='2025-11-21T12:26:27.612734+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-21T12:26:27.612734+00:00'
+[2025-11-21T12:26:31.664+0000] {logging_mixin.py:188} INFO - Detected DuckDB tables: ['bronze_infrared', 'bronze_mobility', 'bronze_weather']
+[2025-11-21T12:26:31.664+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/dag_three.py", line 68, in create_and_append_iceberg
+    tables = detect_duckdb_tables()
+  File "/opt/airflow/dags/dag_three.py", line 36, in detect_duckdb_tables
+    context["ti"].xcom_push(key="duckdb_tables", value=table_list)
+KeyError: 'ti'
+[2025-11-21T12:26:31.673+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=duckdb_to_iceberg_dynamic, task_id=create_and_append_iceberg, execution_date=20251121T122627, start_date=20251121T122631, end_date=20251121T122631
+[2025-11-21T12:26:31.685+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 101 for task create_and_append_iceberg ('ti'; 21396)
+[2025-11-21T12:26:31.725+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-11-21T12:26:31.765+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,24 @@
+[2025-11-20T12:15:05.444+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: minio_to_duckdb_pipeline.load_minio_csvs_to_duckdb manual__2025-11-20T12:15:02.216329+00:00 [queued]>
+[2025-11-20T12:15:05.451+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: minio_to_duckdb_pipeline.load_minio_csvs_to_duckdb manual__2025-11-20T12:15:02.216329+00:00 [queued]>
+[2025-11-20T12:15:05.452+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-11-20T12:15:05.464+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): load_minio_csvs_to_duckdb> on 2025-11-20 12:15:02.216329+00:00
+[2025-11-20T12:15:05.468+0000] {standard_task_runner.py:60} INFO - Started process 6530 to run task
+[2025-11-20T12:15:05.471+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'minio_to_duckdb_pipeline', 'load_minio_csvs_to_duckdb', 'manual__2025-11-20T12:15:02.216329+00:00', '--job-id', '46', '--raw', '--subdir', 'DAGS_FOLDER/dag_two.py', '--cfg-path', '/tmp/tmp1c_xsvp3']
+[2025-11-20T12:15:05.473+0000] {standard_task_runner.py:88} INFO - Job 46: Subtask load_minio_csvs_to_duckdb
+[2025-11-20T12:15:05.522+0000] {task_command.py:423} INFO - Running <TaskInstance: minio_to_duckdb_pipeline.load_minio_csvs_to_duckdb manual__2025-11-20T12:15:02.216329+00:00 [running]> on host 801760f054ff
+[2025-11-20T12:15:05.594+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='minio_to_duckdb_pipeline' AIRFLOW_CTX_TASK_ID='load_minio_csvs_to_duckdb' AIRFLOW_CTX_EXECUTION_DATE='2025-11-20T12:15:02.216329+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-20T12:15:02.216329+00:00'
+[2025-11-20T12:15:06.300+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/dag_two.py", line 112, in load_minio_csvs_to_duckdb
+    con.execute(f"""
+duckdb.duckdb.HTTPException: HTTP Error: HTTP GET error on 'https://project-bucket.s3.amazonaws.com/bronze_infrared.csv' (HTTP 403)
+[2025-11-20T12:15:06.323+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=minio_to_duckdb_pipeline, task_id=load_minio_csvs_to_duckdb, execution_date=20251120T121502, start_date=20251120T121505, end_date=20251120T121506
+[2025-11-20T12:15:06.343+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 46 for task load_minio_csvs_to_duckdb (HTTP Error: HTTP GET error on 'https://project-bucket.s3.amazonaws.com/bronze_infrared.csv' (HTTP 403); 6530)
+[2025-11-20T12:15:06.393+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-11-20T12:15:06.427+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

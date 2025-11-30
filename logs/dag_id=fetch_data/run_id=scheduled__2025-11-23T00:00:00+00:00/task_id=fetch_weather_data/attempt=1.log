@@ -1,0 +1,26 @@
+[2025-11-24T07:26:43.629+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_data.fetch_weather_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-11-24T07:26:43.641+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_data.fetch_weather_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-11-24T07:26:43.641+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-11-24T07:26:43.654+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): fetch_weather_data> on 2025-11-23 00:00:00+00:00
+[2025-11-24T07:26:43.659+0000] {standard_task_runner.py:60} INFO - Started process 278 to run task
+[2025-11-24T07:26:43.664+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'fetch_data', 'fetch_weather_data', 'scheduled__2025-11-23T00:00:00+00:00', '--job-id', '281', '--raw', '--subdir', 'DAGS_FOLDER/dag_one.py', '--cfg-path', '/tmp/tmpbe1bm9fm']
+[2025-11-24T07:26:43.668+0000] {standard_task_runner.py:88} INFO - Job 281: Subtask fetch_weather_data
+[2025-11-24T07:26:43.730+0000] {task_command.py:423} INFO - Running <TaskInstance: fetch_data.fetch_weather_data scheduled__2025-11-23T00:00:00+00:00 [running]> on host b8d844055de8
+[2025-11-24T07:26:43.935+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_data' AIRFLOW_CTX_TASK_ID='fetch_weather_data' AIRFLOW_CTX_EXECUTION_DATE='2025-11-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-23T00:00:00+00:00'
+[2025-11-24T07:26:46.999+0000] {python.py:201} INFO - Done. Returned value was: None
+[2025-11-24T07:26:47.013+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=fetch_data, task_id=fetch_weather_data, execution_date=20251123T000000, start_date=20251124T072643, end_date=20251124T072647
+[2025-11-24T07:26:47.044+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-11-24T07:26:47.077+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-11-24T07:39:16.582+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_data.fetch_weather_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-11-24T07:39:16.589+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_data.fetch_weather_data scheduled__2025-11-23T00:00:00+00:00 [queued]>
+[2025-11-24T07:39:16.589+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-11-24T07:39:16.601+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): fetch_weather_data> on 2025-11-23 00:00:00+00:00
+[2025-11-24T07:39:16.606+0000] {standard_task_runner.py:60} INFO - Started process 2604 to run task
+[2025-11-24T07:39:16.611+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'fetch_data', 'fetch_weather_data', 'scheduled__2025-11-23T00:00:00+00:00', '--job-id', '289', '--raw', '--subdir', 'DAGS_FOLDER/dag_one.py', '--cfg-path', '/tmp/tmpl6t38yg3']
+[2025-11-24T07:39:16.615+0000] {standard_task_runner.py:88} INFO - Job 289: Subtask fetch_weather_data
+[2025-11-24T07:39:16.669+0000] {task_command.py:423} INFO - Running <TaskInstance: fetch_data.fetch_weather_data scheduled__2025-11-23T00:00:00+00:00 [running]> on host b8d844055de8
+[2025-11-24T07:39:16.886+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_data' AIRFLOW_CTX_TASK_ID='fetch_weather_data' AIRFLOW_CTX_EXECUTION_DATE='2025-11-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-23T00:00:00+00:00'
+[2025-11-24T07:39:16.951+0000] {python.py:201} INFO - Done. Returned value was: None
+[2025-11-24T07:39:16.964+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=fetch_data, task_id=fetch_weather_data, execution_date=20251123T000000, start_date=20251124T073916, end_date=20251124T073916
+[2025-11-24T07:39:16.995+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-11-24T07:39:17.046+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

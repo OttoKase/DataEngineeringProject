@@ -1,0 +1,16 @@
+[2025-11-27T10:14:59.271+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: minio_to_duckdb_pipeline.load_minio_csvs_to_duckdb manual__2025-11-27T10:14:51.889503+00:00 [queued]>
+[2025-11-27T10:14:59.305+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: minio_to_duckdb_pipeline.load_minio_csvs_to_duckdb manual__2025-11-27T10:14:51.889503+00:00 [queued]>
+[2025-11-27T10:14:59.306+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-11-27T10:14:59.338+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): load_minio_csvs_to_duckdb> on 2025-11-27 10:14:51.889503+00:00
+[2025-11-27T10:14:59.345+0000] {standard_task_runner.py:60} INFO - Started process 14305 to run task
+[2025-11-27T10:14:59.351+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'minio_to_duckdb_pipeline', 'load_minio_csvs_to_duckdb', 'manual__2025-11-27T10:14:51.889503+00:00', '--job-id', '542', '--raw', '--subdir', 'DAGS_FOLDER/02_minio_to_duckdb.py', '--cfg-path', '/tmp/tmppf_idwpe']
+[2025-11-27T10:14:59.355+0000] {standard_task_runner.py:88} INFO - Job 542: Subtask load_minio_csvs_to_duckdb
+[2025-11-27T10:14:59.483+0000] {task_command.py:423} INFO - Running <TaskInstance: minio_to_duckdb_pipeline.load_minio_csvs_to_duckdb manual__2025-11-27T10:14:51.889503+00:00 [running]> on host 8e7e8c622b15
+[2025-11-27T10:14:59.703+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='minio_to_duckdb_pipeline' AIRFLOW_CTX_TASK_ID='load_minio_csvs_to_duckdb' AIRFLOW_CTX_EXECUTION_DATE='2025-11-27T10:14:51.889503+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-27T10:14:51.889503+00:00'
+[2025-11-27T10:15:00.413+0000] {logging_mixin.py:188} INFO - Loaded s3://project-bucket/bronze_infrared.csv into DuckDB table `bronze_infrared`
+[2025-11-27T10:15:00.571+0000] {logging_mixin.py:188} INFO - Loaded s3://project-bucket/bronze_weather.csv into DuckDB table `bronze_weather`
+[2025-11-27T10:15:00.684+0000] {logging_mixin.py:188} INFO - DuckDB tables: [('bronze_infrared',), ('bronze_mobility',), ('bronze_weather',)]
+[2025-11-27T10:15:00.912+0000] {python.py:201} INFO - Done. Returned value was: None
+[2025-11-27T10:15:00.958+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=minio_to_duckdb_pipeline, task_id=load_minio_csvs_to_duckdb, execution_date=20251127T101451, start_date=20251127T101459, end_date=20251127T101500
+[2025-11-27T10:15:01.045+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-11-27T10:15:01.130+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

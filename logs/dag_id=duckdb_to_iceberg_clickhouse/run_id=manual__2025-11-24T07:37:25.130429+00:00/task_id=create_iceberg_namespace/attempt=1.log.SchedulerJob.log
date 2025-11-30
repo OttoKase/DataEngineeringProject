@@ -1,0 +1,1 @@
+[2025-11-24T07:37:26.972+0000] {scheduler_job_runner.py:781} ERROR - Executor reports task instance <TaskInstance: duckdb_to_iceberg_clickhouse.create_iceberg_namespace manual__2025-11-24T07:37:25.130429+00:00 [queued]> finished (failed) although the task says it's queued. (Info: None) Was the task killed externally?

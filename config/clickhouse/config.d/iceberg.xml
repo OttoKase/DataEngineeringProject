@@ -1,0 +1,56 @@
+<clickhouse>
+    <s3>
+        <project-bucket>
+            <endpoint>http://minio:9000</endpoint>
+            <access_key_id>minioadmin</access_key_id>
+            <secret_access_key>minioadmin</secret_access_key>
+            <region>us-east-1</region>
+            <path_style_access>true</path_style_access>
+        </project-bucket>
+    </s3>
+
+    <storage_configuration>
+        <disks>
+            <iceberg_s3>
+                <type>s3</type>
+                <endpoint>http://minio:9000/project-bucket</endpoint>
+                <access_key_id>minioadmin</access_key_id>
+                <secret_access_key>minioadmin</secret_access_key>
+                <region>us-east-1</region>
+                <path_style_access>true</path_style_access>
+            </iceberg_s3>
+        </disks>
+        <policies>
+            <iceberg_policy>
+                <volumes>
+                    <main>
+                        <disk>iceberg_s3</disk>
+                    </main>
+                </volumes>
+            </iceberg_policy>
+        </policies>
+    </storage_configuration>
+
+    <iceberg>
+        <catalogs>
+            <catalog>
+                <name>iceberg_catalog</name>
+                <type>rest</type>
+                <uri>http://iceberg_rest:8181/</uri>
+                <warehouse>s3://project-bucket/</warehouse>
+                <s3>
+                    <endpoint>http://minio:9000</endpoint>
+                    <access_key_id>minioadmin</access_key_id>
+                    <secret_access_key>minioadmin</secret_access_key>
+                    <region>us-east-1</region>
+                    <path_style_access>true</path_style_access>
+                </s3>
+            </catalog>
+        </catalogs>
+    </iceberg>
+</clickhouse>
+
+
+
+
+

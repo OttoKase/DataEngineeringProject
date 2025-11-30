@@ -1,0 +1,30 @@
+[2025-11-26T10:39:17.728+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dbt_transforms.dbt_run manual__2025-11-26T10:39:16.066162+00:00 [queued]>
+[2025-11-26T10:39:17.775+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dbt_transforms.dbt_run manual__2025-11-26T10:39:16.066162+00:00 [queued]>
+[2025-11-26T10:39:17.778+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-11-26T10:39:17.853+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): dbt_run> on 2025-11-26 10:39:16.066162+00:00
+[2025-11-26T10:39:17.862+0000] {standard_task_runner.py:60} INFO - Started process 4452 to run task
+[2025-11-26T10:39:17.874+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dbt_transforms', 'dbt_run', 'manual__2025-11-26T10:39:16.066162+00:00', '--job-id', '487', '--raw', '--subdir', 'DAGS_FOLDER/011_dbt_transforms.py', '--cfg-path', '/tmp/tmp1aq2sy96']
+[2025-11-26T10:39:17.883+0000] {standard_task_runner.py:88} INFO - Job 487: Subtask dbt_run
+[2025-11-26T10:39:18.130+0000] {task_command.py:423} INFO - Running <TaskInstance: dbt_transforms.dbt_run manual__2025-11-26T10:39:16.066162+00:00 [running]> on host 5b6237d76f75
+[2025-11-26T10:39:18.415+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='dbt_transforms' AIRFLOW_CTX_TASK_ID='dbt_run' AIRFLOW_CTX_EXECUTION_DATE='2025-11-26T10:39:16.066162+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-26T10:39:16.066162+00:00'
+[2025-11-26T10:39:18.421+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-11-26T10:39:18.423+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', "docker exec dbt bash -lc 'cd /dbt && dbt run --profiles-dir /dbt'"]
+[2025-11-26T10:39:18.447+0000] {subprocess.py:86} INFO - Output:
+[2025-11-26T10:39:21.795+0000] {subprocess.py:93} INFO - [0m10:39:21  Running with dbt=1.10.15
+[2025-11-26T10:39:22.202+0000] {subprocess.py:93} INFO - [0m10:39:22  Registered adapter: clickhouse=1.9.6
+[2025-11-26T10:39:22.300+0000] {subprocess.py:93} INFO - [0m10:39:22  Unable to do partial parsing because saved manifest not found. Starting full parse.
+[2025-11-26T10:39:24.927+0000] {subprocess.py:93} INFO - [0m10:39:24  Encountered an error:
+[2025-11-26T10:39:24.929+0000] {subprocess.py:93} INFO - Compilation Error
+[2025-11-26T10:39:24.931+0000] {subprocess.py:93} INFO -   Model 'model.peopletraffic.fact_people_traffic' (models/marts/fact_people_traffic.sql) depends on a node named 'stg_dim_building' in package or project 'stg_dim_weather' which was not found
+[2025-11-26T10:39:26.206+0000] {subprocess.py:97} INFO - Command exited with return code 2
+[2025-11-26T10:39:26.256+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 2.
+[2025-11-26T10:39:26.264+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=dbt_transforms, task_id=dbt_run, execution_date=20251126T103916, start_date=20251126T103917, end_date=20251126T103926
+[2025-11-26T10:39:26.299+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 487 for task dbt_run (Bash command failed. The command returned a non-zero exit code 2.; 4452)
+[2025-11-26T10:39:26.343+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-11-26T10:39:26.384+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

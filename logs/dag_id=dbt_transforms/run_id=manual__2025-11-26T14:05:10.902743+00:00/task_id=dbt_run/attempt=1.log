@@ -1,0 +1,44 @@
+[2025-11-26T14:05:12.456+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dbt_transforms.dbt_run manual__2025-11-26T14:05:10.902743+00:00 [queued]>
+[2025-11-26T14:05:12.499+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dbt_transforms.dbt_run manual__2025-11-26T14:05:10.902743+00:00 [queued]>
+[2025-11-26T14:05:12.500+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-11-26T14:05:12.554+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): dbt_run> on 2025-11-26 14:05:10.902743+00:00
+[2025-11-26T14:05:12.564+0000] {standard_task_runner.py:60} INFO - Started process 1902 to run task
+[2025-11-26T14:05:12.576+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'dbt_transforms', 'dbt_run', 'manual__2025-11-26T14:05:10.902743+00:00', '--job-id', '503', '--raw', '--subdir', 'DAGS_FOLDER/011_dbt_transforms.py', '--cfg-path', '/tmp/tmp4argjprk']
+[2025-11-26T14:05:12.582+0000] {standard_task_runner.py:88} INFO - Job 503: Subtask dbt_run
+[2025-11-26T14:05:12.739+0000] {task_command.py:423} INFO - Running <TaskInstance: dbt_transforms.dbt_run manual__2025-11-26T14:05:10.902743+00:00 [running]> on host 6e8f8d0966e9
+[2025-11-26T14:05:13.000+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='dbt_transforms' AIRFLOW_CTX_TASK_ID='dbt_run' AIRFLOW_CTX_EXECUTION_DATE='2025-11-26T14:05:10.902743+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-26T14:05:10.902743+00:00'
+[2025-11-26T14:05:13.007+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-11-26T14:05:13.009+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', "docker exec dbt bash -lc 'cd /dbt && dbt run --profiles-dir /dbt'"]
+[2025-11-26T14:05:13.028+0000] {subprocess.py:86} INFO - Output:
+[2025-11-26T14:05:17.747+0000] {subprocess.py:93} INFO - [0m14:05:17  Running with dbt=1.10.15
+[2025-11-26T14:05:18.491+0000] {subprocess.py:93} INFO - [0m14:05:18  Registered adapter: clickhouse=1.9.6
+[2025-11-26T14:05:19.035+0000] {subprocess.py:93} INFO - [0m14:05:19  [[33mWARNING[0m]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+[2025-11-26T14:05:19.038+0000] {subprocess.py:93} INFO - There are 3 unused configuration paths:
+[2025-11-26T14:05:19.042+0000] {subprocess.py:93} INFO - - models.peopletraffic_uc.gold
+[2025-11-26T14:05:19.043+0000] {subprocess.py:93} INFO - - models.peopletraffic_uc.silver
+[2025-11-26T14:05:19.044+0000] {subprocess.py:93} INFO - - models.peopletraffic_uc.bronze
+[2025-11-26T14:05:19.347+0000] {subprocess.py:93} INFO - [0m14:05:19  Found 7 models, 15 data tests, 2 sources, 485 macros
+[2025-11-26T14:05:19.356+0000] {subprocess.py:93} INFO - [0m14:05:19
+[2025-11-26T14:05:19.357+0000] {subprocess.py:93} INFO - [0m14:05:19  Concurrency: 1 threads (target='dev')
+[2025-11-26T14:05:19.358+0000] {subprocess.py:93} INFO - [0m14:05:19
+[2025-11-26T14:05:20.535+0000] {subprocess.py:93} INFO - WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=0, status=None)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPConnection object at 0x7f25da910610>: Failed to resolve 'clickhouse-server-omdviz' ([Errno -2] Name or service not known)")': /?
+[2025-11-26T14:05:20.553+0000] {subprocess.py:93} INFO - WARNING:clickhouse_connect.driver.httpclient:Unexpected Http Driver Exception
+[2025-11-26T14:05:21.579+0000] {subprocess.py:93} INFO - WARNING:urllib3.connectionpool:Retrying (Retry(total=0, connect=None, read=None, redirect=0, status=None)) after connection broken by 'NameResolutionError("<urllib3.connection.HTTPConnection object at 0x7f25d09c2290>: Failed to resolve 'clickhouse-server-omdviz' ([Errno -2] Name or service not known)")': /?
+[2025-11-26T14:05:21.601+0000] {subprocess.py:93} INFO - WARNING:clickhouse_connect.driver.httpclient:Unexpected Http Driver Exception
+[2025-11-26T14:05:21.610+0000] {subprocess.py:93} INFO - [0m14:05:21
+[2025-11-26T14:05:21.611+0000] {subprocess.py:93} INFO - [0m14:05:21  Finished running  in 0 hours 0 minutes and 2.25 seconds (2.25s).
+[2025-11-26T14:05:21.613+0000] {subprocess.py:93} INFO - [0m14:05:21  Encountered an error:
+[2025-11-26T14:05:21.614+0000] {subprocess.py:93} INFO - Database Error
+[2025-11-26T14:05:21.614+0000] {subprocess.py:93} INFO -   Error HTTPConnectionPool(host='clickhouse-server-omdviz', port=8123): Max retries exceeded with url: /? (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x7f25d09c2c10>: Failed to resolve 'clickhouse-server-omdviz' ([Errno -2] Name or service not known)")) executing HTTP request attempt 1 (http://clickhouse-server-omdviz:8123)
+[2025-11-26T14:05:26.627+0000] {subprocess.py:97} INFO - Command exited with return code 2
+[2025-11-26T14:05:26.661+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 2.
+[2025-11-26T14:05:26.667+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=dbt_transforms, task_id=dbt_run, execution_date=20251126T140510, start_date=20251126T140512, end_date=20251126T140526
+[2025-11-26T14:05:26.705+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 503 for task dbt_run (Bash command failed. The command returned a non-zero exit code 2.; 1902)
+[2025-11-26T14:05:26.742+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-11-26T14:05:26.784+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

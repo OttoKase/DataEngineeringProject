@@ -1,0 +1,86 @@
+[2025-11-20T10:48:47.220+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: minio_to_duckdb_pipeline.upload_csv_to_minio manual__2025-11-20T10:48:46.111480+00:00 [queued]>
+[2025-11-20T10:48:47.238+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: minio_to_duckdb_pipeline.upload_csv_to_minio manual__2025-11-20T10:48:46.111480+00:00 [queued]>
+[2025-11-20T10:48:47.238+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-11-20T10:48:47.256+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): upload_csv_to_minio> on 2025-11-20 10:48:46.111480+00:00
+[2025-11-20T10:48:47.260+0000] {standard_task_runner.py:60} INFO - Started process 1799 to run task
+[2025-11-20T10:48:47.266+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'minio_to_duckdb_pipeline', 'upload_csv_to_minio', 'manual__2025-11-20T10:48:46.111480+00:00', '--job-id', '28', '--raw', '--subdir', 'DAGS_FOLDER/dag_two.py', '--cfg-path', '/tmp/tmpf4vp7alx']
+[2025-11-20T10:48:47.268+0000] {standard_task_runner.py:88} INFO - Job 28: Subtask upload_csv_to_minio
+[2025-11-20T10:48:47.325+0000] {task_command.py:423} INFO - Running <TaskInstance: minio_to_duckdb_pipeline.upload_csv_to_minio manual__2025-11-20T10:48:46.111480+00:00 [running]> on host e8868b1b2574
+[2025-11-20T10:48:47.403+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='minio_to_duckdb_pipeline' AIRFLOW_CTX_TASK_ID='upload_csv_to_minio' AIRFLOW_CTX_EXECUTION_DATE='2025-11-20T10:48:46.111480+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-20T10:48:46.111480+00:00'
+[2025-11-20T10:48:47.435+0000] {connectionpool.py:824} WARNING - Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f747f37c1c0>: Failed to establish a new connection: [Errno -2] Name or service not known')': /project-bucket?location=
+[2025-11-20T10:48:47.856+0000] {connectionpool.py:824} WARNING - Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f747f37c370>: Failed to establish a new connection: [Errno -2] Name or service not known')': /project-bucket?location=
+[2025-11-20T10:48:48.679+0000] {connectionpool.py:824} WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f747f37c5b0>: Failed to establish a new connection: [Errno -2] Name or service not known')': /project-bucket?location=
+[2025-11-20T10:48:50.301+0000] {connectionpool.py:824} WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f747f37c9d0>: Failed to establish a new connection: [Errno -2] Name or service not known')': /project-bucket?location=
+[2025-11-20T10:48:53.527+0000] {connectionpool.py:824} WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f747f37ce20>: Failed to establish a new connection: [Errno -2] Name or service not known')': /project-bucket?location=
+[2025-11-20T10:48:53.547+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/util/connection.py", line 72, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/local/lib/python3.8/socket.py", line 918, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 715, in urlopen
+    httplib_response = self._make_request(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 416, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 244, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/usr/local/lib/python3.8/http/client.py", line 1256, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1302, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1251, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1011, in _send_output
+    self.send(msg)
+  File "/usr/local/lib/python3.8/http/client.py", line 951, in send
+    self.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7f747f37cf70>: Failed to establish a new connection: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/dag_two.py", line 39, in upload_csv_to_minio
+    if not client.bucket_exists(MINIO_BUCKET):
+  File "/home/airflow/.local/lib/python3.8/site-packages/minio/api.py", line 696, in bucket_exists
+    self._execute("HEAD", bucket_name)
+  File "/home/airflow/.local/lib/python3.8/site-packages/minio/api.py", line 437, in _execute
+    region = self._get_region(bucket_name)
+  File "/home/airflow/.local/lib/python3.8/site-packages/minio/api.py", line 494, in _get_region
+    response = self._url_open(
+  File "/home/airflow/.local/lib/python3.8/site-packages/minio/api.py", line 302, in _url_open
+    response = self._http.urlopen(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/poolmanager.py", line 376, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 827, in urlopen
+    return self.urlopen(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 827, in urlopen
+    return self.urlopen(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 827, in urlopen
+    return self.urlopen(
+  [Previous line repeated 2 more times]
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 799, in urlopen
+    retries = retries.increment(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='minio', port=9000): Max retries exceeded with url: /project-bucket?location= (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f747f37cf70>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+[2025-11-20T10:48:53.568+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=minio_to_duckdb_pipeline, task_id=upload_csv_to_minio, execution_date=20251120T104846, start_date=20251120T104847, end_date=20251120T104853
+[2025-11-20T10:48:53.587+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 28 for task upload_csv_to_minio (HTTPConnectionPool(host='minio', port=9000): Max retries exceeded with url: /project-bucket?location= (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f747f37cf70>: Failed to establish a new connection: [Errno -2] Name or service not known')); 1799)
+[2025-11-20T10:48:53.602+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-11-20T10:48:53.636+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

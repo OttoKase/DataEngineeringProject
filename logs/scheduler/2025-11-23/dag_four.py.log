@@ -1,0 +1,196 @@
+[2025-11-23T13:56:51.745+0000] {processor.py:161} INFO - Started process (PID=5795) to work on /opt/airflow/dags/dag_four.py
+[2025-11-23T13:56:51.746+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_four.py for tasks to queue
+[2025-11-23T13:56:51.746+0000] {logging_mixin.py:188} INFO - [2025-11-23T13:56:51.746+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dag_four.py
+[2025-11-23T13:56:52.106+0000] {logging_mixin.py:188} INFO - [2025-11-23T13:56:52.105+0000] {dagbag.py:348} ERROR - Failed to import: /opt/airflow/dags/dag_four.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/dagbag.py", line 344, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/dag_four.py", line 11, in <module>
+    from clickhouse_connect import Client  # pip install clickhouse-connect
+ModuleNotFoundError: No module named 'clickhouse_connect'
+[2025-11-23T13:56:52.107+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/dag_four.py
+[2025-11-23T13:56:52.137+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_four.py took 0.395 seconds
+[2025-11-23T13:57:22.444+0000] {processor.py:161} INFO - Started process (PID=5881) to work on /opt/airflow/dags/dag_four.py
+[2025-11-23T13:57:22.445+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_four.py for tasks to queue
+[2025-11-23T13:57:22.447+0000] {logging_mixin.py:188} INFO - [2025-11-23T13:57:22.446+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dag_four.py
+[2025-11-23T13:57:22.789+0000] {logging_mixin.py:188} INFO - [2025-11-23T13:57:22.788+0000] {dagbag.py:348} ERROR - Failed to import: /opt/airflow/dags/dag_four.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/dagbag.py", line 344, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/dag_four.py", line 11, in <module>
+    from clickhouse_connect import Client  # pip install clickhouse-connect
+ModuleNotFoundError: No module named 'clickhouse_connect'
+[2025-11-23T13:57:22.789+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/dag_four.py
+[2025-11-23T13:57:22.813+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_four.py took 0.372 seconds
+[2025-11-23T13:57:53.217+0000] {processor.py:161} INFO - Started process (PID=5967) to work on /opt/airflow/dags/dag_four.py
+[2025-11-23T13:57:53.219+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_four.py for tasks to queue
+[2025-11-23T13:57:53.220+0000] {logging_mixin.py:188} INFO - [2025-11-23T13:57:53.220+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dag_four.py
+[2025-11-23T13:57:53.576+0000] {logging_mixin.py:188} INFO - [2025-11-23T13:57:53.575+0000] {dagbag.py:348} ERROR - Failed to import: /opt/airflow/dags/dag_four.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/dagbag.py", line 344, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/dag_four.py", line 11, in <module>
+    from clickhouse_connect import Client  # pip install clickhouse-connect
+ModuleNotFoundError: No module named 'clickhouse_connect'
+[2025-11-23T13:57:53.577+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/dag_four.py
+[2025-11-23T13:57:53.603+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_four.py took 0.391 seconds
+[2025-11-23T13:58:24.087+0000] {processor.py:161} INFO - Started process (PID=6053) to work on /opt/airflow/dags/dag_four.py
+[2025-11-23T13:58:24.089+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_four.py for tasks to queue
+[2025-11-23T13:58:24.090+0000] {logging_mixin.py:188} INFO - [2025-11-23T13:58:24.090+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dag_four.py
+[2025-11-23T13:58:24.448+0000] {logging_mixin.py:188} INFO - [2025-11-23T13:58:24.447+0000] {dagbag.py:348} ERROR - Failed to import: /opt/airflow/dags/dag_four.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/dagbag.py", line 344, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/dag_four.py", line 11, in <module>
+    from clickhouse_connect import Client  # pip install clickhouse-connect
+ModuleNotFoundError: No module named 'clickhouse_connect'
+[2025-11-23T13:58:24.448+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/dag_four.py
+[2025-11-23T13:58:24.473+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_four.py took 0.392 seconds
+[2025-11-23T13:58:54.908+0000] {processor.py:161} INFO - Started process (PID=6139) to work on /opt/airflow/dags/dag_four.py
+[2025-11-23T13:58:54.909+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_four.py for tasks to queue
+[2025-11-23T13:58:54.911+0000] {logging_mixin.py:188} INFO - [2025-11-23T13:58:54.910+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dag_four.py
+[2025-11-23T13:58:55.257+0000] {logging_mixin.py:188} INFO - [2025-11-23T13:58:55.256+0000] {dagbag.py:348} ERROR - Failed to import: /opt/airflow/dags/dag_four.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/dagbag.py", line 344, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/dag_four.py", line 11, in <module>
+    from clickhouse_connect import Client  # pip install clickhouse-connect
+ModuleNotFoundError: No module named 'clickhouse_connect'
+[2025-11-23T13:58:55.257+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/dag_four.py
+[2025-11-23T13:58:55.282+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_four.py took 0.379 seconds
+[2025-11-23T13:59:25.941+0000] {processor.py:161} INFO - Started process (PID=6222) to work on /opt/airflow/dags/dag_four.py
+[2025-11-23T13:59:25.942+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_four.py for tasks to queue
+[2025-11-23T13:59:25.943+0000] {logging_mixin.py:188} INFO - [2025-11-23T13:59:25.942+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dag_four.py
+[2025-11-23T13:59:26.343+0000] {logging_mixin.py:188} INFO - [2025-11-23T13:59:26.342+0000] {dagbag.py:348} ERROR - Failed to import: /opt/airflow/dags/dag_four.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/dagbag.py", line 344, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/dag_four.py", line 11, in <module>
+    from clickhouse_connect import Client  # pip install clickhouse-connect
+ModuleNotFoundError: No module named 'clickhouse_connect'
+[2025-11-23T13:59:26.343+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/dag_four.py
+[2025-11-23T13:59:26.368+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_four.py took 0.430 seconds
+[2025-11-23T13:59:56.789+0000] {processor.py:161} INFO - Started process (PID=6287) to work on /opt/airflow/dags/dag_four.py
+[2025-11-23T13:59:56.790+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_four.py for tasks to queue
+[2025-11-23T13:59:56.792+0000] {logging_mixin.py:188} INFO - [2025-11-23T13:59:56.791+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dag_four.py
+[2025-11-23T13:59:57.140+0000] {logging_mixin.py:188} INFO - [2025-11-23T13:59:57.139+0000] {dagbag.py:348} ERROR - Failed to import: /opt/airflow/dags/dag_four.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/dagbag.py", line 344, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/dag_four.py", line 11, in <module>
+    from clickhouse_connect import Client  # pip install clickhouse-connect
+ModuleNotFoundError: No module named 'clickhouse_connect'
+[2025-11-23T13:59:57.140+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/dag_four.py
+[2025-11-23T13:59:57.164+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_four.py took 0.379 seconds
+[2025-11-23T14:00:27.551+0000] {processor.py:161} INFO - Started process (PID=6373) to work on /opt/airflow/dags/dag_four.py
+[2025-11-23T14:00:27.553+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_four.py for tasks to queue
+[2025-11-23T14:00:27.554+0000] {logging_mixin.py:188} INFO - [2025-11-23T14:00:27.554+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dag_four.py
+[2025-11-23T14:00:27.942+0000] {logging_mixin.py:188} INFO - [2025-11-23T14:00:27.941+0000] {dagbag.py:348} ERROR - Failed to import: /opt/airflow/dags/dag_four.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/dagbag.py", line 344, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/dag_four.py", line 11, in <module>
+    from clickhouse_connect import Client  # pip install clickhouse-connect
+ModuleNotFoundError: No module named 'clickhouse_connect'
+[2025-11-23T14:00:27.942+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/dag_four.py
+[2025-11-23T14:00:27.968+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_four.py took 0.423 seconds
+[2025-11-23T14:00:58.396+0000] {processor.py:161} INFO - Started process (PID=6459) to work on /opt/airflow/dags/dag_four.py
+[2025-11-23T14:00:58.397+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_four.py for tasks to queue
+[2025-11-23T14:00:58.398+0000] {logging_mixin.py:188} INFO - [2025-11-23T14:00:58.398+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dag_four.py
+[2025-11-23T14:00:58.745+0000] {logging_mixin.py:188} INFO - [2025-11-23T14:00:58.744+0000] {dagbag.py:348} ERROR - Failed to import: /opt/airflow/dags/dag_four.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/dagbag.py", line 344, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/dag_four.py", line 11, in <module>
+    from clickhouse_connect import Client  # pip install clickhouse-connect
+ModuleNotFoundError: No module named 'clickhouse_connect'
+[2025-11-23T14:00:58.745+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/dag_four.py
+[2025-11-23T14:00:58.773+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_four.py took 0.380 seconds
+[2025-11-23T14:01:29.549+0000] {processor.py:161} INFO - Started process (PID=6545) to work on /opt/airflow/dags/dag_four.py
+[2025-11-23T14:01:29.550+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_four.py for tasks to queue
+[2025-11-23T14:01:29.551+0000] {logging_mixin.py:188} INFO - [2025-11-23T14:01:29.550+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dag_four.py
+[2025-11-23T14:01:29.912+0000] {logging_mixin.py:188} INFO - [2025-11-23T14:01:29.911+0000] {dagbag.py:348} ERROR - Failed to import: /opt/airflow/dags/dag_four.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/dagbag.py", line 344, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/dag_four.py", line 11, in <module>
+    from clickhouse_connect import Client  # pip install clickhouse-connect
+ModuleNotFoundError: No module named 'clickhouse_connect'
+[2025-11-23T14:01:29.912+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/dag_four.py
+[2025-11-23T14:01:29.938+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_four.py took 0.392 seconds
+[2025-11-23T14:02:00.009+0000] {processor.py:161} INFO - Started process (PID=6631) to work on /opt/airflow/dags/dag_four.py
+[2025-11-23T14:02:00.010+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_four.py for tasks to queue
+[2025-11-23T14:02:00.011+0000] {logging_mixin.py:188} INFO - [2025-11-23T14:02:00.011+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dag_four.py
+[2025-11-23T14:02:00.364+0000] {logging_mixin.py:188} INFO - [2025-11-23T14:02:00.364+0000] {dagbag.py:348} ERROR - Failed to import: /opt/airflow/dags/dag_four.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/dagbag.py", line 344, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/dag_four.py", line 11, in <module>
+    from clickhouse_connect import Client  # pip install clickhouse-connect
+ModuleNotFoundError: No module named 'clickhouse_connect'
+[2025-11-23T14:02:00.365+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/dag_four.py
+[2025-11-23T14:02:00.391+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_four.py took 0.386 seconds
+[2025-11-23T14:02:31.170+0000] {processor.py:161} INFO - Started process (PID=6717) to work on /opt/airflow/dags/dag_four.py
+[2025-11-23T14:02:31.172+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_four.py for tasks to queue
+[2025-11-23T14:02:31.174+0000] {logging_mixin.py:188} INFO - [2025-11-23T14:02:31.173+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dag_four.py
+[2025-11-23T14:02:31.532+0000] {logging_mixin.py:188} INFO - [2025-11-23T14:02:31.531+0000] {dagbag.py:348} ERROR - Failed to import: /opt/airflow/dags/dag_four.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/dagbag.py", line 344, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/dag_four.py", line 11, in <module>
+    from clickhouse_connect import Client  # pip install clickhouse-connect
+ModuleNotFoundError: No module named 'clickhouse_connect'
+[2025-11-23T14:02:31.532+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/dag_four.py
+[2025-11-23T14:02:31.564+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_four.py took 0.400 seconds
+[2025-11-23T14:03:02.054+0000] {processor.py:161} INFO - Started process (PID=6803) to work on /opt/airflow/dags/dag_four.py
+[2025-11-23T14:03:02.056+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_four.py for tasks to queue
+[2025-11-23T14:03:02.058+0000] {logging_mixin.py:188} INFO - [2025-11-23T14:03:02.057+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dag_four.py
+[2025-11-23T14:03:02.410+0000] {logging_mixin.py:188} INFO - [2025-11-23T14:03:02.409+0000] {dagbag.py:348} ERROR - Failed to import: /opt/airflow/dags/dag_four.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/dagbag.py", line 344, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/dag_four.py", line 11, in <module>
+    from clickhouse_connect import Client  # pip install clickhouse-connect
+ModuleNotFoundError: No module named 'clickhouse_connect'
+[2025-11-23T14:03:02.410+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/dag_four.py
+[2025-11-23T14:03:02.436+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_four.py took 0.388 seconds
+[2025-11-23T14:03:32.979+0000] {processor.py:161} INFO - Started process (PID=6889) to work on /opt/airflow/dags/dag_four.py
+[2025-11-23T14:03:32.981+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dag_four.py for tasks to queue
+[2025-11-23T14:03:32.982+0000] {logging_mixin.py:188} INFO - [2025-11-23T14:03:32.982+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/dag_four.py
+[2025-11-23T14:03:33.351+0000] {logging_mixin.py:188} INFO - [2025-11-23T14:03:33.350+0000] {dagbag.py:348} ERROR - Failed to import: /opt/airflow/dags/dag_four.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/dagbag.py", line 344, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/dag_four.py", line 11, in <module>
+    from clickhouse_connect import Client  # pip install clickhouse-connect
+ModuleNotFoundError: No module named 'clickhouse_connect'
+[2025-11-23T14:03:33.352+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/dag_four.py
+[2025-11-23T14:03:33.376+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dag_four.py took 0.402 seconds
