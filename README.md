@@ -68,6 +68,12 @@ This repository contains group 8's project in Data Engineering course held in 20
 
 ## Before the start the docker compose stack with containers should be built.
 
+### For making the Superset docker-init.sh file executable, one should change the following (applies for Unix system users)
+```bash
+
+chmod +x docker/docker-init.sh
+chmod +x docker/docker-bootstrap.sh
+```
 
 ## How to Run
 
@@ -545,14 +551,7 @@ NB! OMD service can work differently on windows and other OS. If needed, please 
 
 
 ## 8. SuperSet
-For making the Superset docker-init.sh file executable, one should change the following (applies for Unix system users)
-```bash
-
-chmod +x docker/docker-init.sh
-chmod +x docker/docker-bootstrap.sh
-```
-
-Then open Superset in your browser:
+Open Superset in your browser:
 
 - URL: <http://localhost:8088>
 
