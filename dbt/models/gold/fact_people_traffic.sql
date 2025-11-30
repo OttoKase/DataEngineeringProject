@@ -2,12 +2,6 @@
     materialized='incremental'
 ) }}
 
-<<<<<<< HEAD:dbt/models/marts/fact_people_traffic.sql
--- 1️⃣ BUILDING DATA ROLLED UP TO HOURLY GRAIN
-WITH building_hourly AS (
-    SELECT
-        any(building_key) AS building_key,      -- pick a representative key
-=======
 -- 1️⃣ BUILDING DATA ROLLED UP TO HOURLY GRAIN (summarized by building_name)
 WITH building_hourly AS (
     SELECT
@@ -78,10 +72,6 @@ SELECT
     people_in,
     temp,
     prcp,
-<<<<<<< HEAD:dbt/models/marts/fact_people_traffic.sql
-    total_peopleIN
-=======
     toHour(join_timestamp) AS hour  -- ✅ hour as integer
->>>>>>> 0639af7ea235b3551331be25f92f19fa1f76616c:dbt/models/gold/fact_people_traffic.sql
 FROM joined
 ORDER BY join_timestamp, building_name
