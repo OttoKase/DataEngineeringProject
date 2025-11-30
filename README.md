@@ -1,13 +1,12 @@
 # DataEngineeringProject
 This repository contains group 8's project in Data Engineering course held in 2025 autumn
 
+# DataEngineeringProject
+This repository contains group 8's project in Data Engineering course held in 2025 autumn
 
+## NB! All the authentication credentials for different services used are located in .env file.
 
-
-Before the start the docker compose stack with containers should be built.
-
-
-## Project Structure
+## 1. Project Structure
 ```
 ├── compose.yml
 ├── config
@@ -55,6 +54,9 @@ Before the start the docker compose stack with containers should be built.
 └── superset-core
 ```
 
+## Before the start the docker compose stack with containers should be built.
+
+
 ## How to Run
 
 ```
@@ -73,25 +75,28 @@ docker compose stop <service_name>
 
 ```
 
-* NB! NB! While building and composing the Superset container it may happen that .... containers do not start from the terminal, howevere their building was Correct, then one should start them from the Docker Desktop. The same goes for Open Meta Data, i.e. if building and composing of the stack was successful ,but some services did not start, one can start them from Docker Desktop.
+* NB! NB! While building and composing the Superset container it may happen that some superset_* containers do not start from the terminal, howevere their building was Correct. Then one should start them from the Docker Desktop. The same goes for OpenMetaData (OMD), i.e. if building and composing of the stack were successful, but some services did not start, one can start them from Docker Desktop.
 
 
 ![Running the service(s) via Docker Desktop. Example with SuperSet_*](/images/start_from_ddesktop.png)
 
 
 
-2. Data fetch, making dbt models: bronze, gold
-This section is needed to prepare the data-sets for the other tasks.
-* The raw-level data is used in the Task: "Apache Iceberg";
+## 2 Data fetch, making dbt models: bronze, gold
 
-* The gold-level data, i.e. ./gold/fact_people_traffic is used in Tasks: ClickHouse, OpenMetaData, SuperSet.
+These activities are implemented via Airflow DAG-1 (see Figure below). There is a need to prepare the data-sets for the other tasks.
 
+* The raw-level data is used in the Task: "2. Apache Iceberg";
+
+* The gold-level data, i.e. ./gold/fact_people_traffic is used in Tasks 3, 4, 5: ClickHouse, OpenMetaData, SuperSet.
 
 * Documentation for the dbt project can be generated via:
+
 ```
 docker exec dbt dbt docs generate
 ```
-and/or be fount in
+and/or be found in:
+
 ```
 /dbt/target/catalog.json
 ```
@@ -109,55 +114,47 @@ DROP DATABASE default_gold;
 DROP DATABASE default_bronze;
 
 
-2. Create MinIO bucket:
+## 3. Create MinIO bucket:
 
 * Login: [http://localhost:9501]
 * Bucket: `project-bucket`
 
-3. Access DuckDB container via airflow-webserver:
+## 4. Access DuckDB container via airflow-webserver and check for the tables available:
+
+```
+Tables: [('bronze_infrared',), ('bronze_weather',)]
+```
 
 ```bash
-docker exec -it airflow-webserver python3 -c "
-import duckdb
+docker exec -it airflow-webserver python
 
-con = duckdb.connect('/opt/airflow/db/lab.duckdb')
+>>> import duckdb
+>>> con = duckdb.connect('/opt/airflow/db/lab.duckdb')
 
 # Get list of tables
-tables = con.execute('SHOW TABLES;').fetchall()
-print('Tables:', tables)
+>>> tables = con.execute('SHOW TABLES;').fetchall()
+>>> print('Tables:', tables)
 
 # Fetch and print data for each table
-for table in tables:
+>>> for table in tables:
     table_name = table[0]
     print(f'\nData from table {table_name}:')
     rows = con.execute(f'SELECT * FROM {table_name} LIMIT 10;').fetchall()  # limit to 10 rows
     for row in rows:
         print(row)
-
-con.close()
-"
-```
-Tables: [('bronze_infrared',), ('bronze_mobility',), ('bronze_weather',)]
+>>> con.close()
 ```
 
+## 5. Fetch Iceberg table from ClickHouse
 
-
-#
-# docker exec -it airflow-webserver bash
-#
-# python ./scripts/01_check_tables_induckdb.py
-```
-
-4. Fetch data from ClickHOUSE
-
-* Iceberg table created via Airflow DAG:
+* Iceberg table is created via Airflow DAG:
 
 ![Iceberg table created via Airflow DAG](/images/iceberg_tbl.png)
 
-Check Iceberg tables via duckdb bash:
+* One can check the Iceberg table via duckdb bash:
+```bash
 
-```
-docker-compose exec duckdb_lab bash
+docker compose exec duckdb_lab bash
 
 python
 
@@ -182,38 +179,31 @@ print(tables)
 
 ```
 
--- DuckDB container can reach Iceberg REST (iceberg_rest:8181).
-
--- Iceberg REST can access the S3 warehouse in MinIO (s3://project-bucket/).
-
--- Your Iceberg table exists: bronze_infrared in the default namespace.
-
-
-* 5. CREATE USERS, ROLES IN CH
-
+## 6. Create Roles, Views in ClickHouse
+```sql
 
 CREATE ROLE IF NOT EXISTS jun_analyst_role;
 
 CREATE USER IF NOT EXISTS jun_analyst_user IDENTIFIED WITH plaintext_password BY 'password123';
 
---GRANT SELECT(salary, department, location, hire_date) ON sec_demo.employees TO jun_analyst_role WITH GRANT OPTION;
+GRANT SELECT(salary, department, location, hire_date) ON sec_demo.employees TO jun_analyst_role WITH GRANT OPTION;
 
 GRANT SELECT(salary, department, location, hire_date) ON sec_demo.employees TO jun_analyst_user;
+```
 
 
+## 7. OpenMetaData (OMD)
+
+Navigate to the OpenMetadata UI by opening your browser and going to `localhost:8585`
+The default Username and Password are:
 
 
+Create a Clickhouse user for OpenMetadata. Create the user `service_openmetadata` and assign it to a role `role_openmetadata`.
+Add the role SELECT and SHOW access to `system` database.
+Then, add the role SELECT rights on the `supermarket` database.
 
-## OpenMetadata UI
 
-how to access OpenMetadata 
-http://localhost:8585/
-Username: admin@open-metadata.org
-Password: admin
-
-Create a Clickhouse user for OpenMetadata. From Clickhouse UI:
-
-```bash
+```sql
 CREATE ROLE role_openmetadata;
 
 CREATE USER service_openmetadata IDENTIFIED WITH sha256_password BY 'omd_very_secret_password';
@@ -223,60 +213,29 @@ GRANT role_openmetadata TO service_openmetadata;
 GRANT SELECT, SHOW ON system.* to role_openmetadata;
 
 GRANT SELECT ON supermarket.* TO role_openmetadata;
-```
-Create Clickhouse service for OMD. From OMD UI:
 
-```bash
-Go to Settings → Services → Databases
-Click + Add New Service
-Choose ClickHouse as the service type
-Fill in the connection details (adapt as needed):
-Service Name: clickhouse_warehouse, can be whatever
-Host and Port: clickhouse-server-omd:8123
-Username: service_openmetadata
-Password: omd_very_secret_password
-Database: default_gold 
-Schema: leave empty
-Https / Secure: leave off
-Click Test Connection
-If successful, click Next and Save the service.
-```
-
-*It might be necessary to add Airflow user.* 
-If you get Airflow error in OMD "Failed to connect to Airflow due to java.net.ConnectException. Is the host available at http://ingestion:8080"
-Then create user:
-```bash
-docker exec -it openmetadata_mysql mysql -u root -ppassword
-```
-```bash
-CREATE USER 'airflow_user'@'%' IDENTIFIED BY 'airflow_pass';
-GRANT ALL PRIVILEGES ON airflow_db.* TO 'airflow_user'@'%';
-FLUSH PRIVILEGES;
 ```
 
 
-## Task 5: SuperSet
-<summary>For making the Superset docker-init.sh file executable one should change the following</summary>
+
+## 8. SuperSet
+For making the Superset docker-init.sh file executable, one should change the following (applies for Unix system users)
 ```bash
+
 chmod +x docker/docker-init.sh
 chmod +x docker/docker-bootstrap.sh
 ```
 
-
-
 Then open Superset in your browser:
 
 - URL: http://localhost:8088
-- Login: for now, use the default credentials ( `admin` / `admin`)
 
-### 0.3 Create a Superset service account
+###  Create a Superset service account
 
-Create a service account in ClickHouse for Superset application. It should have SELECT rights on "default_gold" schema.
+Create a service account in ClickHouse for Superset application.
+It should have SELECT rights on "default_gold" schema.
 
-<details>
-<summary>Example solution</summary>
-
-```
+```sql
 CREATE ROLE role_superset_full;
 
 CREATE USER peopletraffic_user IDENTIFIED WITH sha256_password BY 'peopletraffic_pass';
@@ -284,11 +243,13 @@ CREATE USER peopletraffic_user IDENTIFIED WITH sha256_password BY 'peopletraffic
 GRANT role_superset_full TO peopletraffic_user;
 
 GRANT SELECT ON default_gold.* TO role_superset_full;
-```
-</details>
 
-<summary>Dataset from SQL</summary>
 ```
+
+###  Superset example Datasets can be created, such as:
+Dataset from SQL
+
+```sql
 SELECT
     building_name,
     SUM(people_in) AS total_people_in,
@@ -300,7 +261,6 @@ WHERE prcp != 0
 GROUP BY building_name
 ORDER BY building_name
 LIMIT 1000;
-
 
 
 SELECT
@@ -317,5 +277,6 @@ LIMIT 1000;
 ```
 
 ![SeperSet Dashboard answering the BQ-1 and BQ-2](/images/dashboard.png)
+
 
 
