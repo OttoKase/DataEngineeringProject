@@ -175,9 +175,8 @@ print(tables)
 
 ```
 
-## 6. Create Roles, Views in ClickHouse
+## 6. Create Roles, Views in ClickHouse (OTTO !)
 ```sql
-
 CREATE ROLE IF NOT EXISTS jun_analyst_role;
 
 CREATE USER IF NOT EXISTS jun_analyst_user IDENTIFIED WITH plaintext_password BY 'password123';
@@ -188,7 +187,7 @@ GRANT SELECT(salary, department, location, hire_date) ON sec_demo.employees TO j
 ```
 
 
-## 7. OpenMetaData (OMD)
+## 7. OpenMetaData (OMD) (TERJE !!)
 
 Navigate to the OpenMetadata UI by opening your browser and going to `localhost:8585`
 The default Username and Password are:
