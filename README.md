@@ -212,7 +212,6 @@ GRANT SELECT ON supermarket.* TO role_openmetadata;
 ```
 
 
-
 ## 8. SuperSet
 For making the Superset docker-init.sh file executable, one should change the following (applies for Unix system users)
 ```bash
@@ -239,6 +238,14 @@ GRANT role_superset_full TO peopletraffic_user;
 
 GRANT SELECT ON default_gold.* TO role_superset_full;
 
+```
+While connecting to SuperSet and selecting the connection type: ClickHouse; 
+```
+host: clickhouse-server
+port: 8123
+
+user: peopletraffic_user
+password: peopletraffic_pass
 ```
 
 ###  Superset example Datasets can be created, such as:
