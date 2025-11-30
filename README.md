@@ -204,45 +204,16 @@ GRANT SELECT(salary, department, location, hire_date) ON sec_demo.employees TO j
 
 
 
-## Task 0: Check OpenMetadata UI
+## OpenMetadata UI
 
-Use `docker compose up -d` to start the OpenMetadata services.
-Note: this can take several minutes.
-
-Then, navigate to the OpenMetadata UI by opening your browser and going to `localhost:8585`
-
-The default Username and Password are:
-```
-Username - admin@open-metadata.org
-Password - admin
-```
-
-Connect to Clickhouse database: peopletraffic.
-
-Use the CH database: peopletraffic with tables.
+how to access OpenMetadata 
+http://localhost:8585/
+Username: admin@open-metadata.org
+Password: admin
 
 
-
-
-
-
-<details>
-<summary>Example scripts</summary>
-
-`docker exec -it clickhouse-server-omd bash`
-`clickhouse-client --multiquery --queries-file=/sql/01_create_db_and_tables.sql`
-`clickhouse-client --multiquery --queries-file=/sql/02_load_queries.sql`
-
-</details>
-
-Next, you need to create a Clickhouse user for OpenMetadata. Create the user `service_openmetadata` and assign it to a role `role_openmetadata`.
-Add the role SELECT and SHOW access to `system` database.
-Then, add the role SELECT rights on the `supermarket` database.
-
-<details>
-<summary>Example solution</summary>
-
-```
+# Create a Clickhouse user for OpenMetadata. From Clickhouse UI:
+```bash
 CREATE ROLE role_openmetadata;
 
 CREATE USER service_openmetadata IDENTIFIED WITH sha256_password BY 'omd_very_secret_password';
@@ -253,32 +224,35 @@ GRANT SELECT, SHOW ON system.* to role_openmetadata;
 
 GRANT SELECT ON supermarket.* TO role_openmetadata;
 ```
-</details>
+# Create Clickhouse service for OMD. From OMD UI:
 
+```bash
+Go to Settings → Services → Databases
+Click + Add New Service
+Choose ClickHouse as the service type
+Fill in the connection details (adapt as needed):
+Service Name: clickhouse_warehouse, can be whatever
+Host and Port: clickhouse-server-omd:8123
+Username: service_openmetadata
+Password: omd_very_secret_password
+Database: default_gold 
+Schema: leave empty
+Https / Secure: leave off
+Click Test Connection
+If successful, click Next and Save the service.
+```
 
-
-<summary>Example solution</summary>
-
-In the OpenMetadata UI:
-* Go to **Settings → Services → Databases**
-* Click **+ Add New Service**
-* Choose **ClickHouse** as the service type
-* Fill in the connection details (adapt as needed):
-  * **Service Name:**
-  e.g. `clickhouse_warehouse`, can be whatever you would like
-  * **Host and Port:**
-  Use the Docker service name and HTTP port, for example:
-  `clickhouse-server-omd:8123`
-  * **Username:** `service_openmetadata`
-  * **Password:** `omd_very_secret_password`
-  * **Database / Schema:**
-  you can leave empty
-  * **Https / Secure:**
-  leave them off, we have not configured Clickhouse for HTTPS or SSL/TLS.
-  * Click **Test Connection**
-  * If successful, click **Next** and **Save** the service.
-
-</details>
+*It might be necessary to add Airflow user.* 
+If you get Airflow error in OMD "Failed to connect to Airflow due to java.net.ConnectException. Is the host available at http://ingestion:8080"
+Then create user:
+```bash
+docker exec -it openmetadata_mysql mysql -u root -ppassword
+```
+```bash
+CREATE USER 'airflow_user'@'%' IDENTIFIED BY 'airflow_pass';
+GRANT ALL PRIVILEGES ON airflow_db.* TO 'airflow_user'@'%';
+FLUSH PRIVILEGES;
+```
 
 
 ## Task 5: SuperSet
