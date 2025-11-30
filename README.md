@@ -13,7 +13,7 @@ This repository contains group 8's project in Data Engineering course held in 20
 │   ├── 01_data_fetch_mkCHtbls.py
 │   ├── 02_minio_to_duckdb.py
 │   ├── 03_duckdb_to_iceberg.py
-│ ├── dbt
+├── dbt
 │   ├── dbt_packages
 │   ├── dbt_project.yml
 │   ├── logs
@@ -47,6 +47,9 @@ This repository contains group 8's project in Data Engineering course held in 20
 │   ├── bronze_infrared.csv
 │   └── bronze_weather.csv
 ├── sql
+|   ├── user_management
+|   |    ├── create_users_and_roles.sql
+|   |    └── create_views.sql
 │   ├── 01_create_DB_and_tables.sql
 │   └── 02_load_data_from_csv.sql
 └── superset-core
@@ -415,17 +418,58 @@ print(tables)
 
 ```
 
-## 6. Create Roles, Views in ClickHouse (OTTO !)
+## 6. Create Roles, Views in ClickHouse
+
+### Create Users and Roles
+
+The user and role configuration is located in `sql/user_management/create_users_and_roles.sql`. This script:
+- Creates two users: `analyst_limited` and `analyst_full`
+- Creates two roles: `limited` and `full`
+- Assigns roles to their respective users
+- Grants necessary table access to each role
+
+Run this script first:
 ```sql
-CREATE ROLE IF NOT EXISTS jun_analyst_role;
-
-CREATE USER IF NOT EXISTS jun_analyst_user IDENTIFIED WITH plaintext_password BY 'password123';
-
-GRANT SELECT(salary, department, location, hire_date) ON sec_demo.employees TO jun_analyst_role WITH GRANT OPTION;
-
-GRANT SELECT(salary, department, location, hire_date) ON sec_demo.employees TO jun_analyst_user;
+clickhouse-client < sql/user_management/create_users_and_roles.sql
 ```
 
+### Create Views
+
+After setting up roles, create the views by running `sql/create_views.sql`. This script creates:
+- **Masked views** (for `limited` role);
+- **Unmasked views** (for `full` role).
+
+The `limited` role is automatically granted access to the masked views.
+```sql
+clickhouse-client < sql/create_views.sql
+```
+
+### Users and Permissions
+
+| User | Role | Access |
+|------|------|--------|
+| `analyst_full` | `full` | All tables and unmasked views |
+| `analyst_limited` | `limited` | Masked views only |
+
+### Images
+
+Daily traffic view without masking accessed by full role:
+
+![Daily traffic view without masking accessed by full role](/images/user_management/daily_traffic_full-full.png)
+
+Daily traffic view without masking accessed by limited role:
+
+![Daily traffic view without masking accessed by limited role](/images/user_management/daily_traffic_full-limited.png)
+
+Summarized traffic view with masking accessed by full role
+
+![Summarized traffic view with masking accessed by full role](/images/user_management/summarized_traffic_limited-full.png)
+
+Summarized traffic view with masking accessed by limited role
+
+![Summarized traffic view with masking accessed by limited role](/images/user_management/summarized_traffic_limited-limited.png)
+
+There are a few more pictures/screenshots that are not included here (in the README).
 
 ## 7. OpenMetaData (OMD)
 
