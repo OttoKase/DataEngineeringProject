@@ -189,16 +189,14 @@ GRANT SELECT(salary, department, location, hire_date) ON sec_demo.employees TO j
 
 ## 7. OpenMetaData (OMD) (TERJE !!)
 
-Navigate to the OpenMetadata UI by opening your browser and going to `localhost:8585`
-The default Username and Password are:
+To access OpenMetadata 
+http://localhost:8585/
+Username: admin@open-metadata.org
+Password: admin
 
 
-Create a Clickhouse user for OpenMetadata. Create the user `service_openmetadata` and assign it to a role `role_openmetadata`.
-Add the role SELECT and SHOW access to `system` database.
-Then, add the role SELECT rights on the `supermarket` database.
-
-
-```sql
+# Create a Clickhouse user for OpenMetadata. From Clickhouse UI:
+```bash
 CREATE ROLE role_openmetadata;
 
 CREATE USER service_openmetadata IDENTIFIED WITH sha256_password BY 'omd_very_secret_password';
@@ -207,8 +205,38 @@ GRANT role_openmetadata TO service_openmetadata;
 
 GRANT SELECT, SHOW ON system.* to role_openmetadata;
 
-GRANT SELECT ON supermarket.* TO role_openmetadata;
+GRANT SELECT ON default_gold.* TO role_openmetadata;
+```
+Create Clickhouse service for OMD. From OMD UI:
 
+```bash
+Go to Settings → Services → Databases
+Click + Add New Service
+Choose ClickHouse as the service type
+Fill in the connection details (adapt as needed):
+Service Name: clickhouse_warehouse, can be whatever
+Host and Port: clickhouse-server-omd:8123
+Username: service_openmetadata
+Password: omd_very_secret_password
+Database: default_gold 
+Schema: leave empty
+Https / Secure: leave off
+Click Test Connection
+If successful, click Next and Save the service.
+```
+
+It might be necessary to add Airflow user. 
+If you get Airflow error in OMD "Failed to connect to Airflow due to java.net.ConnectException. Is the host available at http://ingestion:8080"
+
+Then create user:
+```bash
+docker exec -it openmetadata_mysql mysql -u root -ppassword
+```
+
+```bash
+CREATE USER 'airflow_user'@'%' IDENTIFIED BY 'airflow_pass';
+GRANT ALL PRIVILEGES ON airflow_db.* TO 'airflow_user'@'%';
+FLUSH PRIVILEGES;
 ```
 
 
