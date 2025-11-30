@@ -98,6 +98,8 @@ and/or be found in:
 /dbt/target/catalog.json
 ```
 
+![Airflow DAGs used in the current Project-3](/images/DAG_1,2,3_ppl_traffic.drawio.png)
+
 
 * To DROP all tables created in Clickhouse in "default_gold" database:
 
@@ -274,6 +276,5 @@ LIMIT 1000;
 ```
 
 ![SeperSet Dashboard answering the BQ-1 and BQ-2](/images/dashboard.png)
-
 
 
