@@ -1,9 +1,6 @@
 # DataEngineeringProject
 This repository contains group 8's project in Data Engineering course held in 2025 autumn
 
-# DataEngineeringProject
-This repository contains group 8's project in Data Engineering course held in 2025 autumn
-
 ## NB! All the authentication credentials for different services used are located in .env file.
 
 ## 1. Project Structure
