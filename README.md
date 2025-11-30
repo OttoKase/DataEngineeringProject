@@ -187,7 +187,7 @@ GRANT SELECT(salary, department, location, hire_date) ON sec_demo.employees TO j
 ```
 
 
-## 7. OpenMetaData (OMD) (TERJE !!)
+## 7. OpenMetaData (OMD)
 
 To access OpenMetadata 
 http://localhost:8585/
@@ -238,7 +238,7 @@ CREATE USER 'airflow_user'@'%' IDENTIFIED BY 'airflow_pass';
 GRANT ALL PRIVILEGES ON airflow_db.* TO 'airflow_user'@'%';
 FLUSH PRIVILEGES;
 ```
-
+NB! OMD servicecan work differently on windows and other OS. If needed, please make necessary changes in compose file for your operating system. 
 
 ## 8. SuperSet
 For making the Superset docker-init.sh file executable, one should change the following (applies for Unix system users)
