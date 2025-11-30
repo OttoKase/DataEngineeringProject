@@ -195,7 +195,7 @@ Username: admin@open-metadata.org
 Password: admin
 
 
-# Create a Clickhouse user for OpenMetadata. From Clickhouse UI:
+Create a Clickhouse user for OpenMetadata. From Clickhouse UI:
 ```bash
 CREATE ROLE role_openmetadata;
 
