@@ -13,6 +13,7 @@ This repository contains group 8's project in Data Engineering course held in 20
 │   ├── 01_data_fetch_mkCHtbls.py
 │   ├── 02_minio_to_duckdb.py
 │   ├── 03_duckdb_to_iceberg.py
+│   └── __pycache__
 ├── dbt
 │   ├── dbt_packages
 │   ├── dbt_project.yml
@@ -30,14 +31,20 @@ This repository contains group 8's project in Data Engineering course held in 20
 │   └── lab.duckdb
 ├── etc
 │   └── requirements.txt
-├── fact_peopletraffic_vs_weather.jpg
 ├── images
-│   ├── b_name_pin_modeprcphr.png
-│   ├── b_name_pin_modeprcphr_september.png
+│   ├── added_test_cases.png
+│   ├── column_description.png
+│   ├── DAG_1,2,3_ppl_traffic.drawio.png
+│   ├── DAG_1,2,3_ppl_traffic.drawio.svg
 │   ├── dashboard.png
 │   ├── iceberg_tbl.png
-│   └── start_from_ddesktop.png
-├── logs
+│   ├── OMD_superset_con_agent.png
+│   ├── omd_supersetdb_connection.png
+│   ├── OMD_table_descriptions.png
+│   ├── start_from_ddesktop.png
+│   ├── table_descriptions.png
+│   ├── test_outcome.png
+│   └── user_management
 ├── minio_data
 │   └── project-bucket
 ├── pgdata_airflow
@@ -46,13 +53,17 @@ This repository contains group 8's project in Data Engineering course held in 20
 ├── sample_data
 │   ├── bronze_infrared.csv
 │   └── bronze_weather.csv
+├── scripts
 ├── sql
-|   ├── user_management
-|   |    ├── create_users_and_roles.sql
-|   |    └── create_views.sql
 │   ├── 01_create_DB_and_tables.sql
-│   └── 02_load_data_from_csv.sql
+│   ├── 02_load_data_from_csv.sql
+│   └── user_management
 └── superset-core
+    ├── CHANGELOG.md
+    ├── LICENSE.txt
+    ├── pyproject.toml
+    ├── README.md
+    └── src
 ```
 
 ## Before the start the docker compose stack with containers should be built.
