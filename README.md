@@ -212,6 +212,7 @@ Username: admin@open-metadata.org
 Password: admin
 
 Create a Clickhouse user for OpenMetadata. From Clickhouse UI:
+
 ```bash
 CREATE ROLE role_openmetadata;
 
@@ -223,7 +224,7 @@ GRANT SELECT, SHOW ON system.* to role_openmetadata;
 
 GRANT SELECT ON supermarket.* TO role_openmetadata;
 ```
-# Create Clickhouse service for OMD. From OMD UI:
+Create Clickhouse service for OMD. From OMD UI:
 
 ```bash
 Go to Settings → Services → Databases
