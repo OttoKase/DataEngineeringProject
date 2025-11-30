@@ -188,32 +188,8 @@ print(tables)
 
 -- Your Iceberg table exists: bronze_infrared in the default namespace.
 
-###############################
 
-docker exec -it clickhouse-server clickhouse-client
-
-:) SHOW DATABASES;
-
-SHOW DATABASES
-
-Query id: 042aa5c1-9330-4518-aa0b-aae9d7282dd4
-
-   ┌─name───────────────┐
-1. │ INFORMATION_SCHEMA │
-2. │ default            │
-3. │ information_schema │
-4. │ peopletraffic      │
-5. │ system             │
-   └────────────────────┘
-
-5 rows in set. Elapsed: 0.003 sec.
-
-Not seen:
-iceberg_catalog_default
-
-
-
-5. CREATE USERS, ROLES IN CH
+* 5. CREATE USERS, ROLES IN CH
 
 
 CREATE ROLE IF NOT EXISTS jun_analyst_role;
@@ -365,5 +341,7 @@ ORDER BY mode_prcp DESC, building_name DESC, week_start DESC
 LIMIT 1000;
 
 ```
-![SeperSet Dashboard answering the BQ-1 and BQ-2.](/images/dashboard.png)
+
+![SeperSet Dashboard answering the BQ-1 and BQ-2](/images/dashboard.png)
+
 
