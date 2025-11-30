@@ -109,9 +109,6 @@ SELECT concat('DROP TABLE IF EXISTS default_gold.', name, ';')
 FROM system.tables
 WHERE database = 'default_gold';" | docker exec -i clickhouse-server clickhouse-client
 ```
-DROP DATABASE default_gold;
-DROP DATABASE default_bronze;
-
 
 ## 3. Create MinIO bucket:
 
