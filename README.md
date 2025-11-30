@@ -431,9 +431,7 @@ GRANT SELECT(salary, department, location, hire_date) ON sec_demo.employees TO j
 
 To access OpenMetadata 
 <http://localhost:8585/>
-Username: in .env
-Password: in .env
-
+Username and password are in .env file.
 
 Create a Clickhouse user for OpenMetadata. From Clickhouse UI:
 ```bash
