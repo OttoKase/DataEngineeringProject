@@ -238,7 +238,12 @@ CREATE USER 'airflow_user'@'%' IDENTIFIED BY 'airflow_pass';
 GRANT ALL PRIVILEGES ON airflow_db.* TO 'airflow_user'@'%';
 FLUSH PRIVILEGES;
 ```
-NB! OMD servicecan work differently on windows and other OS. If needed, please make necessary changes in compose file for your operating system. 
+NB! OMD service can work differently on windows and other OS. If needed, please make necessary changes in compose file for your operating system. 
+
+![OMD images](/images/column_description.png)
+![OMD images](/images/table_descriptions.png)
+![OMD images](/images/added_test_cases.png)
+![OMD images](/images/test_outcome.png)
 
 ## 8. SuperSet
 For making the Superset docker-init.sh file executable, one should change the following (applies for Unix system users)
