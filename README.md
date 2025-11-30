@@ -431,8 +431,8 @@ GRANT SELECT(salary, department, location, hire_date) ON sec_demo.employees TO j
 
 To access OpenMetadata 
 http://localhost:8585/
-Username: admin@open-metadata.org
-Password: admin
+Username: in .env
+Password: in .env
 
 
 Create a Clickhouse user for OpenMetadata. From Clickhouse UI:
@@ -481,7 +481,7 @@ FLUSH PRIVILEGES;
 NB! OMD service can work differently on windows and other OS. If needed, please make necessary changes in compose file for your operating system. 
 
 ![OMD images](/images/column_description.png)
-![OMD images](/images/table_descriptions.png)
+![OMD images](/images/OMD_table_descriptions.png)
 ![OMD images](/images/added_test_cases.png)
 ![OMD images](/images/test_outcome.png)
 
