@@ -116,5 +116,5 @@ with DAG(
         bash_command="docker exec dbt dbt run", #docker exec -it dbt dbt seed
     )
 
-    fetch_task >> ingest_infrared_csv_task >>  run_create_tables  >> run_load_queries >>  run_dbt
+    fetch_task >> ingest_infrared_csv_task >>  run_create_tables  >> run_load_queries >> run_dbt
     # fetch_task >> ingest_infrared_csv_task >>  run_dbt_seed >> run_create_tables  >> run_load_queries

@@ -1,9 +1,6 @@
 {{ config(
     materialized='incremental'
-
 ) }}
-
-
 
 -- 1️⃣ BUILDING DATA ROLLED UP TO HOURLY GRAIN (summarized by building_name)
 WITH building_hourly AS (
@@ -60,6 +57,7 @@ SELECT
     people_out,
     people_in,
     temp,
-    prcp
+    prcp,
+    toHour(join_timestamp) AS hour  -- ✅ hour as integer
 FROM joined
 ORDER BY join_timestamp, building_name
