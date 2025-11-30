@@ -9,7 +9,50 @@ Before the start the docker compose stack with containers should be built.
 
 ## Project Structure
 ```
-
+├── compose.yml
+├── config
+│   └── clickhouse
+├── dags
+│   ├── 01_data_fetch_mkCHtbls.py
+│   ├── 02_minio_to_duckdb.py
+│   ├── 03_duckdb_to_iceberg.py
+│ ├── dbt
+│   ├── dbt_packages
+│   ├── dbt_project.yml
+│   ├── logs
+│   ├── models
+│   ├── profiles.yml
+│   ├── seeds
+│   └── target
+├── docker
+├── Dockerfile
+├── Dockerfile.airflow
+├── docker-volume
+│   └── db-data
+├── duckdb_lab
+│   └── lab.duckdb
+├── etc
+│   └── requirements.txt
+├── fact_peopletraffic_vs_weather.jpg
+├── images
+│   ├── b_name_pin_modeprcphr.png
+│   ├── b_name_pin_modeprcphr_september.png
+│   ├── dashboard.png
+│   ├── iceberg_tbl.png
+│   └── start_from_ddesktop.png
+├── logs
+├── minio_data
+│   └── project-bucket
+├── pgdata_airflow
+├── pgdata_weather
+├── README.md
+├── sample_data
+│   ├── bronze_infrared.csv
+│   └── bronze_weather.csv
+├── sql
+│   ├── 01_create_DB_and_tables.sql
+│   └── 02_load_data_from_csv.sql
+└── superset-core
 ```
 
 ## How to Run
@@ -322,3 +365,5 @@ ORDER BY mode_prcp DESC, building_name DESC, week_start DESC
 LIMIT 1000;
 
 ```
+![SeperSet Dashboard answering the BQ-1 and BQ-2.](/images/dashboard.png)
+
