@@ -3,6 +3,7 @@ This repository contains group 8's project in Data Engineering course held in 20
 
 ## NB! All the authentication credentials for different services used are located in .env file.
 
+
 ## 1. Project Structure
 ```
 ├── compose.yml
@@ -77,6 +78,245 @@ docker compose stop <service_name>
 
 ![Running the service(s) via Docker Desktop. Example with SuperSet_*](/images/start_from_ddesktop.png)
 
+## Environment variables and dependencies
+
+<details>
+<summary>Environment Variables</summary>
+
+### airflow-db
+
+POSTGRES_USER
+
+POSTGRES_PASSWORD
+
+POSTGRES_DB
+
+PGUSER
+
+PGPASSWORD
+
+PGDATABASE
+
+### weather-db
+
+POSTGRES_USER
+
+POSTGRES_PASSWORD
+
+POSTGRES_DB
+
+PGUSER
+
+PGPASSWORD
+
+PGDATABASE
+
+### pgadmin
+
+PGADMIN_DEFAULT_EMAIL
+
+PGADMIN_DEFAULT_PASSWORD
+
+CSRF_ENABLED
+
+### airflow-webserver
+
+AIRFLOW__CORE__EXECUTOR
+
+AIRFLOW__DATABASE__SQL_ALCHEMY_CONN
+
+AIRFLOW_CONN_WEATHER_DB
+
+AIRFLOW__CORE__LOAD_EXAMPLES
+
+AIRFLOW__API__AUTH_BACKENDS
+
+### airflow-scheduler
+
+AIRFLOW__CORE__EXECUTOR
+
+AIRFLOW__DATABASE__SQL_ALCHEMY_CONN
+
+AIRFLOW_CONN_WEATHER_DB
+
+AIRFLOW__CORE__LOAD_EXAMPLES
+
+### airflow-init
+
+AIRFLOW__CORE__EXECUTOR
+
+AIRFLOW__DATABASE__SQL_ALCHEMY_CONN
+
+### dbt
+
+(no direct environment variables defined)
+
+### minio
+
+MINIO_ROOT_USER
+
+MINIO_ROOT_PASSWORD
+
+### duckdb_lab
+
+PYICEBERG_HOME
+
+PYICEBERG_CATALOG__REST__URI
+
+PYICEBERG_CATALOG__REST__WAREHOUSE
+
+PYICEBERG_CATALOG__REST__IO__IMPL
+
+PYICEBERG_CATALOG__REST__S3__ENDPOINT
+
+PYICEBERG_CATALOG__REST__S3__ACCESS-KEY-ID
+
+PYICEBERG_CATALOG__REST__S3__SECRET-ACCESS-KEY
+
+### iceberg_rest
+
+AWS_ACCESS_KEY_ID
+
+AWS_SECRET_ACCESS_KEY
+
+AWS_REGION
+
+AWS_ENDPOINT
+
+CATALOG__REST__TYPE
+
+CATALOG__REST__WAREHOUSE
+
+CATALOG__REST__IO__IMPL
+
+CATALOG__REST__PROPERTIES__S3__ENDPOINT
+
+CATALOG__REST__PROPERTIES__S3__ACCESS_KEY_ID
+
+CATALOG__REST__PROPERTIES__S3__SECRET_ACCESS_KEY
+
+CATALOG__REST__PROPERTIES__S3__PATH_STYLE_ACCESS
+
+CATALOG__REST__PROPERTIES__S3__REGION
+
+### clickhouse-server
+
+CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT
+
+CLICKHOUSE_USER
+
+CLICKHOUSE_PASSWORD
+
+### redis
+
+(no environment variables defined)
+
+### superset (and superset-worker, superset-worker-beat)
+
+Loaded via:
+
+docker/.env
+
+docker/.env-local
+
+(Variables not explicitly listed, read from env files.)
+
+### superset-init
+
+Loaded via:
+
+docker/.env
+
+docker/.env-local
+
+### db (superset_db)
+
+Loaded via:
+
+docker/.env
+
+docker/.env-local 
+
+</details>
+
+
+
+<details>
+<summary>Service Dependencies</summary>
+
+### pgadmin
+
+airflow-db
+
+weather-db
+
+### airflow-webserver
+
+airflow-init
+
+airflow-db
+
+weather-db
+
+minio
+
+### airflow-scheduler
+
+airflow-init
+
+airflow-db
+
+weather-db
+
+minio
+
+### airflow-init
+
+airflow-db
+
+weather-db
+
+minio
+
+### dbt
+
+minio (service_started)
+
+clickhouse-server (service_healthy)
+
+### duckdb_lab
+
+minio
+
+iceberg_rest
+
+### iceberg_rest
+
+minio
+
+### clickhouse-server
+
+minio
+
+### superset
+
+superset-init (service_completed_successfully)
+
+### superset-init
+
+db (service_started)
+
+redis (service_started)
+
+### superset-worker
+
+superset-init (service_completed_successfully)
+
+### superset-worker-beat
+
+superset-init (service_completed_successfully)
+
+</details>
 
 
 ## 2 Data fetch, making dbt models: bronze, gold
