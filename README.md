@@ -352,7 +352,7 @@ WHERE database = 'default_gold';" | docker exec -i clickhouse-server clickhouse-
 
 ## 3. Create MinIO bucket:
 
-* Login: [http://localhost:9501]
+* Login: <http://localhost:9501>
 * Bucket: `project-bucket`
 
 ## 4. Access DuckDB container via airflow-webserver and check for the tables available:
@@ -430,7 +430,7 @@ GRANT SELECT(salary, department, location, hire_date) ON sec_demo.employees TO j
 ## 7. OpenMetaData (OMD)
 
 To access OpenMetadata 
-http://localhost:8585/
+<http://localhost:8585/>
 Username: in .env
 Password: in .env
 
@@ -495,7 +495,7 @@ chmod +x docker/docker-bootstrap.sh
 
 Then open Superset in your browser:
 
-- URL: http://localhost:8088
+- URL: <http://localhost:8088>
 
 ###  Create a Superset service account
 
